@@ -1,0 +1,241 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="1152" viewBox="0 0 2048 1152" role="img" aria-labelledby="title desc">
+  <title id="title">AI 设计提效全链路规划</title>
+  <desc id="desc">A single-page JD field PPT style diagram showing before manual design workflow, after AI-native workflow, and reusable design knowledge foundations.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080a12"/>
+      <stop offset="0.52" stop-color="#111522"/>
+      <stop offset="1" stop-color="#070912"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#202536"/>
+      <stop offset="1" stop-color="#141827"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#20263a"/>
+      <stop offset="1" stop-color="#121727"/>
+    </linearGradient>
+    <linearGradient id="panelRed" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b1d27"/>
+      <stop offset="1" stop-color="#151925"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ca66b"/>
+      <stop offset="1" stop-color="#005c43"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#000000" flood-opacity="0.38"/>
+    </filter>
+    <filter id="glow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .font{font-family:"JD ZhengHei","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif}
+      .title{font-size:54px;font-weight:800;fill:#ffffff;letter-spacing:0}
+      .caption{font-size:22px;font-weight:700;fill:#c2c4cc}
+      .muted{font-size:16px;fill:#828794;font-weight:600}
+      .section{font-size:26px;font-weight:800;fill:#ffffff}
+      .node-title{font-size:19px;font-weight:800;fill:#ffffff}
+      .node-sub{font-size:14px;fill:#c2c4cc;font-weight:600}
+      .small{font-size:13px;fill:#c2c4cc;font-weight:600}
+      .tiny{font-size:12px;fill:#828794;font-weight:600}
+      .label{font-size:12px;font-weight:800;fill:#ffffff}
+      .stage-title{font-size:24px;font-weight:800;fill:#ffffff}
+      .stage-sub{font-size:15px;fill:#c2c4cc;font-weight:600}
+      .chip-skill{fill:#ff0f23}
+      .chip-work{fill:#b5691a}
+      .chip-md{fill:#2aa32a}
+      .chip-sop{fill:#828794}
+      .stroke{stroke:rgba(255,255,255,.16);stroke-width:1}
+      .stroke-red{stroke:#ff0f23;stroke-width:2}
+    </style>
+  </defs>
+
+  <rect width="2048" height="1152" fill="url(#bg)"/>
+  <circle cx="320" cy="150" r="230" fill="#ff0f23" opacity=".10" filter="url(#glow)"/>
+  <circle cx="1690" cy="820" r="270" fill="#0073ff" opacity=".08" filter="url(#glow)"/>
+  <path d="M0 980 C440 875 830 1010 1170 905 C1510 800 1740 825 2048 750 L2048 1152 L0 1152Z" fill="#ffffff" opacity=".025"/>
+
+  <text x="48" y="76" class="font title">AI设计提效全链路规划</text>
+  <text x="50" y="126" class="font muted">从人工串行交付，升级为 AI-native 的策略、生成、审验收与知识沉淀闭环</text>
+  <rect x="1782" y="42" width="170" height="36" rx="18" fill="#ff0f23"/>
+  <text x="1815" y="66" class="font label">JD DESIGN</text>
+
+  <!-- Before -->
+  <text x="50" y="204" class="font caption" fill="#828794">BEFORE</text>
+  <text x="50" y="242" class="font small">传统人工 MANUAL</text>
+  <g transform="translate(198,154)">
+    <g filter="url(#shadow)">
+      <path d="M0 0 H280 L300 44 L280 88 H0 Z" fill="url(#card)" stroke="rgba(255,255,255,.16)"/>
+      <text x="88" y="38" class="font node-title">需求对接</text><text x="112" y="68" class="font small">人工</text>
+    </g>
+    <g transform="translate(320,0)" filter="url(#shadow)">
+      <path d="M0 0 H280 L300 44 L280 88 H0 Z" fill="url(#card)" stroke="rgba(255,255,255,.16)"/>
+      <text x="88" y="38" class="font node-title">设计方案</text><text x="112" y="68" class="font small">人工</text>
+    </g>
+    <g transform="translate(640,0)" filter="url(#shadow)">
+      <path d="M0 0 H280 L300 44 L280 88 H0 Z" fill="url(#card)" stroke="rgba(255,255,255,.16)"/>
+      <text x="88" y="38" class="font node-title">设计延展</text><text x="112" y="68" class="font small">人工</text>
+    </g>
+    <g transform="translate(960,0)" filter="url(#shadow)">
+      <path d="M0 0 H280 L300 44 L280 88 H0 Z" fill="url(#card)" stroke="rgba(255,255,255,.16)"/>
+      <text x="72" y="38" class="font node-title">设计审核串稿</text><text x="112" y="68" class="font small">人工</text>
+    </g>
+    <g transform="translate(1280,0)" filter="url(#shadow)">
+      <path d="M0 0 H280 L300 44 L280 88 H0 Z" fill="url(#card)" stroke="rgba(255,255,255,.16)"/>
+      <text x="88" y="38" class="font node-title">设计修改</text><text x="112" y="68" class="font small">人工</text>
+    </g>
+    <g transform="translate(1600,0)" filter="url(#shadow)">
+      <rect x="0" y="0" width="270" height="88" rx="8" fill="url(#card)" stroke="rgba(255,255,255,.16)"/>
+      <text x="82" y="38" class="font node-title">研发联调</text><text x="112" y="68" class="font small">人工</text>
+    </g>
+  </g>
+
+  <!-- After labels -->
+  <text x="50" y="334" class="font caption" fill="#ffffff">AFTER</text>
+  <text x="50" y="374" class="font caption" fill="#c2c4cc">AI-NATIVE</text>
+  <rect x="50" y="396" width="46" height="22" rx="3" class="chip-skill"/><text x="60" y="412" class="font label">SKILL</text>
+  <rect x="106" y="396" width="48" height="22" rx="3" class="chip-work"/><text x="114" y="412" class="font label">工作流</text>
+  <rect x="164" y="396" width="36" height="22" rx="3" class="chip-md"/><text x="173" y="412" class="font label">MD</text>
+
+  <!-- Main stage panels -->
+  <g transform="translate(198,274)" filter="url(#shadow)">
+    <rect width="462" height="548" rx="12" fill="url(#panel)" stroke="#3d414d"/>
+    <rect width="462" height="72" rx="12" fill="#ff0f23" opacity=".16"/>
+    <circle cx="70" cy="36" r="18" fill="#ff0f23"/><text x="64" y="43" class="font label">1</text>
+    <text x="104" y="44" class="font stage-title">设计前 · 提策略</text>
+    <g transform="translate(18,96)">
+      <rect width="426" height="116" rx="8" fill="#ffffff" opacity=".05" stroke="rgba(255,255,255,.10)"/>
+      <text x="150" y="28" class="font node-title">需求理解与策略提炼</text>
+      <rect x="18" y="50" width="44" height="20" rx="3" class="chip-skill"/><text x="25" y="65" class="font label">SKILL</text><text x="78" y="65" class="font small">目标拆解与策略提炼</text>
+      <rect x="18" y="82" width="44" height="20" rx="3" class="chip-skill"/><text x="25" y="97" class="font label">SKILL</text><text x="78" y="97" class="font small">竞品分析与机会洞察</text>
+    </g>
+    <g transform="translate(18,228)">
+      <rect width="426" height="142" rx="8" fill="#ffffff" opacity=".05" stroke="rgba(255,255,255,.10)"/>
+      <text x="164" y="28" class="font node-title">深度分析与洞察</text>
+      <rect x="18" y="52" width="44" height="20" rx="3" class="chip-skill"/><text x="25" y="67" class="font label">SKILL</text><text x="78" y="67" class="font small">竞品拆解分析</text>
+      <rect x="18" y="86" width="44" height="20" rx="3" class="chip-skill"/><text x="25" y="101" class="font label">SKILL</text><text x="78" y="101" class="font small">用户 / 商家洞察</text>
+      <rect x="18" y="120" width="44" height="20" rx="3" class="chip-skill"/><text x="25" y="135" class="font label">SKILL</text><text x="78" y="135" class="font small">数据分析洞察</text>
+    </g>
+    <g transform="translate(18,386)">
+      <rect width="426" height="122" rx="8" fill="#ffffff" opacity=".05" stroke="rgba(255,255,255,.10)"/>
+      <text x="164" y="28" class="font node-title">调研与验证</text>
+      <rect x="18" y="56" width="44" height="20" rx="3" class="chip-skill"/><text x="25" y="71" class="font label">SKILL</text><text x="78" y="71" class="font small">调研问卷生成</text>
+      <rect x="18" y="90" width="44" height="20" rx="3" class="chip-skill"/><text x="25" y="105" class="font label">SKILL</text><text x="78" y="105" class="font small">用户反馈分析</text>
+    </g>
+  </g>
+
+  <g transform="translate(678,274)" filter="url(#shadow)">
+    <rect width="748" height="548" rx="12" fill="url(#panel)" stroke="#3d414d"/>
+    <rect width="748" height="72" rx="12" fill="#ff0f23" opacity=".14"/>
+    <circle cx="220" cy="36" r="18" fill="#ff0f23"/><text x="214" y="43" class="font label">2</text>
+    <text x="256" y="44" class="font stage-title">设计中 · 出方案 &amp; 产素材</text>
+    <g transform="translate(18,96)">
+      <rect width="712" height="92" rx="8" fill="#ffffff" opacity=".05" stroke="rgba(255,255,255,.10)"/>
+      <text x="306" y="28" class="font node-title">方案生成与设计延展</text>
+      <rect x="22" y="52" width="44" height="20" rx="3" class="chip-skill"/><text x="29" y="67" class="font label">SKILL</text><text x="82" y="67" class="font small">交互原型生成</text>
+      <rect x="268" y="52" width="44" height="20" rx="3" class="chip-skill"/><text x="275" y="67" class="font label">SKILL</text><text x="328" y="67" class="font small">多方案分析</text>
+      <rect x="514" y="52" width="44" height="20" rx="3" class="chip-skill"/><text x="521" y="67" class="font label">SKILL</text><text x="574" y="67" class="font small">高保真原型生成</text>
+    </g>
+    <g transform="translate(18,204)">
+      <rect width="712" height="126" rx="8" fill="#ffffff" opacity=".05" stroke="rgba(255,255,255,.10)"/>
+      <text x="306" y="28" class="font node-title">设计细化与优化</text>
+      <rect x="22" y="64" width="44" height="20" rx="3" class="chip-skill"/><text x="29" y="79" class="font label">SKILL</text><text x="82" y="79" class="font small">交互细节生成</text>
+      <rect x="202" y="64" width="44" height="20" rx="3" class="chip-skill"/><text x="209" y="79" class="font label">SKILL</text><text x="262" y="79" class="font small">文案优化</text>
+      <rect x="382" y="64" width="44" height="20" rx="3" class="chip-skill"/><text x="389" y="79" class="font label">SKILL</text><text x="442" y="79" class="font small">多语言匹配</text>
+      <rect x="562" y="64" width="44" height="20" rx="3" class="chip-skill"/><text x="569" y="79" class="font label">SKILL</text><text x="622" y="79" class="font small">动效生成</text>
+    </g>
+    <g transform="translate(18,346)">
+      <rect width="712" height="86" rx="8" fill="#ffffff" opacity=".05" stroke="rgba(255,255,255,.10)"/>
+      <text x="306" y="28" class="font node-title">运营素材生产</text>
+      <rect x="22" y="54" width="44" height="20" rx="3" class="chip-work"/><text x="29" y="69" class="font label">工作流</text><text x="82" y="69" class="font small">商品图生成</text>
+      <rect x="210" y="54" width="44" height="20" rx="3" class="chip-work"/><text x="217" y="69" class="font label">工作流</text><text x="270" y="69" class="font small">场景图生成</text>
+      <rect x="398" y="54" width="44" height="20" rx="3" class="chip-work"/><text x="405" y="69" class="font label">工作流</text><text x="458" y="69" class="font small">ICON 生成</text>
+      <rect x="586" y="54" width="44" height="20" rx="3" class="chip-work"/><text x="593" y="69" class="font label">工作流</text><text x="642" y="69" class="font small">视频生成</text>
+    </g>
+    <g transform="translate(18,448)">
+      <rect width="712" height="78" rx="8" fill="#ffffff" opacity=".05" stroke="rgba(255,255,255,.10)"/>
+      <text x="306" y="28" class="font node-title">设计资源与规范</text>
+      <rect x="70" y="52" width="36" height="20" rx="3" class="chip-md"/><text x="79" y="67" class="font label">MD</text><text x="124" y="67" class="font small">组件 / 样式规范</text>
+      <rect x="310" y="52" width="36" height="20" rx="3" class="chip-md"/><text x="319" y="67" class="font label">MD</text><text x="364" y="67" class="font small">页面模板复用</text>
+      <rect x="550" y="52" width="36" height="20" rx="3" class="chip-md"/><text x="559" y="67" class="font label">MD</text><text x="604" y="67" class="font small">品牌规范素材</text>
+    </g>
+  </g>
+
+  <g transform="translate(1444,274)" filter="url(#shadow)">
+    <rect width="552" height="548" rx="12" fill="url(#panel)" stroke="#3d414d"/>
+    <rect width="552" height="72" rx="12" fill="#ff0f23" opacity=".14"/>
+    <circle cx="164" cy="36" r="18" fill="#ff0f23"/><text x="158" y="43" class="font label">3</text>
+    <text x="202" y="44" class="font stage-title">设计后 · 审验收</text>
+    <g transform="translate(18,96)">
+      <rect width="516" height="154" rx="8" fill="#ffffff" opacity=".05" stroke="rgba(255,255,255,.10)"/>
+      <text x="198" y="28" class="font node-title">内容与规范审核</text>
+      <rect x="26" y="58" width="44" height="20" rx="3" class="chip-skill"/><text x="33" y="73" class="font label">SKILL</text><text x="88" y="73" class="font small">UI 验收</text>
+      <rect x="274" y="58" width="44" height="20" rx="3" class="chip-skill"/><text x="281" y="73" class="font label">SKILL</text><text x="336" y="73" class="font small">规范自查</text>
+      <rect x="26" y="112" width="44" height="20" rx="3" class="chip-skill"/><text x="33" y="127" class="font label">SKILL</text><text x="88" y="127" class="font small">资源 / 动效审核</text>
+      <rect x="274" y="112" width="44" height="20" rx="3" class="chip-skill"/><text x="281" y="127" class="font label">SKILL</text><text x="336" y="127" class="font small">用户 / 专家审核</text>
+    </g>
+    <g transform="translate(18,270)">
+      <rect width="516" height="126" rx="8" fill="#ffffff" opacity=".05" stroke="rgba(255,255,255,.10)"/>
+      <text x="200" y="28" class="font node-title">结果评估与优化</text>
+      <rect x="26" y="70" width="44" height="20" rx="3" class="chip-skill"/><text x="33" y="85" class="font label">SKILL</text><text x="88" y="85" class="font small">设计评估分析</text>
+      <rect x="274" y="70" width="44" height="20" rx="3" class="chip-skill"/><text x="281" y="85" class="font label">SKILL</text><text x="336" y="85" class="font small">效果归因分析</text>
+    </g>
+    <g transform="translate(18,414)">
+      <rect width="516" height="110" rx="8" fill="#ffffff" opacity=".05" stroke="rgba(255,255,255,.10)"/>
+      <text x="200" y="28" class="font node-title">研发适配与联调</text>
+      <rect x="26" y="68" width="44" height="20" rx="3" class="chip-skill"/><text x="33" y="83" class="font label">SKILL</text><text x="88" y="83" class="font small">研发还原检测，输出差异与修复建议</text>
+    </g>
+  </g>
+
+  <path d="M660 514 C672 514 672 514 684 514" stroke="#ff0f23" stroke-width="4" fill="none"/>
+  <path d="M1418 514 C1430 514 1430 514 1442 514" stroke="#ff0f23" stroke-width="4" fill="none"/>
+  <path d="M670 500 L690 514 L670 528 Z" fill="#ff0f23"/>
+  <path d="M1428 500 L1448 514 L1428 528 Z" fill="#ff0f23"/>
+
+  <!-- Foundations -->
+  <g transform="translate(38,852)" filter="url(#shadow)">
+    <rect width="1996" height="206" rx="10" fill="#111827" stroke="rgba(255,255,255,.16)"/>
+    <text x="22" y="48" class="font section">沉淀复用</text>
+    <text x="22" y="84" class="font caption">知识库与设计体系</text>
+    <rect x="22" y="120" width="36" height="22" rx="3" class="chip-md"/><text x="31" y="136" class="font label">MD</text>
+    <g transform="translate(210,28)">
+      <rect width="330" height="150" rx="8" fill="url(#card)" stroke="rgba(255,255,255,.10)"/>
+      <circle cx="58" cy="44" r="28" fill="url(#green)"/><text x="100" y="54" class="font stage-title">设计规范体系</text>
+      <text x="32" y="104" class="font small">设计原则、色彩、字体、间距、</text><text x="32" y="132" class="font small">组件规范等沉淀输出</text>
+    </g>
+    <g transform="translate(570,28)">
+      <rect width="330" height="150" rx="8" fill="url(#card)" stroke="rgba(255,255,255,.10)"/>
+      <circle cx="58" cy="44" r="28" fill="url(#green)"/><text x="100" y="54" class="font stage-title">视觉与素材资产库</text>
+      <text x="32" y="104" class="font small">品牌视觉规范、组件库、图标库、</text><text x="32" y="132" class="font small">动效库、模板统一管理</text>
+    </g>
+    <g transform="translate(930,28)">
+      <rect width="330" height="150" rx="8" fill="url(#card)" stroke="rgba(255,255,255,.10)"/>
+      <circle cx="58" cy="44" r="28" fill="url(#green)"/><text x="100" y="54" class="font stage-title">页面结构与模板体系</text>
+      <text x="32" y="104" class="font small">频道页、列表页、详情页等</text><text x="32" y="132" class="font small">页面结构模板化沉淀</text>
+    </g>
+    <g transform="translate(1290,28)">
+      <rect width="330" height="150" rx="8" fill="url(#card)" stroke="rgba(255,255,255,.10)"/>
+      <circle cx="58" cy="44" r="28" fill="url(#green)"/><text x="100" y="54" class="font stage-title">渠道与业务知识库</text>
+      <text x="32" y="104" class="font small">频道规则、业务场景、运营策略、</text><text x="32" y="132" class="font small">搜索 / SUG / 资讯 / 商家</text>
+    </g>
+    <g transform="translate(1650,28)">
+      <rect width="330" height="150" rx="8" fill="url(#card)" stroke="rgba(255,255,255,.10)"/>
+      <circle cx="58" cy="44" r="28" fill="url(#green)"/><text x="100" y="54" class="font stage-title">本地生活全站知识库</text>
+      <text x="32" y="104" class="font small">业务全链路知识沉淀、</text><text x="32" y="132" class="font small">经验复用与持续迭代</text>
+    </g>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(610,1080)">
+    <rect width="820" height="44" rx="22" fill="#141827" stroke="rgba(255,255,255,.12)"/>
+    <rect x="28" y="12" width="48" height="22" rx="3" class="chip-skill"/><text x="36" y="28" class="font label">SKILL</text><text x="92" y="29" class="font small">AI 能力</text>
+    <rect x="230" y="12" width="48" height="22" rx="3" class="chip-work"/><text x="238" y="28" class="font label">工作流</text><text x="294" y="29" class="font small">自动化工作流</text>
+    <rect x="440" y="12" width="38" height="22" rx="3" class="chip-md"/><text x="449" y="28" class="font label">MD</text><text x="494" y="29" class="font small">沉淀资产 / 知识</text>
+    <rect x="650" y="12" width="42" height="22" rx="3" class="chip-sop"/><text x="659" y="28" class="font label">SOP</text><text x="708" y="29" class="font small">规范流程</text>
+  </g>
+</svg>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI设计提效全链路规划</title>
+  <style>
+    @font-face {
+      font-family: "JD ZhengHei";
+      src: url("../../assets/fonts/JDZhengHeiV2-Regular.otf") format("opentype");
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "JD ZhengHei";
+      src: url("../../assets/fonts/JDZhengHeiV2-Bold.otf") format("opentype");
+      font-weight: 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "JD ZhengHei";
+      src: url("../../assets/fonts/JDZhengHeiV2-Heavy.otf") format("opentype");
+      font-weight: 800;
+      font-display: swap;
+    }
+    :root {
+      --page-bg: #080a12;
+      --frame-line: rgba(255, 255, 255, .12);
+      --text-help: #828794;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: var(--page-bg); }
+    body {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: "JD ZhengHei", "PingFang SC", system-ui, sans-serif;
+    }
+    .stage {
+      width: min(100%, 2048px);
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--frame-line);
+      background: #080a12;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .45);
+    }
+    .stage img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+    .hint {
+      position: fixed;
+      left: 24px;
+      bottom: 16px;
+      color: var(--text-help);
+      font-size: 12px;
+      letter-spacing: 0;
+      opacity: .78;
+    }
+    @media print {
+      body { padding: 0; }
+      .stage { width: 100vw; height: 100vh; border: 0; box-shadow: none; }
+      .hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage" aria-label="AI设计提效全链路规划">
+    <img src="./ai-design-chain-plan.svg" alt="AI设计提效全链路规划" />
+  </main>
+  <div class="hint">AI design chain plan / SVG large image / JD field PPT skill</div>
+</body>
+</html>
