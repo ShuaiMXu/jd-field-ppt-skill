@@ -9,97 +9,103 @@
     @font-face { font-family:"JD ZhengHei"; src:url("../../assets/fonts/JDZhengHeiV2-Bold.otf") format("opentype"); font-weight:700; font-display:swap; }
     @font-face { font-family:"JD ZhengHei"; src:url("../../assets/fonts/JDZhengHeiV2-Heavy.otf") format("opentype"); font-weight:800; font-display:swap; }
     :root {
-      --bg:#080a12; --panel:#111827; --panel-2:#171d2c; --card:#202536;
+      --bg:#080a12; --panel:#111827; --card:#171d2c; --card-2:#202536;
       --title:#ffffff; --text:#c2c4cc; --help:#828794; --line:rgba(255,255,255,.13);
-      --red:#ff0f23; --red-soft:rgba(255,15,35,.14); --green:#2aa32a; --blue:#0073ff;
-      --gold:#b5691a; --radius:8px; --font:"JD ZhengHei","PingFang SC",system-ui,sans-serif;
+      --red:#ff0f23; --red-soft:rgba(255,15,35,.14); --green:#2aa32a; --blue:#0073ff; --gold:#b5691a;
+      --radius:8px; --font:"JD ZhengHei","PingFang SC",system-ui,sans-serif;
     }
     * { box-sizing:border-box; }
     html,body { margin:0; min-height:100%; background:var(--bg); font-family:var(--font); }
     body { display:grid; place-items:center; padding:24px; color:var(--text); }
     .canvas {
       width:min(100%,2048px); aspect-ratio:16/9; position:relative; overflow:hidden;
-      padding:42px 48px 34px; background:
-        radial-gradient(circle at 12% 8%, rgba(255,15,35,.17), transparent 28%),
+      padding:44px 48px 34px; border:1px solid var(--line);
+      background:
+        radial-gradient(circle at 14% 4%, rgba(255,15,35,.18), transparent 26%),
         radial-gradient(circle at 88% 88%, rgba(0,115,255,.10), transparent 32%),
         linear-gradient(135deg,#080a12 0%,#111522 55%,#070912 100%);
-      border:1px solid var(--line); box-shadow:0 28px 80px rgba(0,0,0,.45);
+      box-shadow:0 28px 80px rgba(0,0,0,.45);
     }
     .canvas::after {
-      content:""; position:absolute; inset:auto 0 0; height:180px;
+      content:""; position:absolute; left:0; right:0; bottom:0; height:210px;
       background:linear-gradient(180deg,transparent,rgba(255,255,255,.035)); pointer-events:none;
     }
-    .top { position:relative; z-index:1; display:grid; grid-template-columns:1fr auto; gap:28px; align-items:start; }
-    h1 { margin:0; color:var(--title); font-size:58px; line-height:1.03; font-weight:800; letter-spacing:0; }
-    .lead { margin:16px 0 0; color:var(--text); font-size:23px; line-height:1.35; font-weight:700; }
-    .kpis { display:grid; grid-template-columns:repeat(3,132px); gap:10px; margin-top:8px; }
-    .kpi { border:1px solid var(--line); border-radius:var(--radius); background:rgba(255,255,255,.055); padding:13px 14px; }
-    .kpi b { display:block; color:var(--title); font-size:24px; line-height:1; }
-    .kpi span { display:block; margin-top:8px; color:var(--help); font-size:13px; font-weight:700; }
+    .top { position:relative; z-index:1; display:grid; grid-template-columns:1fr 430px; gap:42px; align-items:start; }
     .mark { display:inline-grid; place-items:center; width:64px; height:34px; border-radius:8px; background:var(--red); color:#fff; font-size:18px; font-weight:800; margin-bottom:14px; }
-    .section-label { color:var(--help); font-size:18px; font-weight:800; letter-spacing:0; }
-    .before { position:relative; z-index:1; margin-top:28px; display:grid; grid-template-columns:148px 1fr; gap:12px; align-items:center; }
-    .before-flow { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; }
-    .before-node {
-      min-height:72px; padding:16px 14px; border:1px solid var(--line); border-radius:var(--radius);
-      background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
-      display:grid; align-content:center; gap:8px; position:relative;
+    h1 { margin:0; color:var(--title); font-size:58px; line-height:1.02; font-weight:800; letter-spacing:0; }
+    .lead { margin:16px 0 0; max-width:1020px; color:var(--text); font-size:24px; line-height:1.35; font-weight:700; }
+    .goal {
+      border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.05);
+      padding:22px 24px; display:grid; gap:16px;
     }
-    .before-node:not(:last-child)::after {
-      content:""; position:absolute; right:-16px; top:29px; width:20px; height:14px;
-      background:var(--help); opacity:.45; clip-path:polygon(0 0,100% 50%,0 100%);
+    .goal b { color:var(--title); font-size:22px; }
+    .goal-row { display:grid; grid-template-columns:86px 1fr; gap:14px; align-items:center; }
+    .goal-num { color:var(--red); font-size:36px; font-weight:800; line-height:1; }
+    .goal-row span { color:var(--help); font-size:15px; font-weight:700; line-height:1.35; }
+    .before {
+      position:relative; z-index:1; margin-top:26px; padding:18px 20px; border:1px solid var(--line);
+      border-radius:12px; background:rgba(255,255,255,.035); display:grid; grid-template-columns:150px 1fr; gap:16px; align-items:center;
     }
-    .before-node b { color:var(--title); font-size:19px; }
-    .before-node span { color:var(--help); font-size:13px; font-weight:700; }
-    .main { position:relative; z-index:1; margin-top:26px; display:grid; grid-template-columns:1fr 1.34fr 1fr; gap:18px; }
+    .label { color:var(--help); font-size:16px; font-weight:800; }
+    .label strong { display:block; color:var(--title); font-size:22px; margin-bottom:7px; }
+    .manual-flow { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; }
+    .manual {
+      min-height:66px; border:1px solid rgba(255,255,255,.12); border-radius:var(--radius);
+      background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.028));
+      display:grid; place-items:center; color:var(--text); font-size:18px; font-weight:800; position:relative; text-align:center;
+    }
+    .manual:not(:last-child)::after {
+      content:""; position:absolute; right:-16px; top:25px; width:20px; height:14px; background:var(--help);
+      opacity:.46; clip-path:polygon(0 0,100% 50%,0 100%);
+    }
+    .main { position:relative; z-index:1; margin-top:22px; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
     .stage {
-      min-height:500px; border:1px solid rgba(255,255,255,.16); border-radius:12px;
+      min-height:454px; border:1px solid rgba(255,255,255,.16); border-radius:12px;
       background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));
-      overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,.30);
+      box-shadow:0 18px 50px rgba(0,0,0,.28); overflow:hidden;
     }
     .stage-head {
-      display:flex; align-items:center; gap:14px; min-height:70px; padding:18px 22px;
-      background:linear-gradient(90deg,var(--red-soft),rgba(255,15,35,.04));
-      border-bottom:1px solid rgba(255,255,255,.08);
+      min-height:96px; padding:22px 24px 18px; border-bottom:1px solid rgba(255,255,255,.09);
+      background:linear-gradient(90deg,var(--red-soft),rgba(255,15,35,.035));
+      display:grid; grid-template-columns:44px 1fr; gap:14px; align-items:start;
     }
-    .num { display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--red); color:#fff; font-size:18px; font-weight:800; flex:none; }
-    .stage-head h2 { margin:0; color:var(--title); font-size:28px; line-height:1.1; font-weight:800; }
-    .stage-head p { margin:5px 0 0; color:var(--help); font-size:14px; font-weight:700; }
-    .stage-body { padding:18px; display:grid; gap:12px; }
-    .group { border:1px solid rgba(255,255,255,.10); border-radius:var(--radius); background:rgba(255,255,255,.045); padding:16px; }
-    .group-title { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
-    .group-title b { color:var(--title); font-size:20px; }
-    .group-title span { color:var(--help); font-size:13px; font-weight:700; }
-    .items { display:grid; gap:10px; }
-    .items.two { grid-template-columns:repeat(2,1fr); }
-    .items.three { grid-template-columns:repeat(3,1fr); }
-    .item { min-height:68px; border-left:3px solid var(--red); background:rgba(8,10,18,.42); border-radius:6px; padding:12px 12px 10px; }
-    .item b { display:block; color:var(--title); font-size:16px; line-height:1.2; }
-    .item p { margin:8px 0 0; color:var(--help); font-size:12px; line-height:1.35; font-weight:700; }
-    .item.work { border-left-color:var(--gold); }
-    .item.md { border-left-color:var(--green); }
-    .tag { display:inline-flex; align-items:center; height:20px; padding:0 7px; border-radius:4px; color:#fff; font-size:11px; font-weight:800; margin-right:6px; }
-    .tag.skill { background:var(--red); } .tag.work { background:var(--gold); } .tag.md { background:var(--green); }
+    .num { display:grid; place-items:center; width:40px; height:40px; border-radius:50%; background:var(--red); color:#fff; font-size:20px; font-weight:800; }
+    .stage h2 { margin:0; color:var(--title); font-size:30px; line-height:1.1; font-weight:800; }
+    .stage-head p { margin:8px 0 0; color:var(--help); font-size:15px; line-height:1.35; font-weight:700; }
+    .blocks { padding:18px; display:grid; gap:14px; }
+    .block {
+      min-height:104px; border:1px solid rgba(255,255,255,.11); border-radius:var(--radius);
+      background:rgba(8,10,18,.44); padding:17px 18px 15px; display:grid; grid-template-columns:1fr auto; gap:18px;
+    }
+    .block b { display:block; color:var(--title); font-size:22px; line-height:1.18; }
+    .block p { grid-column:1 / -1; margin:0; color:var(--text); font-size:16px; line-height:1.45; font-weight:700; }
+    .chips { display:flex; gap:6px; align-self:start; }
+    .chip { display:inline-grid; place-items:center; height:22px; padding:0 8px; border-radius:4px; color:#fff; font-size:11px; font-weight:800; }
+    .skill { background:var(--red); } .work { background:var(--gold); } .md { background:var(--green); }
+    .block.strategy { border-left:4px solid var(--red); }
+    .block.produce { border-left:4px solid var(--gold); }
+    .block.asset { border-left:4px solid var(--green); }
+    .block.check { border-left:4px solid var(--blue); }
     .arrow {
-      position:absolute; top:505px; width:36px; height:36px; border-radius:50%; display:grid; place-items:center;
-      background:var(--red); color:#fff; font-size:28px; font-weight:800; box-shadow:0 8px 24px rgba(255,15,35,.24);
+      position:absolute; top:514px; width:38px; height:38px; border-radius:50%; display:grid; place-items:center;
+      background:var(--red); color:#fff; font-size:30px; font-weight:800; box-shadow:0 8px 24px rgba(255,15,35,.26);
     }
-    .arrow.a1 { left:640px; } .arrow.a2 { right:578px; }
-    .foundation { position:relative; z-index:1; margin-top:20px; display:grid; grid-template-columns:190px 1fr; gap:16px; align-items:stretch; }
-    .foundation-title { border:1px solid var(--line); border-radius:var(--radius); background:rgba(255,255,255,.04); padding:20px; }
-    .foundation-title b { display:block; color:var(--title); font-size:26px; line-height:1.2; }
-    .foundation-title span { display:block; margin-top:12px; color:var(--help); font-size:14px; font-weight:700; }
-    .base-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
-    .base { border:1px solid var(--line); border-radius:var(--radius); background:rgba(255,255,255,.055); padding:18px; min-height:120px; }
-    .base i { display:grid; place-items:center; width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#00d900,#006c4a); color:#fff; font-style:normal; font-weight:800; margin-bottom:12px; }
-    .base b { display:block; color:var(--title); font-size:18px; }
-    .base p { margin:9px 0 0; color:var(--help); font-size:13px; line-height:1.45; font-weight:700; }
-    .legend { position:absolute; z-index:2; left:50%; bottom:16px; transform:translateX(-50%); display:flex; align-items:center; gap:22px; padding:10px 20px; border:1px solid var(--line); border-radius:999px; background:rgba(17,24,39,.88); }
+    .arrow.one { left:648px; } .arrow.two { right:648px; }
+    .foundation { position:relative; z-index:1; margin-top:20px; display:grid; grid-template-columns:220px 1fr; gap:16px; }
+    .foundation-title { border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.04); padding:20px; }
+    .foundation-title b { display:block; color:var(--title); font-size:27px; line-height:1.2; }
+    .foundation-title span { display:block; margin-top:12px; color:var(--help); font-size:15px; line-height:1.35; font-weight:700; }
+    .bases { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+    .base {
+      min-height:122px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.055);
+      padding:18px; display:grid; align-content:start; gap:9px;
+    }
+    .base i { display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#00d900,#2aa32a); color:#fff; font-style:normal; font-weight:800; }
+    .base b { color:var(--title); font-size:18px; line-height:1.2; }
+    .base span { color:var(--help); font-size:13px; line-height:1.38; font-weight:700; }
+    .legend { position:absolute; z-index:2; left:50%; bottom:14px; transform:translateX(-50%); display:flex; gap:22px; align-items:center; padding:10px 20px; border:1px solid var(--line); border-radius:999px; background:rgba(17,24,39,.9); }
     .legend span { color:var(--text); font-size:14px; font-weight:700; }
-    @media (max-width:1100px) {
-      body { padding:0; }
-      .canvas { width:100vw; min-width:1100px; }
-    }
+    @media (max-width:1100px) { body { padding:0; } .canvas { width:100vw; min-width:1100px; } }
   </style>
 </head>
 <body>
@@ -108,125 +114,83 @@
       <div>
         <div class="mark">JD</div>
         <h1>AI设计提效全链路规划</h1>
-        <p class="lead">把设计流程从人工串行交付，升级为“策略生成、方案生产、审验收、知识沉淀”一体化闭环。</p>
+        <p class="lead">把设计流程从人工串行交付，升级为“策略判断、方案生产、审验收、知识沉淀”的 AI-native 闭环。</p>
       </div>
-      <div class="kpis" aria-label="规划目标">
-        <div class="kpi"><b>3段</b><span>覆盖设计前中后</span></div>
-        <div class="kpi"><b>12类</b><span>AI 能力与工作流</span></div>
-        <div class="kpi"><b>5座</b><span>复用知识底座</span></div>
-      </div>
+      <aside class="goal" aria-label="规划目标">
+        <b>规划目标</b>
+        <div class="goal-row"><div class="goal-num">3</div><span>覆盖设计前、设计中、设计后三个关键阶段。</span></div>
+        <div class="goal-row"><div class="goal-num">9</div><span>收敛为九类高频能力，不再堆满工具清单。</span></div>
+        <div class="goal-row"><div class="goal-num">5</div><span>沉淀五类底座，让项目产出可复用。</span></div>
+      </aside>
     </section>
 
     <section class="before">
-      <div><div class="section-label">BEFORE</div><div class="muted">传统人工链路</div></div>
-      <div class="before-flow">
-        <div class="before-node"><b>需求对接</b><span>口头沟通 / 文档理解</span></div>
-        <div class="before-node"><b>设计方案</b><span>人工出稿</span></div>
-        <div class="before-node"><b>设计延展</b><span>多页面适配</span></div>
-        <div class="before-node"><b>审核串稿</b><span>规范与内容检查</span></div>
-        <div class="before-node"><b>设计修改</b><span>多轮返工</span></div>
-        <div class="before-node"><b>研发联调</b><span>还原检查</span></div>
+      <div class="label"><strong>BEFORE</strong>传统人工链路</div>
+      <div class="manual-flow">
+        <div class="manual">需求对接</div>
+        <div class="manual">方案设计</div>
+        <div class="manual">页面延展</div>
+        <div class="manual">审核串稿</div>
+        <div class="manual">多轮修改</div>
+        <div class="manual">研发联调</div>
       </div>
     </section>
 
     <section class="main">
       <article class="stage">
-        <header class="stage-head"><span class="num">1</span><div><h2>设计前：先把策略算清楚</h2><p>输入业务目标、竞品、用户反馈，形成可执行设计判断。</p></div></header>
-        <div class="stage-body">
-          <div class="group">
-            <div class="group-title"><b>需求理解与策略提炼</b><span>从“要做什么”到“为什么这样做”</span></div>
-            <div class="items two">
-              <div class="item"><b><span class="tag skill">SKILL</span>目标拆解</b><p>识别目标、约束、关键链路和成败指标。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>机会洞察</b><p>沉淀竞品差异、用户痛点和策略切入点。</p></div>
-            </div>
-          </div>
-          <div class="group">
-            <div class="group-title"><b>分析与验证</b><span>减少凭经验拍脑袋</span></div>
-            <div class="items two">
-              <div class="item"><b><span class="tag skill">SKILL</span>竞品拆解</b><p>自动拆结构、找差异、输出可参考模式。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>反馈分析</b><p>归类用户反馈，提炼高频问题和需求证据。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>数据洞察</b><p>从点击、转化、留存中发现设计机会。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>调研生成</b><p>快速生成问卷、访谈提纲和验证假设。</p></div>
-            </div>
-          </div>
+        <header class="stage-head">
+          <span class="num">1</span>
+          <div><h2>设计前：先把策略算清楚</h2><p>用 AI 把目标、证据和判断提前收敛。</p></div>
+        </header>
+        <div class="blocks">
+          <div class="block strategy"><b>目标拆解</b><div class="chips"><span class="chip skill">SKILL</span></div><p>识别业务目标、用户任务、约束条件和成败指标。</p></div>
+          <div class="block strategy"><b>机会洞察</b><div class="chips"><span class="chip skill">SKILL</span></div><p>整合竞品、用户反馈和数据，定位真正值得投入的设计机会。</p></div>
+          <div class="block strategy"><b>调研验证</b><div class="chips"><span class="chip skill">SKILL</span></div><p>自动生成问卷、访谈提纲和验证假设，降低前期决策成本。</p></div>
         </div>
       </article>
 
       <article class="stage">
-        <header class="stage-head"><span class="num">2</span><div><h2>设计中：把方案和素材批量生产</h2><p>围绕方案生成、细化优化、运营素材和规范复用提升产出效率。</p></div></header>
-        <div class="stage-body">
-          <div class="group">
-            <div class="group-title"><b>方案生成与设计延展</b><span>先出结构，再做表达</span></div>
-            <div class="items three">
-              <div class="item"><b><span class="tag skill">SKILL</span>原型生成</b><p>基于目标自动生成交互框架。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>多方案比较</b><p>并行产出方案并对比优劣。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>高保真生成</b><p>按规范生成可评审设计稿。</p></div>
-            </div>
-          </div>
-          <div class="group">
-            <div class="group-title"><b>设计细化与运营素材</b><span>把重复劳动交给工作流</span></div>
-            <div class="items three">
-              <div class="item"><b><span class="tag skill">SKILL</span>文案优化</b><p>按钮、标题、利益点统一调性。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>多语言匹配</b><p>多语种文案自动生成和校验。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>动效预演</b><p>动效脚本、节奏和状态预览。</p></div>
-              <div class="item work"><b><span class="tag work">工作流</span>商品图</b><p>定制商品图、场景图、KV 图。</p></div>
-              <div class="item work"><b><span class="tag work">工作流</span>图标资产</b><p>ICON、3D、色彩延展统一生产。</p></div>
-              <div class="item work"><b><span class="tag work">工作流</span>短视频</b><p>短视频和动效素材快速生成。</p></div>
-            </div>
-          </div>
-          <div class="group">
-            <div class="group-title"><b>设计资源与规范复用</b><span>让方案从一张稿变成一套体系</span></div>
-            <div class="items three">
-              <div class="item md"><b><span class="tag md">MD</span>组件规范</b><p>组件、样式和页面结构复用。</p></div>
-              <div class="item md"><b><span class="tag md">MD</span>模板体系</b><p>频道页、列表页、详情页模板沉淀。</p></div>
-              <div class="item md"><b><span class="tag md">MD</span>品牌素材</b><p>Logo、色彩、字体和视觉资产管理。</p></div>
-            </div>
-          </div>
+        <header class="stage-head">
+          <span class="num">2</span>
+          <div><h2>设计中：批量生产方案与素材</h2><p>方案、素材、规范复用同步推进。</p></div>
+        </header>
+        <div class="blocks">
+          <div class="block strategy"><b>方案生成</b><div class="chips"><span class="chip skill">SKILL</span></div><p>快速生成原型、高保真方向和多方案比较，先出结构再做表达。</p></div>
+          <div class="block produce"><b>素材生产</b><div class="chips"><span class="chip work">工作流</span></div><p>批量生成商品图、场景图、图标、动效和短视频素材。</p></div>
+          <div class="block asset"><b>规范复用</b><div class="chips"><span class="chip md">MD</span></div><p>复用组件、页面模板、品牌素材，把一张稿沉淀成一套体系。</p></div>
         </div>
       </article>
 
       <article class="stage">
-        <header class="stage-head"><span class="num">3</span><div><h2>设计后：把审验收变成闭环</h2><p>从人工逐项检查，升级为自动审查、还原检测和效果归因。</p></div></header>
-        <div class="stage-body">
-          <div class="group">
-            <div class="group-title"><b>内容与规范审核</b><span>上线前自动拦截问题</span></div>
-            <div class="items two">
-              <div class="item"><b><span class="tag skill">SKILL</span>UI 验收</b><p>检查视觉、交互、组件与页面一致性。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>规范自查</b><p>自动比对设计规范和品牌规则。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>资源审核</b><p>检查图片、动效、状态和命名完整性。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>专家审核</b><p>收敛评审意见，沉淀可复用 checklist。</p></div>
-            </div>
-          </div>
-          <div class="group">
-            <div class="group-title"><b>评估、归因与联调</b><span>让上线结果回到下一轮设计</span></div>
-            <div class="items two">
-              <div class="item"><b><span class="tag skill">SKILL</span>效果评估</b><p>分析点击、转化、停留和任务完成率。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>归因分析</b><p>定位策略、视觉、交互和内容问题。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>还原检测</b><p>输出研发还原差异和修复建议。</p></div>
-              <div class="item"><b><span class="tag skill">SKILL</span>知识回流</b><p>把问题、结论、资产回灌知识库。</p></div>
-            </div>
-          </div>
+        <header class="stage-head">
+          <span class="num">3</span>
+          <div><h2>设计后：把审验收变成闭环</h2><p>自动审查、还原检测和效果归因回流下一轮。</p></div>
+        </header>
+        <div class="blocks">
+          <div class="block check"><b>规范审核</b><div class="chips"><span class="chip skill">SKILL</span></div><p>检查 UI、交互、组件、内容和资源完整性，减少上线前返工。</p></div>
+          <div class="block check"><b>还原联调</b><div class="chips"><span class="chip skill">SKILL</span></div><p>识别研发还原差异，输出可执行的修复建议。</p></div>
+          <div class="block check"><b>效果归因</b><div class="chips"><span class="chip skill">SKILL</span></div><p>把点击、转化、停留和问题反馈沉淀为下一轮设计输入。</p></div>
         </div>
       </article>
-      <div class="arrow a1">›</div>
-      <div class="arrow a2">›</div>
+      <div class="arrow one">›</div>
+      <div class="arrow two">›</div>
     </section>
 
     <section class="foundation">
-      <div class="foundation-title"><b>沉淀复用底座</b><span>让每次项目产出都回到体系里，下一次更快、更准、更一致。</span></div>
-      <div class="base-grid">
-        <div class="base"><i>1</i><b>设计规范体系</b><p>原则、色彩、字体、间距和组件规范。</p></div>
-        <div class="base"><i>2</i><b>视觉素材资产库</b><p>品牌视觉、图标、动效和模板统一管理。</p></div>
-        <div class="base"><i>3</i><b>页面结构模板</b><p>频道、列表、详情等页面结构复用。</p></div>
-        <div class="base"><i>4</i><b>业务知识库</b><p>频道规则、运营策略、搜索和商家场景。</p></div>
-        <div class="base"><i>5</i><b>全站经验库</b><p>项目经验、问题归因和验证结论持续迭代。</p></div>
+      <div class="foundation-title"><b>沉淀复用底座</b><span>每次项目交付都回到体系里，下一次更快、更准、更一致。</span></div>
+      <div class="bases">
+        <div class="base"><i>1</i><b>设计规范体系</b><span>原则、色彩、字体、间距、组件规范。</span></div>
+        <div class="base"><i>2</i><b>视觉素材资产库</b><span>品牌视觉、图标、动效、模板统一管理。</span></div>
+        <div class="base"><i>3</i><b>页面结构模板</b><span>频道、列表、详情等页面结构复用。</span></div>
+        <div class="base"><i>4</i><b>业务知识库</b><span>频道规则、运营策略、搜索与商家场景。</span></div>
+        <div class="base"><i>5</i><b>全站经验库</b><span>项目经验、问题归因和验证结论迭代。</span></div>
       </div>
     </section>
 
     <div class="legend">
-      <span><b class="tag skill">SKILL</b>AI 能力</span>
-      <span><b class="tag work">工作流</b>自动化生产</span>
-      <span><b class="tag md">MD</b>知识 / 资产沉淀</span>
+      <span><b class="chip skill">SKILL</b> AI 能力</span>
+      <span><b class="chip work">工作流</b> 自动化生产</span>
+      <span><b class="chip md">MD</b> 知识 / 资产沉淀</span>
     </div>
   </main>
 </body>
