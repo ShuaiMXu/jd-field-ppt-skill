@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>京东零售场域经营复盘 Demo</title>
+  <style>
+    @font-face { font-family: "JD ZhengHei"; src: url("./fonts/JDZhengHeiV2-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("./fonts/JDZhengHeiV2-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("./fonts/JDZhengHeiV2-Heavy.otf") format("opentype"); font-weight: 800; font-display: swap; }
+    :root {
+      --c-title: #171a26; --c-text: #3d414d; --c-help: #828794; --c-disabled: #c2c4cc;
+      --c-bg-page: #f2f3f7; --c-bg: #ffffff; --c-sunken: #f5f6fa; --c-line: rgba(0,0,0,0.08);
+      --c-brand: #ff0f23; --c-brand-light: #fff0f4; --c-service: #b5691a; --c-service-bg: #fff4e8;
+      --c-success-text: #2aa32a; --c-warning-text: #b26b00; --c-info: #0073ff; --c-info-bg: #e5f5ff;
+      --font-brand: "JD ZhengHei", "PingFang SC", system-ui, sans-serif;
+      --font-body: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--c-bg-page); color: var(--c-title); font-family: var(--font-body); overflow: hidden; }
+    .deck { width: 100vw; height: 100vh; display: flex; transition: transform .34s ease; }
+    .slide { position: relative; flex: 0 0 100vw; height: 100vh; padding: 5.8vh 6.2vw 6vh; background: var(--c-bg); overflow: hidden; }
+    .slide::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--c-brand); pointer-events: none; }
+    .kicker { position: relative; color: var(--c-brand); font: 700 15px/1 var(--font-brand); margin-bottom: 16px; }
+    h1, h2 { position: relative; margin: 0; font-family: var(--font-brand); font-weight: 800; letter-spacing: 0; line-height: 1.04; max-width: 1180px; }
+    h1 { font-size: 76px; } h2 { font-size: 52px; }
+    p { position: relative; margin: 0; color: var(--c-text); font-size: 24px; line-height: 1.55; }
+    .lead { margin-top: 24px; max-width: 860px; font-size: 30px; }
+    .footer { position: absolute; left: 6.2vw; right: 6.2vw; bottom: 3vh; display: flex; justify-content: space-between; color: var(--c-help); font-size: 14px; border-top: 1px solid var(--c-line); padding-top: 12px; }
+    .hero-visual { position: absolute; right: 7vw; bottom: 13vh; width: 430px; height: 430px; border-radius: 8px; background: var(--c-sunken); border: 1px solid var(--c-line); padding: 26px; display: grid; gap: 14px; }
+    .phone { background: var(--c-bg); border: 1px solid var(--c-line); border-radius: 8px; padding: 18px; display: grid; gap: 12px; }
+    .bar { height: 18px; border-radius: 6px; background: var(--c-sunken); } .bar.red { width: 72%; background: var(--c-brand); } .bar.gold { width: 48%; background: var(--c-service); }
+    .grid-3 { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 46px; }
+    .panel { background: var(--c-bg); border: 1px solid var(--c-line); border-radius: 8px; padding: 26px; min-height: 214px; }
+    .panel strong { display: block; font: 800 30px/1.18 var(--font-brand); margin-bottom: 14px; }
+    .metric { font: 800 76px/1 var(--font-brand); color: var(--c-brand); margin-bottom: 12px; }
+    .label { color: var(--c-help); font-size: 17px; }
+    .two { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 44px; }
+    .band { background: var(--c-sunken); border-left: 5px solid var(--c-brand); border-radius: 6px; padding: 24px 26px; margin-top: 16px; }
+    table { position: relative; width: 100%; margin-top: 40px; border-collapse: collapse; font-size: 22px; background: var(--c-bg); }
+    th, td { padding: 19px 14px; border-bottom: 1px solid var(--c-line); text-align: left; }
+    th { color: var(--c-help); font-size: 16px; }
+    .controls { position: fixed; z-index: 5; right: 22px; bottom: 18px; display: flex; gap: 8px; }
+    button { width: 38px; height: 38px; border: 1px solid var(--c-line); border-radius: 6px; background: var(--c-bg); color: var(--c-title); font-size: 18px; }
+  </style>
+</head>
+<body>
+  <main class="deck" id="deck">
+    <section class="slide" data-layout="cover-field">
+      <div class="kicker">JD RETAIL REVIEW</div>
+      <h1>即时零售入口从补贴驱动转向服务心智经营</h1>
+      <p class="lead">2026 Q2 场域经营复盘 · 首页频道 / 搜索 / 店铺承接链路</p>
+      <div class="hero-visual"><div class="phone"><div class="bar red"></div><div class="bar"></div><div class="bar gold"></div><div class="bar"></div></div><p>频道入口、服务承诺和履约时效成为转化主线。</p></div>
+      <div class="footer"><span>零售场域经营复盘 / 2026 Q2</span><span>01</span></div>
+    </section>
+    <section class="slide" data-layout="executive-summary">
+      <div class="kicker">EXECUTIVE SUMMARY</div>
+      <h2>增长来自高确定性服务场景，而不是单点流量加码</h2>
+      <div class="grid-3">
+        <div class="panel"><strong>入口稳定</strong><p>首页频道曝光占比提升，搜索承接贡献更高意图用户。</p></div>
+        <div class="panel"><strong>转化分化</strong><p>高时效品类转化改善，低频品类仍依赖价格刺激。</p></div>
+        <div class="panel"><strong>动作聚焦</strong><p>下阶段把服务承诺前置到入口和商品卡片。</p></div>
+      </div>
+      <div class="footer"><span>Executive summary</span><span>02</span></div>
+    </section>
+    <section class="slide" data-layout="kpi-strip">
+      <div class="kicker">CORE KPI</div>
+      <h2>三个指标说明服务心智正在形成复购牵引</h2>
+      <div class="grid-3">
+        <div class="panel"><div class="metric">+18%</div><p>频道 GMV 环比</p><div class="label">口径：同城小时达核心品类</div></div>
+        <div class="panel"><div class="metric">7.4%</div><p>搜索承接转化率</p><div class="label">口径：带“急用”意图 query</div></div>
+        <div class="panel"><div class="metric">1.32</div><p>30 天复购次数</p><div class="label">口径：下单用户均值</div></div>
+      </div>
+      <div class="footer"><span>KPI strip</span><span>03</span></div>
+    </section>
+    <section class="slide" data-layout="evidence-table">
+      <div class="kicker">EVIDENCE</div>
+      <h2>履约确定性强的场景，价格敏感度明显下降</h2>
+      <table><thead><tr><th>场景</th><th>用户意图</th><th>关键变化</th><th>下一步</th></tr></thead><tbody>
+        <tr><td>药急送</td><td>即时刚需</td><td style="color:var(--c-success-text);">转化 +12%</td><td>强化时效标签</td></tr>
+        <tr><td>商超补货</td><td>计划性补充</td><td style="color:var(--c-info);">客单价稳定</td><td>扩大家庭装组合</td></tr>
+        <tr><td>数码配件</td><td>应急替换</td><td style="color:var(--c-warning-text);">价格敏感</td><td>补充服务承诺</td></tr>
+      </tbody></table>
+      <div class="footer"><span>Evidence table</span><span>04</span></div>
+    </section>
+  </main>
+  <div class="controls"><button onclick="go(-1)">‹</button><button onclick="go(1)">›</button></div>
+  <script>const deck=document.getElementById('deck');let index=0;function go(d){const s=[...document.querySelectorAll('.slide')];index=Math.max(0,Math.min(s.length-1,index+d));deck.style.transform=`translateX(${-index*100}vw)`}addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);});</script>
+</body>
+</html>

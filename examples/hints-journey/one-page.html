@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hints 用户主线 One Page</title>
+  <style>
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Heavy.otf") format("opentype"); font-weight: 800; font-display: swap; }
+    :root {
+      --c-title:#171a26; --c-text:#3d414d; --c-help:#828794; --c-line:rgba(0,0,0,0.08);
+      --c-bg:#ffffff; --c-sunken:#f5f6fa; --c-brand:#ff0f23; --c-brand-light:#fff0f4; --c-on-brand:#ffffff;
+      --c-service:#b5691a; --c-service-bg:#fff4e8; --c-info:#0073ff; --c-info-bg:#e5f5ff; --r-base:6px; --r-card:8px;
+      --font-brand:"JD ZhengHei","PingFang SC",system-ui,sans-serif; --font-body:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:#f2f3f7;color:var(--c-title);font-family:var(--font-body);overflow:hidden}
+    .slide{position:relative;width:100vw;height:100vh;padding:38px 48px 34px;background:var(--c-bg);overflow:hidden}
+    .slide::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c-brand)}
+    .bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}.bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.34}.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--c-bg) 0%,rgba(255,255,255,.96) 50%,rgba(255,255,255,.68) 100%)}
+    .content{position:relative;z-index:1;height:100%;display:grid;grid-template-rows:auto 1fr auto;gap:22px}
+    .top{display:flex;justify-content:space-between;align-items:flex-start;gap:28px}.eyebrow{color:var(--c-brand);font:700 15px/1 var(--font-brand);margin-bottom:10px}h1{margin:0;font:800 46px/1.05 var(--font-brand);letter-spacing:0;max-width:840px}.story{max-width:720px;margin-top:12px;color:var(--c-text);font-size:18px;line-height:1.55}.goal{width:430px;border-radius:var(--r-card);padding:18px 22px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.72);box-shadow:0 18px 48px rgba(23,26,38,.10);backdrop-filter:blur(22px) saturate(1.35)}.goal strong{font:800 23px/1.25 var(--font-brand)}.goal p{margin-top:8px;font-size:16px;color:var(--c-text);line-height:1.45}
+    .main{display:grid;grid-template-rows:auto auto;gap:18px;min-height:0}.section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px;font:800 23px/1.2 var(--font-brand)}.section-title span{width:8px;height:24px;border-radius:4px;background:var(--c-brand)}
+    .journey{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.card{border:1px solid var(--c-line);border-radius:var(--r-card);background:var(--c-bg);padding:16px;min-height:176px}.card.hot{background:var(--c-brand-light);border-color:var(--c-brand)}.head{display:flex;align-items:center;gap:9px;margin-bottom:12px}.num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--c-brand);color:var(--c-on-brand);font:800 14px/1 var(--font-brand)}.card strong{font:800 19px/1.18 var(--font-brand)}.card p{margin:8px 0 0;color:var(--c-text);font-size:14px;line-height:1.42}.hint{margin-top:10px;padding:8px 10px;border-radius:var(--r-base);background:var(--c-sunken);color:var(--c-help);font-size:13px;line-height:1.35}
+    .bottom{display:grid;grid-template-columns:1.35fr .65fr;gap:16px}.sources{border-radius:var(--r-card);background:var(--c-sunken);border:1px solid var(--c-line);padding:16px}.source-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.source{border-radius:var(--r-base);background:var(--c-bg);border:1px solid var(--c-line);padding:11px 9px;text-align:center;min-height:76px}.source strong{display:block;font:800 14px/1.18 var(--font-brand);margin-bottom:6px}.source p{margin:0;color:var(--c-help);font-size:11px;line-height:1.35}.engine{border-radius:var(--r-card);background:var(--c-title);color:var(--c-bg);padding:18px 20px;display:grid;align-content:center}.engine strong{font:800 24px/1.2 var(--font-brand)}.engine p{margin-top:10px;color:var(--c-bg);font-size:15px;line-height:1.45}.outputs{display:flex;gap:8px;margin-top:14px}.outputs span{padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.14);font-size:12px}
+    .after{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--c-line);border-radius:var(--r-card);padding:13px 16px;background:var(--c-bg)}.after strong{font:800 20px/1.2 var(--font-brand)}.after p{margin:0;color:var(--c-text);font-size:14px}.footer{display:flex;justify-content:space-between;color:var(--c-help);font-size:13px;border-top:1px solid var(--c-line);padding-top:10px}
+  </style>
+</head>
+<body>
+  <section class="slide" data-layout="anatomy-system">
+    <div class="bg" aria-hidden="true"><video autoplay muted loop playsinline><source src="../../assets/media/home-banner-bg.mp4" type="video/mp4"></video></div>
+    <div class="content">
+      <div class="top">
+        <div><div class="eyebrow">JD HINTS · ONE PAGE</div><h1>Hints 沿购买链路补齐用户决策信息</h1><p class="story">用户刚装修新家，从首页、搜索、商品对比到售后反馈，平台持续理解“他到底要什么冰箱”。</p></div>
+        <div class="goal"><strong>目标：从“买冰箱”走向“一人一策”的可信承接</strong><p>不同触点识别不同犹豫点，用 Hints 缩短选择、对比、回退和服务路径。</p></div>
+      </div>
+      <div class="main">
+        <div>
+          <div class="section-title"><span></span>一条用户主线：不同触点推荐不同 Hints</div>
+          <div class="journey">
+            <div class="card"><div class="head"><div class="num">1</div><strong>激发需求</strong></div><p>首页 / 推荐流</p><div class="hint">新家入住家电清单<br>厨房预留多大冰箱</div></div>
+            <div class="card"><div class="head"><div class="num">2</div><strong>补齐预算</strong></div><p>搜索框</p><div class="hint">适合三口之家<br>一级能效风冷推荐</div></div>
+            <div class="card hot"><div class="head"><div class="num">3</div><strong>缩小选择</strong></div><p>搜索结果页</p><div class="hint">600L 以内怎么选<br>嵌入式和独立式差异</div></div>
+            <div class="card"><div class="head"><div class="num">4</div><strong>降低成本</strong></div><p>商品详情页</p><div class="hint">能否放进厨房<br>噪音耗电怎么看</div></div>
+            <div class="card"><div class="head"><div class="num">5</div><strong>促成下单</strong></div><p>对比 / 购物车</p><div class="hint">核心差异是什么<br>以旧换新划算吗</div></div>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="sources">
+            <div class="section-title"><span></span>LLM Hints 生成底座：七类上下文</div>
+            <div class="source-grid">
+              <div class="source"><strong>用户行为</strong><p>浏览/搜索/点击</p></div><div class="source"><strong>用户画像</strong><p>家庭/预算/偏好</p></div><div class="source"><strong>当前场域</strong><p>首页/搜索/售后</p></div><div class="source"><strong>实时输入</strong><p>搜索/筛选/追问</p></div><div class="source"><strong>场景信息</strong><p>季节/空间/装修</p></div><div class="source"><strong>商品知识</strong><p>参数/评价/服务</p></div><div class="source"><strong>实时反馈</strong><p>点击/加购/转化</p></div>
+            </div>
+          </div>
+          <div class="engine"><strong>生成可点击、可承接、可评估的 Hints</strong><p>输出推荐词、解释理由和下一步动作。</p><div class="outputs"><span>推荐词</span><span>理由</span><span>动作</span></div></div>
+        </div>
+        <div class="after"><strong>交易后继续理解用户</strong><p>售后优先解决问题，在问题闭环后识别补购、复购和升级机会。</p></div>
+      </div>
+      <div class="footer"><span>JD Hints / 用户主线 one-page</span><span>01</span></div>
+    </div>
+  </section>
+</body>
+</html>

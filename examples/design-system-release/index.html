@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JD V16 设计系统发布 Demo</title>
+  <style>
+    @font-face { font-family: "JD ZhengHei"; src: url("./fonts/JDZhengHeiV2-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("./fonts/JDZhengHeiV2-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("./fonts/JDZhengHeiV2-Heavy.otf") format("opentype"); font-weight: 800; font-display: swap; }
+    :root { --c-title:#171a26; --c-text:#3d414d; --c-help:#828794; --c-disabled:#c2c4cc; --c-bg-page:#f2f3f7; --c-bg:#ffffff; --c-sunken:#f5f6fa; --c-line:rgba(0,0,0,0.08); --c-brand:#ff0f23; --c-brand-light:#fff0f4; --c-service:#b5691a; --c-service-bg:#fff4e8; --c-info:#0073ff; --c-info-bg:#e5f5ff; --c-success-text:#2aa32a; --font-brand:"JD ZhengHei","PingFang SC",system-ui,sans-serif; --font-body:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif; }
+    *{box-sizing:border-box}body{margin:0;background:var(--c-bg-page);color:var(--c-title);font-family:var(--font-body);overflow:hidden}.deck{width:100vw;height:100vh;display:flex;transition:transform .34s ease}.slide{position:relative;flex:0 0 100vw;height:100vh;padding:5.8vh 6.2vw 6vh;background:var(--c-bg);overflow:hidden}.slide::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c-brand);pointer-events:none}.kicker{position:relative;color:var(--c-brand);font:700 15px/1 var(--font-brand);margin-bottom:16px}h1,h2{position:relative;margin:0;font-family:var(--font-brand);font-weight:800;letter-spacing:0;line-height:1.04;max-width:1160px}h1{font-size:74px}h2{font-size:52px}p{position:relative;margin:0;color:var(--c-text);font-size:24px;line-height:1.55}.lead{margin-top:24px;max-width:860px;font-size:30px}.footer{position:absolute;left:6.2vw;right:6.2vw;bottom:3vh;display:flex;justify-content:space-between;color:var(--c-help);font-size:14px;border-top:1px solid var(--c-line);padding-top:12px}
+    .tokens{position:absolute;right:7vw;top:18vh;width:430px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.token{height:124px;border:1px solid var(--c-line);border-radius:8px;padding:18px;background:var(--c-bg)}.swatch{width:46px;height:46px;border-radius:8px;margin-bottom:12px}.token strong{font:800 20px/1 var(--font-brand)}
+    .two{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:46px}.panel{background:var(--c-bg);border:1px solid var(--c-line);border-radius:8px;padding:26px;min-height:264px}.panel strong{display:block;font:800 30px/1.18 var(--font-brand);margin-bottom:14px}.panel.bad{background:var(--c-sunken)}.panel.good{border-left:5px solid var(--c-brand)}
+    .anatomy{position:relative;display:grid;grid-template-columns:440px 1fr;gap:34px;margin-top:44px}.mock{background:var(--c-sunken);border:1px solid var(--c-line);border-radius:8px;padding:24px;display:grid;gap:14px}.mock-row{height:54px;border-radius:8px;background:var(--c-bg);border:1px solid var(--c-line)}.mock-row.active{background:var(--c-brand-light);border-color:var(--c-brand)}.notes{display:grid;gap:14px}.note{background:var(--c-bg);border:1px solid var(--c-line);border-radius:8px;padding:20px}.note strong{font:800 24px/1.2 var(--font-brand)}
+    table{position:relative;width:100%;margin-top:40px;border-collapse:collapse;font-size:22px;background:var(--c-bg)}th,td{padding:19px 14px;border-bottom:1px solid var(--c-line);text-align:left}th{color:var(--c-help);font-size:16px}.controls{position:fixed;z-index:5;right:22px;bottom:18px;display:flex;gap:8px}button{width:38px;height:38px;border:1px solid var(--c-line);border-radius:6px;background:var(--c-bg);color:var(--c-title);font-size:18px}
+  </style>
+</head>
+<body>
+  <main class="deck" id="deck">
+    <section class="slide" data-layout="cover-field">
+      <div class="kicker">JD DESIGN SYSTEM V16</div><h1>V16 发布重点是把组件规范变成可执行资产</h1><p class="lead">设计系统发布 Demo · Token / 组件 / 场景文档 / Agent 流程</p>
+      <div class="tokens"><div class="token"><div class="swatch" style="background:var(--c-brand)"></div><strong>color_primary</strong></div><div class="token"><div class="swatch" style="background:var(--c-title)"></div><strong>color_title</strong></div><div class="token"><div class="swatch" style="background:var(--c-sunken)"></div><strong>color_background_component</strong></div><div class="token"><div class="swatch" style="background:var(--c-info)"></div><strong>color_Info</strong></div></div>
+      <div class="footer"><span>设计系统发布 / V16</span><span>01</span></div>
+    </section>
+    <section class="slide" data-layout="compare-before-after">
+      <div class="kicker">BEFORE / AFTER</div><h2>从单份规范说明，升级为可校验的组件 bundle</h2>
+      <div class="two"><div class="panel bad"><strong>过去</strong><p>规范散在设计稿和文档里，落地依赖人工解释，版本追溯困难。</p></div><div class="panel good"><strong>现在</strong><p>每个组件沉淀 design/spec/variants/behaviors，发布前可自动检查。</p></div></div>
+      <div class="footer"><span>Compare</span><span>02</span></div>
+    </section>
+    <section class="slide" data-layout="anatomy-system">
+      <div class="kicker">SYSTEM ANATOMY</div><h2>组件文档必须同时表达结构、状态和 token 绑定</h2>
+      <div class="anatomy"><div class="mock"><div class="mock-row active"></div><div class="mock-row"></div><div class="mock-row"></div><div class="mock-row"></div></div><div class="notes"><div class="note"><strong>01 结构</strong><p>拆出容器、文本、图标、状态层。</p></div><div class="note"><strong>02 状态</strong><p>默认、选中、禁用、异常要可枚举。</p></div><div class="note"><strong>03 Token</strong><p>颜色、字体、间距都能反查到 V16。</p></div></div></div>
+      <div class="footer"><span>Anatomy</span><span>03</span></div>
+    </section>
+    <section class="slide" data-layout="roadmap">
+      <div class="kicker">ROADMAP</div><h2>下一阶段把规范生产链路接入日常设计评审</h2>
+      <table><thead><tr><th>阶段</th><th>产出</th><th>验收</th></tr></thead><tbody><tr><td>6 月</td><td>补齐基础组件 bundle</td><td>核心组件覆盖 80%</td></tr><tr><td>7 月</td><td>上线 spec-page 发布面</td><td>评审可直接引用链接</td></tr><tr><td>8 月</td><td>接入 Relay 反向生成</td><td>新增组件 1 天内成文</td></tr></tbody></table>
+      <div class="footer"><span>Roadmap</span><span>04</span></div>
+    </section>
+  </main>
+  <div class="controls"><button onclick="go(-1)">‹</button><button onclick="go(1)">›</button></div>
+  <script>const deck=document.getElementById('deck');let index=0;function go(d){const s=[...document.querySelectorAll('.slide')];index=Math.max(0,Math.min(s.length-1,index+d));deck.style.transform=`translateX(${-index*100}vw)`}addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);});</script>
+</body>
+</html>

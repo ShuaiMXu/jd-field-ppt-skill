@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Case E · Precision Architecture</title>
+  <style>
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Heavy.otf") format("opentype"); font-weight: 800; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+    :root {
+      --c-title:#171a26; --c-text:#3d414d; --c-help:#828794; --c-line:rgba(0,0,0,0.08);
+      --c-bg:#ffffff; --c-sunken:#f5f6fa; --c-brand:#ff0f23; --c-brand-light:#fff0f4;
+      --c-on-brand:#ffffff; --c-info:#0073ff; --c-info-bg:#e5f5ff; --c-success-text:#2aa32a; --r-base:6px; --r-card:8px;
+      --font-brand:"JD ZhengHei","PingFang SC",system-ui,sans-serif; --font-body:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f2f3f7; color: var(--c-title); font-family: var(--font-body); overflow: hidden; }
+    .slide { position: relative; width: 100vw; height: 100vh; padding: 38px 48px 32px; background: var(--c-bg); overflow: hidden; }
+    .slide::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--c-brand); }
+    .bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .bg video { width: 100%; height: 100%; object-fit: cover; opacity: .24; }
+    .bg::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,var(--c-bg) 0%,rgba(255,255,255,.97) 54%,rgba(255,255,255,.72) 100%); }
+    .content { position: relative; z-index: 1; height: 100%; display: grid; grid-template-rows: auto 1fr auto; gap: 18px; }
+    .top { display: grid; grid-template-columns: 1fr 380px; gap: 28px; }
+    .eyebrow { color: var(--c-brand); font: 700 15px/1 var(--font-brand); margin-bottom: 10px; }
+    h1 { margin: 0; font: 800 44px/1.05 var(--font-brand); letter-spacing: 0; }
+    .story { margin: 12px 0 0; max-width: 900px; color: var(--c-text); font-size: 18px; line-height: 1.5; }
+    .note { border-radius: var(--r-card); padding: 18px 20px; background: rgba(255,255,255,.76); border: 1px solid rgba(255,255,255,.72); box-shadow: 0 18px 48px rgba(23,26,38,.10); backdrop-filter: blur(18px); }
+    .note strong { font: 800 22px/1.2 var(--font-brand); }
+    .note p { margin: 8px 0 0; color: var(--c-text); font-size: 15px; line-height: 1.45; }
+    .arch { display: grid; grid-template-columns: 230px 1fr 210px; gap: 14px; min-height: 0; }
+    .lane { border: 1px solid var(--c-line); border-radius: var(--r-card); background: rgba(255,255,255,.9); padding: 15px; overflow: hidden; }
+    .lane-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .lane-title strong { font: 800 21px/1.15 var(--font-brand); }
+    .lane-title span { padding: 6px 9px; border-radius: 999px; background: var(--c-brand-light); color: var(--c-brand); font: 700 12px/1 var(--font-brand); }
+    .stack { display: grid; gap: 9px; }
+    .card { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 11px; min-height: 78px; }
+    .card strong { display: block; font: 800 15px/1.2 var(--font-brand); margin-bottom: 5px; }
+    .card p { margin: 0; color: var(--c-help); font-size: 11px; line-height: 1.35; }
+    .center { display: grid; grid-template-columns: 1fr 26px 1.05fr 26px 1fr; align-items: stretch; }
+    .module { border: 1px solid var(--c-line); border-radius: var(--r-card); background: var(--c-bg); padding: 14px; }
+    .module.rank { background: var(--c-sunken); }
+    .module h2 { margin: 0 0 10px; font: 800 22px/1.15 var(--font-brand); }
+    .mini-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
+    .mini { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 10px; min-height: 72px; }
+    .mini strong { display: block; font: 800 14px/1.15 var(--font-brand); margin-bottom: 5px; }
+    .mini p { margin: 0; color: var(--c-help); font-size: 11px; line-height: 1.3; }
+    .arrow { display: grid; place-items: center; color: var(--c-brand); font: 800 26px/1 var(--font-brand); }
+    .feedback { margin-top: 12px; display: grid; grid-template-columns: 1fr 120px 220px; gap: 10px; }
+    .fb-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+    .update { display: grid; place-items: center; border-radius: var(--r-base); background: var(--c-brand); color: var(--c-on-brand); font: 800 18px/1.2 var(--font-brand); text-align: center; }
+    .loop { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 11px; }
+    .loop strong { font: 800 15px/1.2 var(--font-brand); }
+    .loop p { margin: 6px 0 0; color: var(--c-help); font-size: 11px; line-height: 1.35; }
+    .footer { display: flex; justify-content: space-between; color: var(--c-help); font-size: 13px; border-top: 1px solid var(--c-line); padding-top: 10px; }
+  </style>
+</head>
+<body>
+  <section class="slide" data-layout="anatomy-system">
+    <div class="bg" aria-hidden="true"><video autoplay muted loop playsinline><source src="../../assets/media/home-banner-bg.mp4" type="video/mp4"></video></div>
+    <div class="content">
+      <div class="top">
+        <div>
+          <div class="eyebrow">DRAWING PATH E · PRECISION ARCHITECTURE</div>
+          <h1>适合复杂系统：用层级、坐标和反馈闭环组织信息</h1>
+          <p class="story">这是精排架构图路径：先定义 L1-L5 层级，再把节点放进固定坐标和泳道中，适合算法框架、系统结构图、复杂节点关系。</p>
+        </div>
+        <div class="note"><strong>路径判断</strong><p>当用户说“结构化表达”“不要堆卡片”“一页架构图”时，优先用 E。</p></div>
+      </div>
+      <div>
+        <div class="arch">
+          <div class="lane">
+            <div class="lane-title"><strong>输入层</strong><span>L1</span></div>
+            <div class="stack"><div class="card"><strong>用户交互</strong><p>Query、点击、会话。</p></div><div class="card"><strong>商品知识</strong><p>参数、价格、服务。</p></div><div class="card"><strong>实时反馈</strong><p>曝光、加购、转化。</p></div></div>
+          </div>
+          <div class="center">
+            <div class="module"><h2>候选生成</h2><div class="stack"><div class="card"><strong>召回候选</strong><p>历史 + LLM + 规则。</p></div><div class="card"><strong>语义治理</strong><p>聚类、去重、风险过滤。</p></div></div></div>
+            <div class="arrow">→</div>
+            <div class="module rank"><h2>排序决策</h2><div class="mini-grid"><div class="mini"><strong>特征</strong><p>用户/商品/上下文</p></div><div class="mini"><strong>模型</strong><p>CTR/CVR/时长</p></div><div class="mini"><strong>策略</strong><p>频控/风险/收益</p></div><div class="mini"><strong>融合</strong><p>输出 Top N</p></div></div></div>
+            <div class="arrow">→</div>
+            <div class="module"><h2>会话编排</h2><div class="stack"><div class="card"><strong>语义去重</strong><p>避免重复相似表达。</p></div><div class="card"><strong>连贯承接</strong><p>承接上一轮意图。</p></div></div></div>
+          </div>
+          <div class="lane">
+            <div class="lane-title"><strong>触点输出</strong><span>L5</span></div>
+            <div class="stack"><div class="card"><strong>搜索结果页</strong><p>结果列表引导。</p></div><div class="card"><strong>商品详情页</strong><p>加深看点理解。</p></div><div class="card"><strong>购物车</strong><p>加速决策转化。</p></div></div>
+          </div>
+        </div>
+        <div class="feedback">
+          <div class="fb-row"><div class="card"><strong>反馈数据</strong><p>曝光 / 点击 / 转化</p></div><div class="card"><strong>上下文</strong><p>页面 / 商品 / 设备</p></div><div class="card"><strong>引流语</strong><p>Prompt / 排序分</p></div><div class="card"><strong>落盘</strong><p>分析 / 迭代</p></div></div>
+          <div class="update">模型更新<br>上线</div>
+          <div class="loop"><strong>回流到生成层和排序层</strong><p>补候选、调权重、更新频控和去重策略。</p></div>
+        </div>
+      </div>
+      <div class="footer"><span>JD PPT Skill / Drawing Path E</span><span>02</span></div>
+    </div>
+  </section>
+</body>
+</html>

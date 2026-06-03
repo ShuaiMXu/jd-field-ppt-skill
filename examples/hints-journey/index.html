@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hints 用户主线 Demo</title>
+  <style>
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Heavy.otf") format("opentype"); font-weight: 800; font-display: swap; }
+    :root {
+      --c-title:#171a26; --c-text:#3d414d; --c-help:#828794; --c-disabled:#c2c4cc; --c-line:rgba(0,0,0,0.08);
+      --c-bg-page:#f2f3f7; --c-bg:#ffffff; --c-sunken:#f5f6fa; --c-brand:#ff0f23; --c-brand-light:#fff0f4;
+      --c-on-brand:#ffffff; --c-service:#b5691a; --c-service-bg:#fff4e8; --c-info:#0073ff; --c-info-bg:#e5f5ff;
+      --c-success-text:#2aa32a; --c-warning-text:#b26b00; --r-base:6px; --r-card:8px;
+      --font-brand:"JD ZhengHei","PingFang SC",system-ui,sans-serif; --font-body:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    }
+    *{box-sizing:border-box} body{margin:0;background:var(--c-bg-page);color:var(--c-title);font-family:var(--font-body);overflow:hidden}
+    .deck{width:100vw;height:100vh;display:flex;transition:transform .36s ease}.slide{position:relative;flex:0 0 100vw;height:100vh;padding:5.4vh 6.2vw 6vh;background:var(--c-bg);overflow:hidden}.slide::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c-brand)}
+    .cover-bg-motion{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:var(--c-bg)}.cover-bg-motion video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.48;filter:saturate(1.08) contrast(1.02)}.cover-bg-motion::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--c-bg) 0%,rgba(255,255,255,.94) 48%,rgba(255,255,255,.54) 100%)}
+    .topbar,.content,.footer{position:relative;z-index:1}.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:42px;color:var(--c-help);font-size:15px}.brand-lockup{display:flex;align-items:center;gap:12px;font-family:var(--font-brand);font-weight:700;color:var(--c-title)}.brand-mark{width:38px;height:22px;border-radius:var(--r-base);background:var(--c-brand);color:var(--c-on-brand);display:grid;place-items:center;font-size:13px}.kicker{color:var(--c-brand);font:700 15px/1 var(--font-brand);margin-bottom:14px}h1,h2{margin:0;font-family:var(--font-brand);font-weight:800;letter-spacing:0;line-height:1.04}h1{font-size:74px;max-width:860px}h2{font-size:52px;max-width:1120px}p{margin:0;color:var(--c-text);font-size:24px;line-height:1.55}.lead{margin-top:26px;max-width:860px;font-size:30px}.footer{position:absolute;left:6.2vw;right:6.2vw;bottom:3vh;display:flex;justify-content:space-between;color:var(--c-help);font-size:14px;border-top:1px solid var(--c-line);padding-top:12px}
+    .cover-grid{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:54px;align-items:center;min-height:620px}.glass{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.72);box-shadow:0 18px 48px rgba(23,26,38,.10);backdrop-filter:blur(22px) saturate(1.35);-webkit-backdrop-filter:blur(22px) saturate(1.35)}.hero-card{border-radius:var(--r-card);padding:28px;min-height:420px;display:grid;gap:18px}.hero-card strong{font:800 28px/1.18 var(--font-brand)}.pill{display:inline-flex;width:max-content;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--c-brand-light);color:var(--c-brand);font-weight:700}.mini-row{display:grid;grid-template-columns:78px 1fr;gap:12px;align-items:center;border:1px solid var(--c-line);border-radius:var(--r-card);padding:14px;background:var(--c-bg)}.num{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--c-brand);color:var(--c-on-brand);font:800 18px/1 var(--font-brand)}
+    .journey{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:42px}.touch{border:1px solid var(--c-line);border-radius:var(--r-card);background:var(--c-bg);padding:22px;min-height:295px}.touch:nth-child(3){background:var(--c-brand-light);border-color:var(--c-brand)}.touch .head{display:flex;align-items:center;gap:10px;margin-bottom:18px}.touch strong{font:800 24px/1.2 var(--font-brand)}.touch ul{margin:14px 0 0;padding-left:18px;color:var(--c-text);font-size:18px;line-height:1.65}.tag{margin-top:18px;padding:10px 12px;border-radius:var(--r-base);background:var(--c-sunken);color:var(--c-help);font-size:15px}.after{margin-top:18px;border:1px solid var(--c-line);border-radius:var(--r-card);padding:20px 24px;background:var(--c-sunken)}.after strong{font:800 26px/1.2 var(--font-brand)}
+    .system{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-top:40px}.source{border:1px solid var(--c-line);border-radius:var(--r-card);background:var(--c-bg);padding:18px;min-height:120px}.source strong{display:block;font:800 20px/1.2 var(--font-brand);margin-bottom:10px}.engine{margin-top:22px;border-radius:var(--r-card);background:var(--c-title);color:var(--c-bg);padding:28px;text-align:center}.engine strong{font:800 34px/1.2 var(--font-brand)}.outputs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}.output{border:1px solid var(--c-line);border-radius:var(--r-card);background:var(--c-bg);padding:22px}.output strong{font:800 24px/1.2 var(--font-brand)}
+    .controls{position:fixed;z-index:10;right:22px;bottom:18px;display:flex;gap:8px}button{width:38px;height:38px;border:1px solid var(--c-line);border-radius:var(--r-base);background:var(--c-bg);color:var(--c-title);font-size:18px}
+  </style>
+</head>
+<body>
+  <main class="deck" id="deck">
+    <section class="slide" data-layout="cover-field">
+      <div class="cover-bg-motion" aria-hidden="true"><video autoplay muted loop playsinline><source src="../../assets/media/home-banner-bg.mp4" type="video/mp4" /></video></div>
+      <div class="topbar"><div class="brand-lockup"><span class="brand-mark">JD</span><span>Hints Journey</span></div><span>用户主线 / 冰箱购买</span></div>
+      <div class="content cover-grid">
+        <div><div class="kicker">USER STORY</div><h1>Hints 沿购买链路补齐用户决策信息</h1><p class="lead">用户刚装修新家，从首页、搜索、商品对比到售后反馈，持续理解“买冰箱”这件事。</p></div>
+        <div class="hero-card glass"><span class="pill">目标</span><strong>从“买冰箱”走向“一人一策”的可信承接</strong><div class="mini-row"><span class="num">1</span><p>识别不同触点的真实犹豫点。</p></div><div class="mini-row"><span class="num">2</span><p>用 Hints 缩短选择、对比和回退。</p></div><div class="mini-row"><span class="num">3</span><p>让交易后服务继续发现复购机会。</p></div></div>
+      </div>
+      <div class="footer"><span>JD Hints / 用户故事</span><span>01</span></div>
+    </section>
+    <section class="slide" data-layout="journey-lane">
+      <div class="topbar"><div class="brand-lockup"><span class="brand-mark">JD</span><span>Decision Journey</span></div><span>02 / 03</span></div>
+      <div class="content"><div class="kicker">TOUCHPOINTS</div><h2>不同触点推荐不同 Hints，推动用户逐步完成决策</h2>
+        <div class="journey">
+          <div class="touch"><div class="head"><span class="num">1</span><strong>激发需求</strong></div><p>首页 / 推荐流</p><ul><li>新家入住家电清单</li><li>厨房预留多大冰箱</li></ul><div class="tag">激活潜在购物任务</div></div>
+          <div class="touch"><div class="head"><span class="num">2</span><strong>补齐预算</strong></div><p>搜索框</p><ul><li>适合三口之家的冰箱</li><li>一级能效风冷推荐</li></ul><div class="tag">补齐场景、预算、约束</div></div>
+          <div class="touch"><div class="head"><span class="num">3</span><strong>缩小选择</strong></div><p>搜索结果页</p><ul><li>600L 以内怎么选</li><li>超薄嵌入和独立式差异</li></ul><div class="tag">细化筛选和回退</div></div>
+          <div class="touch"><div class="head"><span class="num">4</span><strong>降低成本</strong></div><p>商品详情页</p><ul><li>这款能放进我家厨房吗</li><li>噪音和耗电怎么看</li></ul><div class="tag">适配判断、对比、避坑</div></div>
+          <div class="touch"><div class="head"><span class="num">5</span><strong>促成下单</strong></div><p>对比 / 购物车</p><ul><li>和另一款核心差异</li><li>以旧换新现在划算吗</li></ul><div class="tag">优惠、服务、风险确认</div></div>
+        </div>
+        <div class="after"><strong>交易后仍继续理解用户。</strong><p>订单、售后和使用问题优先解决，不强推销售；在问题闭环后再识别补购、复购和升级机会。</p></div>
+      </div>
+      <div class="footer"><span>Touchpoint Hints</span><span>02</span></div>
+    </section>
+    <section class="slide" data-layout="anatomy-system">
+      <div class="topbar"><div class="brand-lockup"><span class="brand-mark">JD</span><span>LLM Hints Engine</span></div><span>03 / 03</span></div>
+      <div class="content"><div class="kicker">GENERATION BASE</div><h2>七类上下文进入 LLM 底座，输出可点击、可承接、可评估的 Hints</h2>
+        <div class="system"><div class="source"><strong>用户行为</strong><p>浏览、搜索、点击、收藏</p></div><div class="source"><strong>用户画像</strong><p>家庭人数、预算、偏好</p></div><div class="source"><strong>当前场域</strong><p>首页、搜索、商详、售后</p></div><div class="source"><strong>实时输入</strong><p>搜索词、筛选、追问</p></div><div class="source"><strong>场景信息</strong><p>季节、空间、节日、装修</p></div><div class="source"><strong>商品知识</strong><p>参数、评价、价格、服务</p></div><div class="source"><strong>实时反馈</strong><p>点击、加购、转化</p></div></div>
+        <div class="engine"><strong>LLM Hints 生成与推荐能力</strong><p style="color:var(--c-bg);margin-top:10px;">综合用户行为、图像、场域、输入、商品知识和反馈，生成可点击、可承接、可评估的 Hints。</p></div>
+        <div class="outputs"><div class="output"><strong>推荐词</strong><p>按意图和场景输出下一步问题。</p></div><div class="output"><strong>解释理由</strong><p>让用户知道为什么值得点。</p></div><div class="output"><strong>下一步动作</strong><p>承接筛选、对比、购买和服务。</p></div></div>
+      </div>
+      <div class="footer"><span>Generation base</span><span>03</span></div>
+    </section>
+  </main>
+  <div class="controls"><button onclick="go(-1)">‹</button><button onclick="go(1)">›</button></div>
+  <script>const deck=document.getElementById('deck');let index=0;function go(d){const s=[...document.querySelectorAll('.slide')];index=Math.max(0,Math.min(s.length-1,index+d));deck.style.transform=`translateX(${-index*100}vw)`}addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);});</script>
+</body>
+</html>

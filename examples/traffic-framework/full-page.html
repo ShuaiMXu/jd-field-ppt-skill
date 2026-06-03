@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>东东引流语生成与分发框架 · 完整页</title>
+  <style>
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Heavy.otf") format("opentype"); font-weight: 800; font-display: swap; }
+    :root {
+      --c-title:#171a26;
+      --c-text:#3d414d;
+      --c-help:#828794;
+      --c-line:rgba(0,0,0,0.08);
+      --c-bg:#ffffff;
+      --c-bg-page:#f2f3f7;
+      --c-sunken:#f5f6fa;
+      --c-brand:#ff0f23;
+      --c-brand-light:#fff0f4;
+      --c-on-brand:#ffffff;
+      --c-service:#b5691a;
+      --c-service-bg:#fff4e8;
+      --c-info:#0073ff;
+      --c-info-bg:#e5f5ff;
+      --c-success:#00d900;
+      --c-success-bg:#ebfbeb;
+      --c-success-text:#2aa32a;
+      --r-base:6px;
+      --r-card:8px;
+      --font-brand:"JD ZhengHei","PingFang SC",system-ui,sans-serif;
+      --font-body:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--c-bg-page); color: var(--c-title); font-family: var(--font-body); overflow: hidden; }
+    .slide { position: relative; width: 100vw; height: 100vh; padding: 26px 36px 24px; background: var(--c-bg); overflow: hidden; }
+    .slide::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--c-brand); }
+    .bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .bg video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .20; }
+    .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--c-bg) 0%, rgba(255,255,255,.98) 54%, rgba(255,255,255,.78) 100%); }
+    .content { position: relative; z-index: 1; height: 100%; display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
+    .header { display: grid; grid-template-columns: 1fr 330px; gap: 24px; align-items: start; }
+    .eyebrow { color: var(--c-brand); font: 700 14px/1 var(--font-brand); margin-bottom: 8px; }
+    h1 { margin: 0; font: 800 36px/1.04 var(--font-brand); letter-spacing: 0; }
+    .subtitle { margin: 8px 0 0; color: var(--c-text); font-size: 15px; line-height: 1.38; }
+    .goal {
+      border-radius: var(--r-card); padding: 13px 16px; min-height: 92px;
+      background: rgba(255,255,255,.76); border: 1px solid rgba(255,255,255,.72);
+      box-shadow: 0 18px 48px rgba(23,26,38,.10); backdrop-filter: blur(18px) saturate(1.25);
+    }
+    .goal strong { font: 800 18px/1.2 var(--font-brand); }
+    .goal p { margin: 6px 0 0; color: var(--c-text); font-size: 12px; line-height: 1.36; }
+    .main { display: grid; grid-template-rows: minmax(0,1fr) 104px; gap: 10px; min-height: 0; }
+    .framework { display: grid; grid-template-columns: 1.02fr 1.08fr 1.02fr; gap: 12px; min-height: 0; }
+    .stage {
+      position: relative; border: 1px solid var(--c-line); border-radius: var(--r-card); background: rgba(255,255,255,.9);
+      padding: 13px; min-height: 0; overflow: visible;
+    }
+    .stage::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--c-brand); }
+    .stage.rank { background: var(--c-sunken); }
+    .stage.session::before { background: var(--c-success-text); }
+    .stage-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
+    .stage-head h2 { margin: 0; font: 800 22px/1.12 var(--font-brand); letter-spacing: 0; }
+    .step-badge { padding: 6px 9px; border-radius: 999px; background: var(--c-brand-light); color: var(--c-brand); font: 700 11px/1 var(--font-brand); white-space: nowrap; }
+    .stage.session .step-badge { background: var(--c-success-bg); color: var(--c-success-text); }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .card { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 9px; }
+    .card strong { display: block; font: 800 14px/1.18 var(--font-brand); margin-bottom: 4px; }
+    .card p { margin: 0; color: var(--c-help); font-size: 10px; line-height: 1.28; }
+    .stack { display: grid; gap: 7px; }
+    .candidate-pool {
+      margin-top: 7px; border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-sunken);
+      padding: 9px; text-align: center;
+    }
+    .candidate-pool strong { font: 800 15px/1.18 var(--font-brand); }
+    .candidate-pool p { margin: 4px 0 0; color: var(--c-help); font-size: 10px; }
+    .rank-block { border: 1px solid var(--c-line); border-radius: var(--r-card); background: var(--c-bg); padding: 10px; margin-bottom: 7px; }
+    .rank-block h3 { margin: 0 0 7px; color: var(--c-info); font: 800 15px/1.18 var(--font-brand); }
+    .rank-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; align-items: center; }
+    .rank-node { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 8px 6px; min-height: 58px; text-align: center; }
+    .rank-node strong { display: block; font: 800 12px/1.12 var(--font-brand); margin-bottom: 4px; }
+    .rank-node p { margin: 0; color: var(--c-help); font-size: 9px; line-height: 1.22; }
+    .model-update {
+      position: static; transform: none; margin: 7px auto 0;
+      width: 150px; border-radius: var(--r-base); padding: 9px 14px; background: var(--c-brand); color: var(--c-on-brand);
+      text-align: center; font: 800 16px/1 var(--font-brand); box-shadow: 0 12px 28px rgba(23,26,38,.14);
+    }
+    .session-rule { border: 1px solid rgba(42,163,42,.28); border-radius: var(--r-base); background: var(--c-bg); padding: 8px; }
+    .session-rule + .session-rule { margin-top: 7px; }
+    .session-rule h3 { margin: 0 0 5px; color: var(--c-success-text); font: 800 14px/1.16 var(--font-brand); }
+    .rule-flow { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr; gap: 0; align-items: center; }
+    .rule-node { border: 1px solid rgba(42,163,42,.28); border-radius: var(--r-base); background: var(--c-success-bg); padding: 6px; min-height: 38px; text-align: center; color: var(--c-success-text); font: 800 11px/1.16 var(--font-brand); display: grid; place-items: center; }
+    .arrow { display: grid; place-items: center; color: var(--c-brand); font: 800 18px/1 var(--font-brand); }
+    .session .arrow { color: var(--c-success-text); }
+    .delivery { margin-top: 7px; border: 1px solid rgba(42,163,42,.28); border-radius: var(--r-base); background: var(--c-bg); padding: 8px; }
+    .delivery strong { display: block; color: var(--c-success-text); font: 800 13px/1.16 var(--font-brand); margin-bottom: 6px; text-align: center; }
+    .delivery-row { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr; align-items: stretch; }
+    .feedback {
+      border: 1px solid var(--c-line); border-radius: var(--r-card); background: rgba(255,255,255,.9);
+      padding: 9px; display: grid; grid-template-columns: 1fr 145px; gap: 9px;
+    }
+    .feedback-title { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; margin-bottom: -4px; color: var(--c-info); font: 800 16px/1 var(--font-brand); }
+    .feedback-title::before { content: ""; width: 7px; height: 18px; border-radius: 4px; background: var(--c-info); }
+    .fb-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .fb { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 8px; min-height: 58px; }
+    .fb strong { display: block; font: 800 12px/1.18 var(--font-brand); margin-bottom: 4px; }
+    .fb p { margin: 0; color: var(--c-help); font-size: 9px; line-height: 1.25; }
+    .realtime { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-sunken); padding: 9px; display: grid; align-content: center; text-align: center; }
+    .realtime strong { font: 800 14px/1.18 var(--font-brand); }
+    .realtime p { margin: 5px 0 0; color: var(--c-text); font-size: 10px; line-height: 1.28; }
+    .footer { display: flex; justify-content: space-between; color: var(--c-help); font-size: 12px; border-top: 1px solid var(--c-line); padding-top: 7px; }
+  </style>
+</head>
+<body>
+  <section class="slide" data-layout="anatomy-system">
+    <div class="bg" aria-hidden="true">
+      <video autoplay muted loop playsinline><source src="../../assets/media/home-banner-bg.mp4" type="video/mp4"></video>
+    </div>
+    <div class="content">
+      <div class="header">
+        <div>
+          <div class="eyebrow">JD TRAFFIC PHRASE · FULL PAGE</div>
+          <h1>东东引流语生成与分发框架</h1>
+          <p class="subtitle">多源数据生成高质量引流语，通过多维打分与加权融合实现最优排序，并通过实时数据落盘反馈模型迭代。</p>
+        </div>
+        <div class="goal">
+          <strong>核心目标：从生成候选走向会话级编排</strong>
+          <p>同一 APP session 内统一去重、连贯承接和表达风格。</p>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="framework">
+          <div class="stage">
+            <div class="stage-head"><h2>引流语生成</h2><span class="step-badge">Step 1 · 多源融合</span></div>
+            <div class="cols">
+              <div class="stack">
+                <div class="card"><strong>线上用户交互历史</strong><p>东东 Hints、会话历史、Query、点击、用户画像。</p></div>
+                <div class="card"><strong>LLM 实时生成结果</strong><p>基于 GUI 页面上下文与用户 Memory 生成。</p></div>
+                <div class="card"><strong>LLM 提供结果</strong><p>商品属性、意图理解、语义关系和风险治理。</p></div>
+              </div>
+              <div>
+                <div class="card"><strong>引流语候选池</strong><p>多语言土 + 语义聚类，形成可投放候选。</p></div>
+                <div class="candidate-pool">
+                  <strong>N 条候选引流语</strong>
+                  <p>防灌水、柔软贴合、静音防漏、适合新家。</p>
+                </div>
+                <div class="candidate-pool">
+                  <strong>候选治理</strong>
+                  <p>语义去重、风险过滤、表达规范。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stage rank">
+            <div class="stage-head"><h2>线上排序</h2><span class="step-badge">Step 2 · 打分 → 融合 → 排序</span></div>
+            <div class="rank-block">
+              <h3>离线训练</h3>
+              <div class="rank-row">
+                <div class="rank-node"><strong>历史样本</strong><p>曝光 / 点击 / 停留 / 转化</p></div>
+                <div class="rank-node"><strong>特征构建</strong><p>用户 / 商品 / 上下文</p></div>
+                <div class="rank-node"><strong>多目标学习</strong><p>点击率 / 转化率 / 停留时长</p></div>
+                <div class="rank-node"><strong>模型训练</strong><p>GBDT / DNN / CTR</p></div>
+              </div>
+            </div>
+            <div class="rank-block">
+              <h3>线上推理</h3>
+              <div class="rank-row">
+                <div class="rank-node"><strong>候选引流语</strong><p>候选池输入</p></div>
+                <div class="rank-node"><strong>多维打分</strong><p>CTR / CVR / 时长</p></div>
+                <div class="rank-node"><strong>加权融合</strong><p>策略约束 + 业务收益</p></div>
+                <div class="rank-node"><strong>Top N 结果</strong><p>在线投放</p></div>
+              </div>
+            </div>
+            <div class="model-update">模型更新上线</div>
+          </div>
+
+          <div class="stage session">
+            <div class="stage-head"><h2>会话级引流语编排</h2><span class="step-badge">Step 3 · 全链路编排</span></div>
+            <div class="session-rule">
+              <h3>1. 语义去重</h3>
+              <div class="rule-flow"><div class="rule-node">语义相似度计算</div><div class="arrow">→</div><div class="rule-node">去重过滤</div><div class="arrow">→</div><div class="rule-node">多样性控制</div></div>
+            </div>
+            <div class="session-rule">
+              <h3>2. 连贯承接</h3>
+              <div class="rule-flow"><div class="rule-node">Session 上下文理解</div><div class="arrow">→</div><div class="rule-node">用户兴趣意图生成</div><div class="arrow">→</div><div class="rule-node">连贯性保障</div></div>
+            </div>
+            <div class="session-rule">
+              <h3>3. 表达一致</h3>
+              <div class="rule-flow"><div class="rule-node">人设与语气对齐</div><div class="arrow">→</div><div class="rule-node">一致性校验</div><div class="arrow">→</div><div class="rule-node">表达风格统一</div></div>
+            </div>
+            <div class="delivery">
+              <strong>编排输出 · 按投放点投放</strong>
+              <div class="delivery-row"><div class="rule-node">搜索结果页</div><div class="arrow">→</div><div class="rule-node">商品详情页</div><div class="arrow">→</div><div class="rule-node">购物车</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feedback">
+          <div class="feedback-title">反馈信息收集和应用</div>
+          <div class="fb-grid">
+            <div class="fb"><strong>实时反馈数据</strong><p>曝光日志、点击日志、停留日志、转化日志、会话日志。</p></div>
+            <div class="fb"><strong>上下文特征</strong><p>用户特征、页面上下文、商品特征、会话上下文、设备网络。</p></div>
+            <div class="fb"><strong>引流语信息</strong><p>候选表现、模型策略信息、LLM Prompt / 结果、排序打分结果。</p></div>
+          </div>
+          <div class="realtime"><strong>实时落盘</strong><p>高频度 / 粒度，支持分析、报表与模型迭代。</p></div>
+        </div>
+      </div>
+
+      <div class="footer"><span>JD 引流语生成与分发框架 / full-page architecture</span><span>01</span></div>
+    </div>
+  </section>
+</body>
+</html>

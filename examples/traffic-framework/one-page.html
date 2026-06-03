@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>引流语生成与分发框架 One Page · 结构化表达</title>
+  <style>
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+    @font-face { font-family: "JD ZhengHei"; src: url("../../assets/fonts/JDZhengHeiV2-Heavy.otf") format("opentype"); font-weight: 800; font-display: swap; }
+    :root {
+      --c-title:#171a26; --c-text:#3d414d; --c-help:#828794; --c-line:rgba(0,0,0,0.08);
+      --c-bg:#ffffff; --c-bg-page:#f2f3f7; --c-sunken:#f5f6fa; --c-brand:#ff0f23; --c-brand-light:#fff0f4;
+      --c-on-brand:#ffffff; --c-service:#b5691a; --c-service-bg:#fff4e8; --c-info:#0073ff; --c-info-bg:#e5f5ff;
+      --c-success-text:#2aa32a; --r-base:6px; --r-card:8px;
+      --font-brand:"JD ZhengHei","PingFang SC",system-ui,sans-serif;
+      --font-body:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--c-bg-page); color: var(--c-title); font-family: var(--font-body); overflow: hidden; }
+    .slide { position: relative; width: 100vw; height: 100vh; padding: 36px 46px 32px; background: var(--c-bg); overflow: hidden; }
+    .slide::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--c-brand); }
+    .bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .bg video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .28; }
+    .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--c-bg) 0%, rgba(255,255,255,.97) 52%, rgba(255,255,255,.72) 100%); }
+    .content { position: relative; z-index: 1; height: 100%; display: grid; grid-template-rows: auto 1fr auto; gap: 18px; }
+    .top { display: grid; grid-template-columns: minmax(0,1fr) 390px; gap: 30px; align-items: start; }
+    .eyebrow { color: var(--c-brand); font: 700 15px/1 var(--font-brand); margin-bottom: 10px; }
+    h1 { margin: 0; max-width: 980px; font: 800 44px/1.05 var(--font-brand); letter-spacing: 0; }
+    .story { margin: 12px 0 0; max-width: 920px; color: var(--c-text); font-size: 18px; line-height: 1.5; }
+    .goal {
+      min-height: 134px; border-radius: var(--r-card); padding: 18px 22px;
+      background: rgba(255,255,255,.76); border: 1px solid rgba(255,255,255,.72);
+      box-shadow: 0 18px 48px rgba(23,26,38,.10); backdrop-filter: blur(22px) saturate(1.35);
+    }
+    .goal strong { font: 800 23px/1.22 var(--font-brand); }
+    .goal p { margin: 9px 0 0; color: var(--c-text); font-size: 16px; line-height: 1.42; }
+
+    .architecture { display: grid; grid-template-rows: 1fr 126px; gap: 16px; min-height: 0; }
+    .flow-board {
+      display: grid; grid-template-columns: 236px 1fr 196px; gap: 14px; min-height: 0;
+    }
+    .layer {
+      position: relative; border: 1px solid var(--c-line); border-radius: var(--r-card); background: rgba(255,255,255,.88);
+      padding: 16px; min-height: 0; overflow: hidden;
+    }
+    .layer::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--c-brand); }
+    .layer-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 13px; }
+    .layer-title strong { font: 800 22px/1.15 var(--font-brand); }
+    .layer-title span { padding: 6px 9px; border-radius: 999px; background: var(--c-brand-light); color: var(--c-brand); font: 700 12px/1 var(--font-brand); white-space: nowrap; }
+    .input-stack { display: grid; gap: 10px; }
+    .input-card { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 12px; min-height: 76px; }
+    .input-card strong { display: block; font: 800 16px/1.2 var(--font-brand); margin-bottom: 6px; }
+    .input-card p { margin: 0; color: var(--c-help); font-size: 12px; line-height: 1.35; }
+
+    .pipeline { display: grid; grid-template-columns: 1fr 26px 1.08fr 26px 1fr; gap: 0; align-items: stretch; }
+    .process {
+      border: 1px solid var(--c-line); border-radius: var(--r-card); background: var(--c-bg);
+      padding: 15px; min-height: 0; display: grid; grid-template-rows: auto 1fr;
+    }
+    .process.rank { background: var(--c-sunken); }
+    .process.orchestrate { border-color: rgba(42,163,42,.28); }
+    .process h2 { margin: 0 0 12px; font: 800 23px/1.16 var(--font-brand); letter-spacing: 0; }
+    .process h2 small { display: block; margin-top: 5px; color: var(--c-help); font: 400 12px/1.35 var(--font-body); }
+    .steps { display: grid; gap: 9px; align-content: start; }
+    .step { display: grid; grid-template-columns: 28px 1fr; gap: 9px; align-items: start; border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 10px; }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--c-brand); color: var(--c-on-brand); font: 800 12px/1 var(--font-brand); }
+    .step strong { display: block; font: 800 15px/1.18 var(--font-brand); margin-bottom: 4px; }
+    .step p { margin: 0; color: var(--c-help); font-size: 11px; line-height: 1.35; }
+    .arrow { display: grid; place-items: center; color: var(--c-brand); font: 800 26px/1 var(--font-brand); }
+    .rank-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 9px; }
+    .rank-node { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 12px; min-height: 82px; }
+    .rank-node strong { display: block; font: 800 15px/1.18 var(--font-brand); margin-bottom: 6px; }
+    .rank-node p { margin: 0; color: var(--c-help); font-size: 11px; line-height: 1.35; }
+    .topn { margin-top: 10px; border-radius: var(--r-card); background: var(--c-title); color: var(--c-bg); padding: 13px 15px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .topn strong { font: 800 20px/1.15 var(--font-brand); }
+    .topn span { width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: var(--c-brand); color: var(--c-on-brand); font: 800 18px/1 var(--font-brand); }
+
+    .touchpoints { display: grid; gap: 10px; }
+    .touch { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 12px; min-height: 82px; }
+    .touch strong { display: block; font: 800 16px/1.2 var(--font-brand); margin-bottom: 6px; }
+    .touch p { margin: 0; color: var(--c-help); font-size: 12px; line-height: 1.35; }
+
+    .feedback-loop {
+      display: grid; grid-template-columns: 1fr 142px 220px; gap: 12px; align-items: stretch;
+      border: 1px solid var(--c-line); border-radius: var(--r-card); background: var(--c-sunken); padding: 12px;
+    }
+    .fb-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+    .fb { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 11px; }
+    .fb strong { display: block; font: 800 14px/1.2 var(--font-brand); margin-bottom: 6px; }
+    .fb p { margin: 0; color: var(--c-help); font-size: 11px; line-height: 1.35; }
+    .update { display: grid; place-items: center; border-radius: var(--r-base); background: var(--c-brand); color: var(--c-on-brand); text-align: center; font: 800 19px/1.2 var(--font-brand); }
+    .loop-note { border: 1px solid var(--c-line); border-radius: var(--r-base); background: var(--c-bg); padding: 12px; }
+    .loop-note strong { font: 800 16px/1.2 var(--font-brand); }
+    .loop-note p { margin: 7px 0 0; color: var(--c-text); font-size: 12px; line-height: 1.4; }
+    .footer { display: flex; justify-content: space-between; color: var(--c-help); font-size: 13px; border-top: 1px solid var(--c-line); padding-top: 10px; }
+  </style>
+</head>
+<body>
+  <section class="slide" data-layout="anatomy-system">
+    <div class="bg" aria-hidden="true">
+      <video autoplay muted loop playsinline><source src="../../assets/media/home-banner-bg.mp4" type="video/mp4"></video>
+    </div>
+    <div class="content">
+      <div class="top">
+        <div>
+          <div class="eyebrow">JD TRAFFIC PHRASE · STRUCTURED CASE</div>
+          <h1>引流语分发是一条“输入 → 决策 → 编排 → 反馈”的闭环链路</h1>
+          <p class="story">把原始大图拆成 5 个层级：输入层负责候选来源，生成层形成可投放候选，排序层选出 Top N，编排层控制会话体验，反馈层持续回灌模型。</p>
+        </div>
+        <div class="goal">
+          <strong>结构化表达目标：先看清层级，再看每层细节</strong>
+          <p>一页里保留主链路和反馈闭环，次级字段压到每层内部。</p>
+        </div>
+      </div>
+
+      <div class="architecture">
+        <div class="flow-board">
+          <div class="layer">
+            <div class="layer-title"><strong>输入层</strong><span>L1</span></div>
+            <div class="input-stack">
+              <div class="input-card"><strong>线上用户交互历史</strong><p>Hints、会话、Query、点击、画像。</p></div>
+              <div class="input-card"><strong>LLM 实时结果</strong><p>GUI 上下文 + 用户 Memory。</p></div>
+              <div class="input-card"><strong>商品与语义知识</strong><p>属性、活动、意图、近义关系。</p></div>
+            </div>
+          </div>
+
+          <div class="pipeline">
+            <div class="process">
+              <h2>候选生成 <small>L2 · 多源融合</small></h2>
+              <div class="steps">
+                <div class="step"><div class="step-num">1</div><div><strong>召回候选</strong><p>从历史、LLM、商品知识召回。</p></div></div>
+                <div class="step"><div class="step-num">2</div><div><strong>语义聚类</strong><p>合并相似表达，控制重复。</p></div></div>
+                <div class="step"><div class="step-num">3</div><div><strong>安全过滤</strong><p>防灌水、风险词、体验约束。</p></div></div>
+              </div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="process rank">
+              <h2>排序决策 <small>L3 · 打分 → 融合 → Top N</small></h2>
+              <div>
+                <div class="rank-grid">
+                  <div class="rank-node"><strong>特征构建</strong><p>用户 / 商品 / 上下文。</p></div>
+                  <div class="rank-node"><strong>多目标学习</strong><p>CTR / CVR / 时长。</p></div>
+                  <div class="rank-node"><strong>策略约束</strong><p>业务收益、风险、频控。</p></div>
+                  <div class="rank-node"><strong>加权融合</strong><p>融合分决定投放顺序。</p></div>
+                </div>
+                <div class="topn"><strong>输出当前触点 Top N</strong><span>Top N</span></div>
+              </div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="process orchestrate">
+              <h2>会话编排 <small>L4 · 体验一致性</small></h2>
+              <div class="steps">
+                <div class="step"><div class="step-num">1</div><div><strong>语义去重</strong><p>同 session 不重复相似内容。</p></div></div>
+                <div class="step"><div class="step-num">2</div><div><strong>连贯承接</strong><p>承接用户上一轮行为。</p></div></div>
+                <div class="step"><div class="step-num">3</div><div><strong>表达统一</strong><p>统一语气、人设和任务方向。</p></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="layer">
+            <div class="layer-title"><strong>触点输出</strong><span>L5</span></div>
+            <div class="touchpoints">
+              <div class="touch"><strong>搜索结果页</strong><p>结果列表引导，帮助缩小范围。</p></div>
+              <div class="touch"><strong>商品详情页</strong><p>加深看点理解，降低决策成本。</p></div>
+              <div class="touch"><strong>购物车</strong><p>加速决策转化，承接优惠和服务。</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feedback-loop">
+          <div class="fb-grid">
+            <div class="fb"><strong>实时反馈</strong><p>曝光、点击、停留、转化。</p></div>
+            <div class="fb"><strong>上下文特征</strong><p>用户、页面、商品、设备。</p></div>
+            <div class="fb"><strong>引流语信息</strong><p>候选、Prompt、排序分。</p></div>
+            <div class="fb"><strong>实时落盘</strong><p>分析、报表、模型迭代。</p></div>
+          </div>
+          <div class="update">模型更新<br>上线</div>
+          <div class="loop-note"><strong>反馈回流到 L2 / L3</strong><p>生成层补候选，排序层更新特征和权重，编排层更新频控与去重策略。</p></div>
+        </div>
+      </div>
+
+      <div class="footer"><span>JD 引流语生成与分发框架 / structured one-page</span><span>01</span></div>
+    </div>
+  </section>
+</body>
+</html>

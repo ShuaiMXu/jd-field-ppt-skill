@@ -1,0 +1,3 @@
+display_name: 京东场域 PPT
+short_description: 生成符合 JD V16 token 和业务汇报语境的 HTML 演示 deck。
+default_prompt: 基于我的材料生成一份京东场域业务演示 PPT，先整理页结构，再输出可预览的 HTML deck，并完成静态校验。
