@@ -16,10 +16,10 @@
     }
     * { box-sizing:border-box; }
     html,body { margin:0; min-height:100%; background:var(--bg); font-family:var(--font); color:var(--text); }
-    body { display:grid; place-items:center; padding:24px; }
+    body { display:grid; place-items:start center; padding:24px; }
     .slide {
-      width:min(100%,1600px); aspect-ratio:16/9; background:var(--card); border:1px solid var(--line);
-      border-radius:var(--radius); padding:36px; overflow:hidden; box-shadow:0 24px 70px rgba(23,26,38,.10);
+      width:min(100%,1600px); min-height:900px; background:var(--card); border:1px solid var(--line);
+      border-radius:var(--radius); padding:36px; overflow:visible; box-shadow:0 24px 70px rgba(23,26,38,.10);
       display:grid; grid-template-rows:auto 1fr auto; gap:24px;
     }
     .top { display:grid; grid-template-columns:1fr auto; gap:28px; align-items:start; }
@@ -39,7 +39,7 @@
     .pill { display:inline-flex; align-items:center; height:24px; padding:0 9px; border-radius:999px; background:var(--red-soft); color:var(--red); font-size:12px; font-weight:800; }
     pre { margin:0; padding:18px; height:100%; overflow:hidden; font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:var(--text); background:#fbfcff; }
     code { white-space:pre-wrap; }
-    .board { position:relative; height:100%; min-height:590px; background:
+    .board { position:relative; height:100%; min-height:620px; background:
       linear-gradient(var(--line) 1px,transparent 1px),
       linear-gradient(90deg,var(--line) 1px,transparent 1px);
       background-size:32px 32px; background-color:#ffffff;
@@ -109,7 +109,7 @@ AI --> 系统: 返回候选
       <section class="board-wrap">
         <div class="panel-head"><b>飞书画板式输出</b><span class="pill">可编辑矢量节点，非截图</span></div>
         <div class="board" aria-label="editable board diagram">
-          <svg class="edge" viewBox="0 0 1000 590" preserveAspectRatio="none">
+          <svg class="edge" viewBox="0 0 1000 620" preserveAspectRatio="none">
             <defs>
               <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
                 <path d="M0,0 L10,5 L0,10 Z" fill="#ff0f23"/>
@@ -121,21 +121,21 @@ AI --> 系统: 返回候选
             <path d="M150 160 C230 160 230 160 300 160" marker-end="url(#arrow)"/>
             <path d="M410 160 C485 160 485 160 560 160" marker-end="url(#arrow)"/>
             <path d="M670 160 C745 160 745 160 820 160" marker-end="url(#arrow)"/>
-            <path d="M885 214 C885 278 770 300 710 326" marker-end="url(#arrow)"/>
-            <path class="secondary" d="M236 398 C325 438 482 438 602 398" marker-end="url(#arrowBlue)"/>
+            <path d="M885 214 C885 270 770 292 710 314" marker-end="url(#arrow)"/>
+            <path class="secondary" d="M236 388 C325 426 482 426 602 388" marker-end="url(#arrowBlue)"/>
             <text x="336" y="132">flowchart edge</text>
-            <text x="382" y="448">sequence message</text>
+            <text x="382" y="438">sequence message</text>
           </svg>
 
           <div class="node" data-id="A" style="left:48px;top:110px"><b>需求输入</b><span>Markdown 中的 Mermaid 节点</span></div>
           <div class="node" data-id="B" style="left:308px;top:110px"><b>策略拆解</b><span>节点保持独立文本对象</span></div>
           <div class="node" data-id="C" style="left:568px;top:110px"><b>方案生成</b><span>可移动、可改色、可编辑</span></div>
           <div class="node" data-id="D" style="left:828px;top:110px"><b>审验收</b><span>连线引用 from / to ID</span></div>
-          <div class="node green" data-id="E" style="left:626px;top:320px"><b>知识回流</b><span>输出到规范和资产库</span></div>
+          <div class="node green" data-id="E" style="left:626px;top:306px"><b>知识回流</b><span>输出到规范和资产库</span></div>
 
-          <div class="node blue" data-id="P1" style="left:110px;top:328px"><b>用户</b><span>PlantUML participant</span></div>
-          <div class="node blue" data-id="P2" style="left:380px;top:328px"><b>系统</b><span>message connector</span></div>
-          <div class="node gold" data-id="P3" style="left:740px;top:428px"><b>审核</b><span>规范检查节点</span></div>
+          <div class="node blue" data-id="P1" style="left:110px;top:318px"><b>用户</b><span>PlantUML participant</span></div>
+          <div class="node blue" data-id="P2" style="left:380px;top:318px"><b>系统</b><span>message connector</span></div>
+          <div class="node gold" data-id="P3" style="left:740px;top:406px"><b>审核</b><span>规范检查节点</span></div>
 
           <div class="note">
             <div><b>1. 提取代码块</b><span>识别 mermaid / plantuml fence</span></div>
