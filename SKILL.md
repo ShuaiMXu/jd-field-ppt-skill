@@ -29,7 +29,7 @@ metadata:
 1. **识别场域**：先判断是业务复盘、产品方案、设计规范发布、增长实验、生态治理、项目路演还是汇报封面。若材料不足，只问最关键的 1-2 个问题。
 2. **读参考**：按任务读取 `references/`：
    - 不确定该用什么 deck 结构：先读 `deck-structure-presets.md`
-   - 用户要求画图 / 架构图 / 流程图 / 飞轮 / 鱼骨 / Dashboard / SVG / 精排：读 `drawing-paths.md`
+   - 用户要求画图 / 架构图 / 流程图 / 飞轮 / 鱼骨 / Dashboard / SVG / 精排 / Mermaid / PlantUML / Markdown 图表转画板：读 `drawing-paths.md`
    - 用户质疑“结构不够多 / 模板太单一 / 页面类型不够”：读 `html-ppt-patterns.md`
    - 业务 / 产品 / 设计汇报：读 `jd-field-deck-system.md` 和 `page-patterns.md`
    - 调整视觉主题 / 图表色 / 状态色：读 `jd-color-tokens.md`

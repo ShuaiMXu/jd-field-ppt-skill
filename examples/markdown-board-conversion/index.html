@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Markdown Diagram Blocks to Editable Board</title>
+  <style>
+    @font-face { font-family:"JD ZhengHei"; src:url("../../assets/fonts/JDZhengHeiV2-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
+    @font-face { font-family:"JD ZhengHei"; src:url("../../assets/fonts/JDZhengHeiV2-Bold.otf") format("opentype"); font-weight:700; font-display:swap; }
+    @font-face { font-family:"JD ZhengHei"; src:url("../../assets/fonts/JDZhengHeiV2-Heavy.otf") format("opentype"); font-weight:800; font-display:swap; }
+    :root {
+      --title:#171a26; --text:#3d414d; --help:#828794; --bg:#f2f3f7; --card:#ffffff; --sunken:#f5f6fa;
+      --line:rgba(0,0,0,.08); --red:#ff0f23; --red-soft:#fff0f4; --blue:#0073ff; --blue-soft:#e5f5ff;
+      --green:#2aa32a; --green-soft:#ebfbeb; --gold:#b5691a; --gold-soft:#fff4e8;
+      --radius:8px; --font:"JD ZhengHei","PingFang SC",system-ui,sans-serif;
+    }
+    * { box-sizing:border-box; }
+    html,body { margin:0; min-height:100%; background:var(--bg); font-family:var(--font); color:var(--text); }
+    body { display:grid; place-items:center; padding:24px; }
+    .slide {
+      width:min(100%,1600px); aspect-ratio:16/9; background:var(--card); border:1px solid var(--line);
+      border-radius:var(--radius); padding:36px; overflow:hidden; box-shadow:0 24px 70px rgba(23,26,38,.10);
+      display:grid; grid-template-rows:auto 1fr auto; gap:24px;
+    }
+    .top { display:grid; grid-template-columns:1fr auto; gap:28px; align-items:start; }
+    .mark { display:inline-grid; place-items:center; width:54px; height:30px; border-radius:7px; background:var(--red); color:#fff; font-weight:800; margin-bottom:14px; }
+    h1 { margin:0; color:var(--title); font-size:44px; line-height:1.06; font-weight:800; letter-spacing:0; }
+    .lead { margin:12px 0 0; color:var(--help); font-size:18px; line-height:1.45; font-weight:700; }
+    .route {
+      border:1px solid var(--line); border-radius:var(--radius); background:var(--sunken);
+      padding:14px 16px; min-width:330px;
+    }
+    .route b { display:block; color:var(--title); font-size:18px; margin-bottom:8px; }
+    .route span { color:var(--help); font-size:14px; font-weight:700; }
+    .main { display:grid; grid-template-columns:410px 1fr; gap:24px; min-height:0; }
+    .source, .board-wrap { border:1px solid var(--line); border-radius:var(--radius); background:var(--card); overflow:hidden; }
+    .panel-head { height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 18px; border-bottom:1px solid var(--line); background:var(--sunken); }
+    .panel-head b { color:var(--title); font-size:18px; }
+    .pill { display:inline-flex; align-items:center; height:24px; padding:0 9px; border-radius:999px; background:var(--red-soft); color:var(--red); font-size:12px; font-weight:800; }
+    pre { margin:0; padding:18px; height:100%; overflow:hidden; font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:var(--text); background:#fbfcff; }
+    code { white-space:pre-wrap; }
+    .board { position:relative; height:100%; min-height:590px; background:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+      background-size:32px 32px; background-color:#ffffff;
+    }
+    .edge { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+    .edge path { fill:none; stroke:var(--red); stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+    .edge path.secondary { stroke:var(--blue); }
+    .edge text { font:700 13px var(--font); fill:var(--help); }
+    .node {
+      position:absolute; width:168px; min-height:78px; border:2px solid var(--red); border-radius:var(--radius);
+      background:var(--card); box-shadow:0 10px 28px rgba(23,26,38,.10); padding:14px 14px 12px;
+    }
+    .node.blue { border-color:var(--blue); background:var(--blue-soft); }
+    .node.green { border-color:var(--green); background:var(--green-soft); }
+    .node.gold { border-color:var(--gold); background:var(--gold-soft); }
+    .node b { display:block; color:var(--title); font-size:18px; line-height:1.15; }
+    .node span { display:block; margin-top:8px; color:var(--help); font-size:12px; line-height:1.35; font-weight:700; }
+    .node::before {
+      content:attr(data-id); position:absolute; left:10px; top:-12px; height:22px; padding:0 7px; border-radius:999px;
+      display:inline-flex; align-items:center; background:var(--red); color:#fff; font-size:11px; font-weight:800;
+    }
+    .node.blue::before { background:var(--blue); } .node.green::before { background:var(--green); } .node.gold::before { background:var(--gold); }
+    .note {
+      position:absolute; left:40px; bottom:28px; right:40px; display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+    }
+    .note div { border:1px solid var(--line); border-radius:var(--radius); background:rgba(255,255,255,.86); padding:11px 12px; }
+    .note b { display:block; color:var(--title); font-size:14px; margin-bottom:5px; }
+    .note span { color:var(--help); font-size:12px; font-weight:700; }
+    .footer { display:flex; align-items:center; justify-content:space-between; color:var(--help); font-size:14px; font-weight:700; }
+  </style>
+</head>
+<body>
+  <main class="slide">
+    <section class="top">
+      <div>
+        <div class="mark">JD</div>
+        <h1>Markdown 图表代码块转为可编辑画板节点</h1>
+        <p class="lead">Mermaid / PlantUML 不作为截图嵌入，而是拆成节点、连线、标签和分组，落成可编辑矢量对象。</p>
+      </div>
+      <div class="route">
+        <b>Drawing Path F</b>
+        <span>Markdown fenced code block → diagram AST → board-native nodes / connectors</span>
+      </div>
+    </section>
+
+    <section class="main">
+      <aside class="source">
+        <div class="panel-head"><b>Markdown 输入</b><span class="pill">Mermaid + PlantUML</span></div>
+        <pre><code>```mermaid
+flowchart LR
+  A[需求输入] --> B[策略拆解]
+  B --> C[方案生成]
+  C --> D[审验收]
+  D --> E[知识回流]
+```
+
+```plantuml
+@startuml
+用户 -> 系统: 提交需求
+系统 -> AI: 生成方案
+AI --> 系统: 返回候选
+系统 -> 审核: 规范检查
+@enduml
+```</code></pre>
+      </aside>
+
+      <section class="board-wrap">
+        <div class="panel-head"><b>飞书画板式输出</b><span class="pill">可编辑矢量节点，非截图</span></div>
+        <div class="board" aria-label="editable board diagram">
+          <svg class="edge" viewBox="0 0 1000 590" preserveAspectRatio="none">
+            <defs>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#ff0f23"/>
+              </marker>
+              <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#0073ff"/>
+              </marker>
+            </defs>
+            <path d="M150 160 C230 160 230 160 300 160" marker-end="url(#arrow)"/>
+            <path d="M410 160 C485 160 485 160 560 160" marker-end="url(#arrow)"/>
+            <path d="M670 160 C745 160 745 160 820 160" marker-end="url(#arrow)"/>
+            <path d="M885 214 C885 278 770 300 710 326" marker-end="url(#arrow)"/>
+            <path class="secondary" d="M236 398 C325 438 482 438 602 398" marker-end="url(#arrowBlue)"/>
+            <text x="336" y="132">flowchart edge</text>
+            <text x="382" y="448">sequence message</text>
+          </svg>
+
+          <div class="node" data-id="A" style="left:48px;top:110px"><b>需求输入</b><span>Markdown 中的 Mermaid 节点</span></div>
+          <div class="node" data-id="B" style="left:308px;top:110px"><b>策略拆解</b><span>节点保持独立文本对象</span></div>
+          <div class="node" data-id="C" style="left:568px;top:110px"><b>方案生成</b><span>可移动、可改色、可编辑</span></div>
+          <div class="node" data-id="D" style="left:828px;top:110px"><b>审验收</b><span>连线引用 from / to ID</span></div>
+          <div class="node green" data-id="E" style="left:626px;top:320px"><b>知识回流</b><span>输出到规范和资产库</span></div>
+
+          <div class="node blue" data-id="P1" style="left:110px;top:328px"><b>用户</b><span>PlantUML participant</span></div>
+          <div class="node blue" data-id="P2" style="left:380px;top:328px"><b>系统</b><span>message connector</span></div>
+          <div class="node gold" data-id="P3" style="left:740px;top:428px"><b>审核</b><span>规范检查节点</span></div>
+
+          <div class="note">
+            <div><b>1. 提取代码块</b><span>识别 mermaid / plantuml fence</span></div>
+            <div><b>2. 解析结构</b><span>生成节点、边、分组和消息</span></div>
+            <div><b>3. 落原生对象</b><span>shape / text / connector</span></div>
+            <div><b>4. 保留源码</b><span>失败时可回退重绘</span></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <footer class="footer">
+      <span>Layout: markdown-board-conversion / Path F</span>
+      <span>editable diagram expression</span>
+    </footer>
+  </main>
+</body>
+</html>

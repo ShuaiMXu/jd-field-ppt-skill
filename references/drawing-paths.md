@@ -2,7 +2,7 @@
 
 当用户请求“画图 / 架构图 / 流程图 / 飞轮 / 鱼骨 / 路线图 / Dashboard / 插画 / 海报 / 可视化 / 节点图 / 精排 / 一页图 / SVG / Mermaid / whiteboard”等内容时，先选作图路径，再进入页面排版。
 
-## 5 种作图路径
+## 6 种作图路径
 
 ### A. Mermaid / PlantUML 整图渲染
 
@@ -47,6 +47,47 @@
 
 - 视觉表现中等。
 - 复杂图需要手动控制节点数量和层级。
+
+### F. Markdown 图表代码块转可编辑画板
+
+适合：
+
+- 用户给 Markdown 文档，里面包含 Mermaid / PlantUML 代码块
+- 希望像飞书 CLI 画板一样，把图表转换成可编辑矢量节点
+- 不是截图，而是每个节点、连线、文本都可以单独移动和修改
+- 适合流程图、架构图、时序图、简单泳道图、状态图
+
+输入示例：
+
+- Mermaid fenced block: `flowchart LR; A[需求输入] --> B[策略拆解]; B --> C[方案生成]; C --> D[审验收]`
+- PlantUML fenced block: `@startuml ... 用户 -> 系统: 提交需求 ... @enduml`
+
+输出方式：
+
+- 先从 Markdown 中提取 `mermaid` 和 `plantuml` fenced code block。
+- Mermaid:
+  - `flowchart` / `graph`：解析节点、边、方向、子图，转为原生节点和 SVG 连线。
+  - `sequenceDiagram`：转为参与方列、消息箭头、返回箭头和分组带。
+  - `mindmap` / `timeline` / `gantt`：优先转为 HTML/SVG 结构化图；复杂时降级为路径 A。
+- PlantUML:
+  - `sequence`：解析参与方和消息，转为可编辑时序图。
+  - `component` / `deployment` / `class`：转为节点分组、关系线和标签。
+- 在 HTML PPT 中用 `.board-node` / `.board-edge` / `.board-label` 表达，模拟画板原生对象。
+- 若接入飞书 CLI / board API，则输出节点 JSON：`shape/text/connector/position/size/style`，不要上传截图。
+
+落画板原则：
+
+- 每个 Mermaid / PlantUML 节点必须有稳定 `data-id`。
+- 每条边必须有 `from` / `to` / `label`，连线引用节点 ID。
+- 节点文字不超过 16 字；超过则拆成标题 + 注释。
+- 超过 18 个节点时，先聚合分组，再生成画板。
+- 如果用户明确要求“飞书画板”，优先生成 board-native JSON 或调用对应 CLI；没有 CLI 时先产 HTML whiteboard demo 和转换清单。
+
+限制：
+
+- 不适合复杂 PlantUML skinparam 视觉复刻。
+- 不适合直接把大段 Markdown 全量塞进节点。
+- Mermaid/PlantUML 语法解析失败时，保留原始源码，并切到路径 E 精排重画。
 
 ### C. SVG 自由作图
 
@@ -134,6 +175,7 @@
 |---|---|
 | “画一个流程图 / 时序图 / 甘特图” | A |
 | “Mermaid 太复杂渲染不全，但节点还要能改” | B |
+| “Markdown 里的 Mermaid / PlantUML 转飞书画板 / 可编辑矢量图” | F |
 | “做一个飞轮 / 鱼骨 / Dashboard / 海报式信息图” | C |
 | “加一个小图标 / 印章 / 装饰符号” | D |
 | “做一页精排架构图 / 系统结构图 / 算法框架” | E |

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diagram to Editable Board References</title>
+  <style>
+    @font-face { font-family:"JD ZhengHei"; src:url("../../assets/fonts/JDZhengHeiV2-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
+    @font-face { font-family:"JD ZhengHei"; src:url("../../assets/fonts/JDZhengHeiV2-Bold.otf") format("opentype"); font-weight:700; font-display:swap; }
+    @font-face { font-family:"JD ZhengHei"; src:url("../../assets/fonts/JDZhengHeiV2-Heavy.otf") format("opentype"); font-weight:800; font-display:swap; }
+    :root {
+      --title:#171a26; --text:#3d414d; --help:#828794; --bg:#f2f3f7; --card:#fff; --sunken:#f5f6fa;
+      --line:rgba(0,0,0,.08); --red:#ff0f23; --red-soft:#fff0f4; --blue:#0073ff; --blue-soft:#e5f5ff;
+      --green:#2aa32a; --green-soft:#ebfbeb; --gold:#b5691a; --gold-soft:#fff4e8; --font:"JD ZhengHei","PingFang SC",system-ui,sans-serif;
+    }
+    * { box-sizing:border-box; }
+    html,body { margin:0; min-height:100%; background:var(--bg); font-family:var(--font); color:var(--text); }
+    body { display:grid; place-items:center; padding:24px; }
+    .deck { width:min(100%,1600px); display:grid; gap:22px; }
+    .hero {
+      border:1px solid var(--line); border-radius:8px; background:var(--card); padding:34px 38px;
+      display:grid; grid-template-columns:1fr 330px; gap:28px; box-shadow:0 20px 60px rgba(23,26,38,.08);
+    }
+    .mark { display:inline-grid; place-items:center; width:54px; height:30px; border-radius:7px; background:var(--red); color:#fff; font-weight:800; margin-bottom:14px; }
+    h1 { margin:0; color:var(--title); font-size:42px; line-height:1.08; font-weight:800; letter-spacing:0; }
+    .lead { margin:12px 0 0; color:var(--help); font-size:18px; line-height:1.45; font-weight:700; }
+    .meta { border:1px solid var(--line); border-radius:8px; background:var(--sunken); padding:16px; }
+    .meta b { display:block; color:var(--title); font-size:18px; margin-bottom:9px; }
+    .meta p { margin:0; color:var(--help); font-size:14px; line-height:1.45; font-weight:700; }
+    .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .case {
+      min-height:360px; border:1px solid var(--line); border-radius:8px; background:var(--card); overflow:hidden;
+      display:grid; grid-template-rows:auto 1fr; box-shadow:0 14px 44px rgba(23,26,38,.06);
+    }
+    .case-head { min-height:84px; padding:18px 20px; border-bottom:1px solid var(--line); background:var(--sunken); display:grid; grid-template-columns:1fr auto; gap:14px; }
+    .case h2 { margin:0; color:var(--title); font-size:24px; line-height:1.16; font-weight:800; }
+    .case-head p { margin:8px 0 0; color:var(--help); font-size:14px; line-height:1.35; font-weight:700; }
+    .path { display:inline-flex; align-items:center; height:26px; padding:0 10px; border-radius:999px; background:var(--red-soft); color:var(--red); font-size:12px; font-weight:800; white-space:nowrap; }
+    .body { display:grid; grid-template-columns:230px 1fr; min-height:276px; }
+    pre { margin:0; padding:16px; background:#fbfcff; border-right:1px solid var(--line); overflow:hidden; font:12px/1.48 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:var(--text); }
+    .board { position:relative; min-height:276px; background:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+      background-size:28px 28px; background-color:#fff;
+    }
+    .edge { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+    .edge path { fill:none; stroke:var(--red); stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+    .edge .blue { stroke:var(--blue); } .edge .green { stroke:var(--green); }
+    .node {
+      position:absolute; width:118px; min-height:56px; border:2px solid var(--red); border-radius:8px; background:var(--card);
+      padding:11px 12px; box-shadow:0 10px 28px rgba(23,26,38,.10);
+    }
+    .node b { display:block; color:var(--title); font-size:15px; line-height:1.16; }
+    .node span { display:block; margin-top:6px; color:var(--help); font-size:11px; line-height:1.25; font-weight:700; }
+    .node.blue { border-color:var(--blue); background:var(--blue-soft); }
+    .node.green { border-color:var(--green); background:var(--green-soft); }
+    .node.gold { border-color:var(--gold); background:var(--gold-soft); }
+    .actor { position:absolute; width:104px; height:50px; border:2px solid var(--blue); border-radius:999px; background:var(--blue-soft); display:grid; place-items:center; color:var(--title); font-size:15px; font-weight:800; }
+    .lane { position:absolute; top:22px; bottom:22px; border:1px dashed rgba(0,0,0,.14); border-radius:8px; background:rgba(245,246,250,.56); }
+    .lane-title { position:absolute; left:12px; top:10px; color:var(--help); font-size:12px; font-weight:800; }
+    .note { position:absolute; left:18px; right:18px; bottom:16px; border:1px solid var(--line); border-radius:8px; background:rgba(255,255,255,.90); padding:9px 10px; color:var(--help); font-size:12px; line-height:1.35; font-weight:700; }
+    .footer { display:flex; justify-content:space-between; color:var(--help); font-size:13px; font-weight:700; padding:0 4px; }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="hero">
+      <div>
+        <div class="mark">JD</div>
+        <h1>Markdown / Mermaid / PlantUML 转可编辑画板参考</h1>
+        <p class="lead">用 Path F 表达：从代码块提取结构，转成画板原生节点、连线、分组和标签。目标是可编辑矢量图，不是截图。</p>
+      </div>
+      <aside class="meta">
+        <b>选择建议</b>
+        <p>简单流程用 Case 01；系统时序用 Case 02；跨角色协作用 Case 03；复杂 Markdown 多图块用 Case 04。</p>
+      </aside>
+    </section>
+
+    <section class="grid">
+      <article class="case">
+        <header class="case-head"><div><h2>01 流程图：Mermaid Flowchart</h2><p>适合把业务链路、AI 处理链路转成节点图。</p></div><span class="path">Path F / Flow</span></header>
+        <div class="body">
+          <pre>flowchart LR
+A[需求输入] --> B[策略拆解]
+B --> C[方案生成]
+C --> D[审验收]
+D --> E[知识回流]</pre>
+          <div class="board">
+            <svg class="edge" viewBox="0 0 540 276" preserveAspectRatio="none">
+              <path d="M86 90 C126 90 126 90 160 90"/><path d="M246 90 C286 90 286 90 320 90"/><path d="M406 90 C446 90 446 90 480 90"/>
+              <path class="green" d="M448 130 C432 192 318 208 270 184"/>
+            </svg>
+            <div class="node" style="left:20px;top:62px"><b>需求输入</b><span>node A</span></div>
+            <div class="node" style="left:180px;top:62px"><b>策略拆解</b><span>node B</span></div>
+            <div class="node" style="left:340px;top:62px"><b>方案生成</b><span>node C</span></div>
+            <div class="node blue" style="left:462px;top:62px"><b>审验收</b><span>node D</span></div>
+            <div class="node green" style="left:242px;top:170px"><b>知识回流</b><span>node E</span></div>
+            <div class="note">每个 Mermaid 节点转成 `.board-node`，边转成 connector，后续可单独拖拽和编辑。</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <header class="case-head"><div><h2>02 时序图：PlantUML Sequence</h2><p>适合表达用户、系统、AI、审核之间的消息流。</p></div><span class="path">Path F / Sequence</span></header>
+        <div class="body">
+          <pre>@startuml
+用户 -> 系统: 提交需求
+系统 -> AI: 生成方案
+AI --> 系统: 返回候选
+系统 -> 审核: 规范检查
+@enduml</pre>
+          <div class="board">
+            <svg class="edge" viewBox="0 0 540 276" preserveAspectRatio="none">
+              <path class="blue" d="M84 104 H248"/><path class="blue" d="M248 140 H410"/><path class="green" d="M410 176 H248"/><path d="M248 212 H410"/>
+            </svg>
+            <div class="actor" style="left:36px;top:36px">用户</div>
+            <div class="actor" style="left:202px;top:36px">系统</div>
+            <div class="actor" style="left:368px;top:36px">AI / 审核</div>
+            <div class="node blue" style="left:88px;top:92px;width:140px"><b>提交需求</b><span>message 1</span></div>
+            <div class="node blue" style="left:256px;top:128px;width:140px"><b>生成方案</b><span>message 2</span></div>
+            <div class="node green" style="left:256px;top:164px;width:140px"><b>返回候选</b><span>return</span></div>
+            <div class="node" style="left:256px;top:200px;width:140px"><b>规范检查</b><span>review</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <header class="case-head"><div><h2>03 泳道图：跨角色协同</h2><p>适合把“设计 / AI / 研发 / 运营”的责任分层讲清楚。</p></div><span class="path">Path F / Swimlane</span></header>
+        <div class="body">
+          <pre>flowchart TB
+subgraph 设计
+  A[提出目标] --> B[确认方案]
+end
+subgraph AI
+  C[生成候选] --> D[归因建议]
+end</pre>
+          <div class="board">
+            <div class="lane" style="left:18px;width:160px"><span class="lane-title">设计</span></div>
+            <div class="lane" style="left:196px;width:160px"><span class="lane-title">AI</span></div>
+            <div class="lane" style="left:374px;width:160px"><span class="lane-title">研发 / 运营</span></div>
+            <svg class="edge" viewBox="0 0 540 276" preserveAspectRatio="none">
+              <path d="M98 104 H236"/><path class="blue" d="M278 104 H414"/><path class="green" d="M414 184 H278"/><path d="M236 184 H98"/>
+            </svg>
+            <div class="node" style="left:48px;top:72px"><b>提出目标</b><span>brief</span></div>
+            <div class="node blue" style="left:226px;top:72px"><b>生成候选</b><span>AI output</span></div>
+            <div class="node gold" style="left:404px;top:72px"><b>落地校验</b><span>handoff</span></div>
+            <div class="node green" style="left:226px;top:164px"><b>归因建议</b><span>feedback</span></div>
+            <div class="node" style="left:48px;top:164px"><b>确认方案</b><span>decision</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <header class="case-head"><div><h2>04 Markdown 多图块：一文多图</h2><p>适合从 PRD / 方案文档里自动提取多个图表并落画板。</p></div><span class="path">Path F / Batch</span></header>
+        <div class="body">
+          <pre># 方案文档
+```mermaid
+flowchart LR ...
+```
+
+```plantuml
+@startuml ...
+@enduml
+```
+
+输出:
+board.nodes[]
+board.connectors[]</pre>
+          <div class="board">
+            <svg class="edge" viewBox="0 0 540 276" preserveAspectRatio="none">
+              <path d="M104 84 H252"/><path d="M252 84 H404"/><path class="blue" d="M104 170 H252"/><path class="blue" d="M252 170 H404"/>
+            </svg>
+            <div class="node" style="left:36px;top:50px"><b>提取代码块</b><span>2 diagrams</span></div>
+            <div class="node" style="left:206px;top:50px"><b>生成 AST</b><span>nodes / edges</span></div>
+            <div class="node green" style="left:376px;top:50px"><b>落画板</b><span>editable</span></div>
+            <div class="node blue" style="left:36px;top:136px"><b>保留源码</b><span>source map</span></div>
+            <div class="node blue" style="left:206px;top:136px"><b>生成 JSON</b><span>board API</span></div>
+            <div class="node gold" style="left:376px;top:136px"><b>质量检查</b><span>layout QA</span></div>
+            <div class="note">批量转换时要输出 `sourceBlockId`，确保每个画板节点能追溯回 Markdown 源码。</div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <span>JD Field PPT Skill / Diagram Path References</span>
+      <span>Mermaid + PlantUML → editable board-native expression</span>
+    </footer>
+  </main>
+</body>
+</html>
