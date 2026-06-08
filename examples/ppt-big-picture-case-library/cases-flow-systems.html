@@ -19,19 +19,66 @@
     <section class="case-grid">
       <article class="case-card">
         <div class="case-copy"><span class="case-tag">用户旅程</span><h2>京东 APP 下单旅程</h2><p>把用户动作、触点和掉点放到一条链路里看。</p><div class="case-meta"><span>适合：体验优化 / 转化分析</span><span>核心：动作链路 + 情绪/指标</span></div></div>
-        <div class="case-visual"><div class="journey-line"></div><div class="mini-node mini-info" style="left:28px;top:94px;">搜索</div><div class="mini-node" style="left:138px;top:156px;">详情</div><div class="mini-node mini-warning" style="left:248px;top:94px;">加购</div><div class="mini-node mini-red" style="right:28px;top:156px;">支付</div><div class="mini-node mini-success" style="right:142px;bottom:36px;">履约</div></div>
+        <div class="case-visual">
+          <svg class="diagram-svg" viewBox="0 0 520 300" role="img" aria-label="京东 APP 下单旅程">
+            <defs><marker id="journey-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="var(--c-brand)"/></marker></defs>
+            <polyline points="54,152 150,98 246,152 342,98 438,152" fill="none" stroke="var(--c-brand)" stroke-width="4" marker-end="url(#journey-arrow)"/>
+            <rect x="22" y="126" width="74" height="42" rx="8" class="svg-node-info"/><text x="59" y="152" text-anchor="middle" class="svg-label">搜索</text>
+            <rect x="118" y="72" width="74" height="42" rx="8" class="svg-node"/><text x="155" y="98" text-anchor="middle" class="svg-label">详情</text>
+            <rect x="214" y="126" width="74" height="42" rx="8" class="svg-node-warning"/><text x="251" y="152" text-anchor="middle" class="svg-label">加购</text>
+            <rect x="310" y="72" width="74" height="42" rx="8" class="svg-node-red"/><text x="347" y="98" text-anchor="middle" class="svg-label">支付</text>
+            <rect x="406" y="126" width="74" height="42" rx="8" class="svg-node-success"/><text x="443" y="152" text-anchor="middle" class="svg-label">履约</text>
+            <g stroke="var(--c-line)"><line x1="59" y1="178" x2="59" y2="226"/><line x1="155" y1="124" x2="155" y2="226"/><line x1="251" y1="178" x2="251" y2="226"/><line x1="347" y1="124" x2="347" y2="226"/><line x1="443" y1="178" x2="443" y2="226"/></g>
+            <text x="38" y="248" class="svg-small">CTR</text><text x="134" y="248" class="svg-small">停留</text><text x="230" y="248" class="svg-small">加购率</text><text x="326" y="248" class="svg-small">支付率</text><text x="422" y="248" class="svg-small">履约</text>
+          </svg>
+        </div>
       </article>
       <article class="case-card">
         <div class="case-copy"><span class="case-tag">系统架构</span><h2>客服智能化能力架构</h2><p>表达入口、模型、知识库、人工兜底和数据回流的关系。</p><div class="case-meta"><span>适合：方案评审 / 技术对齐</span><span>核心：分层 + 数据流向</span></div></div>
-        <div class="case-visual"><div class="arch-box" style="left:24px;right:24px;top:24px;background:var(--c-brand-light);">客服入口：APP / 企微 / 电话</div><div class="arch-box" style="left:66px;right:66px;top:106px;background:var(--c-info-bg);">意图识别与路由</div><div class="arch-box" style="left:24px;top:192px;width:150px;background:var(--c-success-bg);">知识库</div><div class="arch-box" style="left:196px;top:192px;width:150px;background:var(--c-warning-bg);">模型服务</div><div class="arch-box" style="right:24px;top:192px;width:150px;background:var(--c-service-bg);">人工兜底</div></div>
+        <div class="case-visual">
+          <svg class="diagram-svg" viewBox="0 0 520 300" role="img" aria-label="客服智能化能力架构">
+            <defs><marker id="arch-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="var(--c-help)"/></marker></defs>
+            <rect x="36" y="28" width="448" height="46" rx="8" class="svg-node-red"/><text x="260" y="56" text-anchor="middle" class="svg-label">客服入口：APP / 企微 / 电话 / 店铺咨询</text>
+            <line x1="260" y1="74" x2="260" y2="104" stroke="var(--c-help)" stroke-width="2" marker-end="url(#arch-arrow)"/>
+            <rect x="96" y="106" width="328" height="52" rx="8" class="svg-node-info"/><text x="260" y="128" text-anchor="middle" class="svg-label">意图识别与路由</text><text x="260" y="146" text-anchor="middle" class="svg-small">咨询分类 / 优先级 / 升级条件</text>
+            <line x1="260" y1="158" x2="260" y2="190" stroke="var(--c-help)" stroke-width="2"/>
+            <line x1="106" y1="190" x2="414" y2="190" stroke="var(--c-help)" stroke-width="2"/>
+            <line x1="106" y1="190" x2="106" y2="204" stroke="var(--c-help)" stroke-width="2"/><line x1="260" y1="190" x2="260" y2="204" stroke="var(--c-help)" stroke-width="2"/><line x1="414" y1="190" x2="414" y2="204" stroke="var(--c-help)" stroke-width="2"/>
+            <rect x="38" y="204" width="136" height="54" rx="8" class="svg-node-success"/><text x="106" y="226" text-anchor="middle" class="svg-label">知识库</text><text x="106" y="244" text-anchor="middle" class="svg-small">规则 / FAQ</text>
+            <rect x="192" y="204" width="136" height="54" rx="8" class="svg-node-warning"/><text x="260" y="226" text-anchor="middle" class="svg-label">模型服务</text><text x="260" y="244" text-anchor="middle" class="svg-small">生成 / 总结</text>
+            <rect x="346" y="204" width="136" height="54" rx="8" class="svg-node-service"/><text x="414" y="226" text-anchor="middle" class="svg-label">人工兜底</text><text x="414" y="244" text-anchor="middle" class="svg-small">高风险升级</text>
+          </svg>
+        </div>
       </article>
       <article class="case-card">
         <div class="case-copy"><span class="case-tag">决策树</span><h2>异常分级决策树</h2><p>用少量判断条件把 L1/L2/L3 升级边界讲清楚。</p><div class="case-meta"><span>适合：风控 SOP / 值班机制</span><span>核心：判断条件 + 结果动作</span></div></div>
-        <div class="case-visual"><div class="mini-node mini-red" style="left:205px;top:24px;">异常触发</div><div class="tree-line" style="left:250px;top:76px;width:2px;height:48px;"></div><div class="mini-node mini-warning" style="left:186px;top:124px;">影响收入？</div><div class="tree-line" style="left:110px;top:176px;width:150px;"></div><div class="tree-line" style="left:260px;top:176px;width:150px;"></div><div class="mini-node" style="left:44px;top:210px;">L1观察</div><div class="mini-node mini-info" style="left:210px;top:210px;">L2处置</div><div class="mini-node mini-red" style="right:44px;top:210px;">L3升级</div></div>
+        <div class="case-visual">
+          <svg class="diagram-svg" viewBox="0 0 520 300" role="img" aria-label="异常分级决策树">
+            <rect x="210" y="24" width="100" height="38" rx="8" class="svg-node-red"/><text x="260" y="48" text-anchor="middle" class="svg-label">异常触发</text>
+            <line x1="260" y1="62" x2="260" y2="92" stroke="var(--c-line)" stroke-width="2"/>
+            <polygon points="260,90 336,132 260,174 184,132" fill="var(--c-warning-bg)" stroke="var(--c-warning-text)"/><text x="260" y="128" text-anchor="middle" class="svg-label">影响收入</text><text x="260" y="146" text-anchor="middle" class="svg-label">或舆情？</text>
+            <path d="M184 132 H86 V204" fill="none" stroke="var(--c-line)" stroke-width="2"/><path d="M260 174 V204" fill="none" stroke="var(--c-line)" stroke-width="2"/><path d="M336 132 H436 V204" fill="none" stroke="var(--c-line)" stroke-width="2"/>
+            <text x="122" y="122" class="svg-small">否</text><text x="276" y="194" class="svg-small">局部</text><text x="392" y="122" class="svg-small">是</text>
+            <rect x="38" y="204" width="96" height="44" rx="8" class="svg-node"/><text x="86" y="231" text-anchor="middle" class="svg-label">L1 观察</text>
+            <rect x="212" y="204" width="96" height="44" rx="8" class="svg-node-info"/><text x="260" y="231" text-anchor="middle" class="svg-label">L2 处置</text>
+            <rect x="388" y="204" width="96" height="44" rx="8" class="svg-node-red"/><text x="436" y="231" text-anchor="middle" class="svg-label">L3 升级</text>
+          </svg>
+        </div>
       </article>
       <article class="case-card">
         <div class="case-copy"><span class="case-tag">闭环流程</span><h2>设计规范发布闭环</h2><p>说明规范从定义、试点、发布、培训到监控的落地路径。</p><div class="case-meta"><span>适合：设计系统 / 规范发布</span><span>核心：流程闭环 + 责任归属</span></div></div>
-        <div class="case-visual"><div class="mini-node mini-red" style="left:34px;top:64px;">定义</div><div class="mini-node mini-info" style="left:174px;top:64px;">试点</div><div class="mini-node mini-success" style="right:34px;top:64px;">发布</div><div class="mini-node mini-warning" style="right:88px;bottom:64px;">培训</div><div class="mini-node mini-service" style="left:92px;bottom:64px;">监控</div><div class="road-line" style="top:50%;left:80px;right:80px;"></div><div class="mini-node" style="left:192px;top:136px;">规则回流</div></div>
+        <div class="case-visual">
+          <svg class="diagram-svg" viewBox="0 0 520 300" role="img" aria-label="设计规范发布闭环">
+            <defs><marker id="loop-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="var(--c-brand)"/></marker></defs>
+            <path d="M150 78 C230 26 350 38 400 118 C450 198 364 258 260 252 C156 246 74 190 104 116" fill="none" stroke="var(--c-brand)" stroke-width="4" marker-end="url(#loop-arrow)"/>
+            <rect x="64" y="72" width="86" height="42" rx="8" class="svg-node-red"/><text x="107" y="98" text-anchor="middle" class="svg-label">定义</text>
+            <rect x="220" y="38" width="86" height="42" rx="8" class="svg-node-info"/><text x="263" y="64" text-anchor="middle" class="svg-label">试点</text>
+            <rect x="374" y="112" width="86" height="42" rx="8" class="svg-node-success"/><text x="417" y="138" text-anchor="middle" class="svg-label">发布</text>
+            <rect x="318" y="220" width="86" height="42" rx="8" class="svg-node-warning"/><text x="361" y="246" text-anchor="middle" class="svg-label">培训</text>
+            <rect x="118" y="210" width="86" height="42" rx="8" class="svg-node-service"/><text x="161" y="236" text-anchor="middle" class="svg-label">监控</text>
+            <rect x="210" y="128" width="112" height="46" rx="8" class="svg-node"/><text x="266" y="148" text-anchor="middle" class="svg-label">规则回流</text><text x="266" y="165" text-anchor="middle" class="svg-small">组件 / 文档 / 培训</text>
+          </svg>
+        </div>
       </article>
     </section>
     <div class="fit-note"><span>JD V16 token / 1920 x 1080</span><span>Case 09-12</span></div>

@@ -19,19 +19,82 @@
     <section class="case-grid">
       <article class="case-card">
         <div class="case-copy"><span class="case-tag">增长飞轮</span><h2>商家增长飞轮</h2><p>用闭环解释“流量、转化、履约、复购”如何互相放大。</p><div class="case-meta"><span>适合：增长策略 / 经营复盘</span><span>核心：正循环 + 指标锚点</span></div></div>
-        <div class="case-visual"><div class="wheel"></div><div class="mini-node mini-red" style="left:152px;top:18px;">流量</div><div class="mini-node mini-info" style="right:18px;top:120px;">转化</div><div class="mini-node mini-success" style="left:152px;bottom:18px;">复购</div><div class="mini-node mini-service" style="left:18px;top:120px;">履约</div></div>
+        <div class="case-visual">
+          <svg class="diagram-svg" viewBox="0 0 520 300" role="img" aria-label="商家增长飞轮">
+            <defs>
+              <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="var(--c-brand)"/></marker>
+            </defs>
+            <circle cx="260" cy="150" r="82" fill="var(--c-bg)" stroke="var(--c-line)" stroke-width="1.2"/>
+            <path d="M260 56 A94 94 0 0 1 354 150" fill="none" stroke="var(--c-brand)" stroke-width="18" stroke-linecap="round" marker-end="url(#arrow-red)"/>
+            <path d="M354 150 A94 94 0 0 1 260 244" fill="none" stroke="var(--c-info)" stroke-width="18" stroke-linecap="round"/>
+            <path d="M260 244 A94 94 0 0 1 166 150" fill="none" stroke="var(--c-success-text)" stroke-width="18" stroke-linecap="round"/>
+            <path d="M166 150 A94 94 0 0 1 260 56" fill="none" stroke="var(--c-service)" stroke-width="18" stroke-linecap="round"/>
+            <text x="260" y="142" text-anchor="middle" class="svg-title">增长飞轮</text>
+            <text x="260" y="164" text-anchor="middle" class="svg-small">越转越快的正循环</text>
+            <rect x="212" y="18" width="96" height="34" rx="8" class="svg-node-red"/><text x="260" y="40" text-anchor="middle" class="svg-label">流量进入</text>
+            <rect x="374" y="132" width="96" height="34" rx="8" class="svg-node-info"/><text x="422" y="154" text-anchor="middle" class="svg-label">交易转化</text>
+            <rect x="212" y="248" width="96" height="34" rx="8" class="svg-node-success"/><text x="260" y="270" text-anchor="middle" class="svg-label">复购沉淀</text>
+            <rect x="50" y="132" width="96" height="34" rx="8" class="svg-node-service"/><text x="98" y="154" text-anchor="middle" class="svg-label">履约体验</text>
+          </svg>
+        </div>
       </article>
       <article class="case-card">
         <div class="case-copy"><span class="case-tag">鱼骨分析</span><h2>交易异常归因鱼骨</h2><p>把异常拆成流量、商品、价格、履约、客服、系统六类原因。</p><div class="case-meta"><span>适合：复盘 / 风险治理</span><span>核心：同色分组 + 根因收敛</span></div></div>
-        <div class="case-visual"><div class="fish-spine"></div><div class="bone" style="left:135px;top:88px;transform:rotate(34deg);"></div><div class="bone" style="left:318px;top:88px;transform:rotate(34deg);"></div><div class="bone" style="left:135px;bottom:88px;transform:rotate(-34deg);background:var(--c-service);"></div><div class="bone" style="left:318px;bottom:88px;transform:rotate(-34deg);background:var(--c-service);"></div><div class="mini-node" style="left:54px;top:42px;">商品</div><div class="mini-node" style="left:240px;top:42px;">价格</div><div class="mini-node" style="left:54px;bottom:42px;">履约</div><div class="mini-node" style="left:240px;bottom:42px;">客服</div></div>
+        <div class="case-visual">
+          <svg class="diagram-svg" viewBox="0 0 520 300" role="img" aria-label="交易异常归因鱼骨">
+            <defs><marker id="fish-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 Z" fill="var(--c-brand)"/></marker></defs>
+            <line x1="70" y1="150" x2="430" y2="150" stroke="var(--c-brand)" stroke-width="5" marker-end="url(#fish-arrow)"/>
+            <rect x="424" y="126" width="74" height="48" rx="8" class="svg-node-red"/><text x="461" y="146" text-anchor="middle" class="svg-label">交易</text><text x="461" y="162" text-anchor="middle" class="svg-label">异常</text>
+            <g stroke="var(--c-info)" stroke-width="3">
+              <line x1="150" y1="150" x2="96" y2="86"/><line x1="260" y1="150" x2="206" y2="86"/><line x1="370" y1="150" x2="316" y2="86"/>
+            </g>
+            <g stroke="var(--c-service)" stroke-width="3">
+              <line x1="150" y1="150" x2="96" y2="214"/><line x1="260" y1="150" x2="206" y2="214"/><line x1="370" y1="150" x2="316" y2="214"/>
+            </g>
+            <rect x="52" y="54" width="88" height="34" rx="7" class="svg-node-info"/><text x="96" y="76" text-anchor="middle" class="svg-label">流量</text>
+            <rect x="162" y="54" width="88" height="34" rx="7" class="svg-node-info"/><text x="206" y="76" text-anchor="middle" class="svg-label">商品</text>
+            <rect x="272" y="54" width="88" height="34" rx="7" class="svg-node-info"/><text x="316" y="76" text-anchor="middle" class="svg-label">价格</text>
+            <rect x="52" y="214" width="88" height="34" rx="7" class="svg-node-service"/><text x="96" y="236" text-anchor="middle" class="svg-label">履约</text>
+            <rect x="162" y="214" width="88" height="34" rx="7" class="svg-node-service"/><text x="206" y="236" text-anchor="middle" class="svg-label">客服</text>
+            <rect x="272" y="214" width="88" height="34" rx="7" class="svg-node-service"/><text x="316" y="236" text-anchor="middle" class="svg-label">系统</text>
+          </svg>
+        </div>
       </article>
       <article class="case-card">
         <div class="case-copy"><span class="case-tag">价值金字塔</span><h2>会员价值分层</h2><p>从基础权益到心智经营，说明不同层级用户价值承诺。</p><div class="case-meta"><span>适合：会员体系 / 产品定位</span><span>核心：层级递进 + 描述外置</span></div></div>
-        <div class="case-visual"><div class="pyramid-layer" style="bottom:54px;width:330px;background:var(--c-info-bg);">基础服务</div><div class="pyramid-layer" style="bottom:112px;width:260px;background:var(--c-success-bg);">高频权益</div><div class="pyramid-layer" style="bottom:170px;width:190px;background:var(--c-warning-bg);">专属体验</div><div class="pyramid-layer" style="bottom:228px;width:120px;background:var(--c-brand-light);">心智</div><div class="mini-node" style="right:26px;top:60px;">品牌认同</div><div class="mini-node" style="right:26px;top:132px;">复购提升</div><div class="mini-node" style="right:26px;top:204px;">履约稳定</div></div>
+        <div class="case-visual">
+          <svg class="diagram-svg" viewBox="0 0 520 300" role="img" aria-label="会员价值金字塔">
+            <polygon points="260,28 326,92 194,92" fill="var(--c-brand-light)" stroke="var(--c-brand)"/>
+            <polygon points="194,96 326,96 386,154 134,154" fill="var(--c-warning-bg)" stroke="var(--c-warning-text)"/>
+            <polygon points="134,158 386,158 446,216 74,216" fill="var(--c-success-bg)" stroke="var(--c-success-text)"/>
+            <polygon points="74,220 446,220 492,264 28,264" fill="var(--c-info-bg)" stroke="var(--c-info)"/>
+            <text x="260" y="72" text-anchor="middle" class="svg-label">品牌心智</text>
+            <text x="260" y="132" text-anchor="middle" class="svg-label">专属体验</text>
+            <text x="260" y="194" text-anchor="middle" class="svg-label">高频权益</text>
+            <text x="260" y="248" text-anchor="middle" class="svg-label">基础服务</text>
+            <line x1="350" y1="58" x2="442" y2="58" stroke="var(--c-line)"/><text x="450" y="62" class="svg-small">认同与口碑</text>
+            <line x1="394" y1="128" x2="442" y2="128" stroke="var(--c-line)"/><text x="450" y="132" class="svg-small">复购提升</text>
+            <line x1="454" y1="242" x2="442" y2="242" stroke="var(--c-line)"/><text x="450" y="246" class="svg-small">履约稳定</text>
+          </svg>
+        </div>
       </article>
       <article class="case-card">
         <div class="case-copy"><span class="case-tag">桑基归因</span><h2>流量归因桑基</h2><p>用流条宽度表达渠道贡献，避免把所有渠道写成平均列表。</p><div class="case-meta"><span>适合：投放复盘 / 渠道归因</span><span>核心：来源 → 行为 → 成交</span></div></div>
-        <div class="case-visual"><div class="mini-node" style="left:26px;top:42px;">搜索</div><div class="mini-node" style="left:26px;top:130px;">推荐</div><div class="mini-node" style="left:26px;top:218px;">频道</div><div class="mini-node mini-red" style="left:222px;top:132px;">加购</div><div class="mini-node mini-success" style="right:26px;top:132px;">成交</div><div class="sankey-line" style="--x1:112px;--y:72px;--w:135px;--h:18px;--c:var(--c-info);transform:rotate(18deg);"></div><div class="sankey-line" style="--x1:112px;--y:154px;--w:135px;--h:30px;--c:var(--c-brand);"></div><div class="sankey-line" style="--x1:112px;--y:222px;--w:135px;--h:14px;--c:var(--c-service);transform:rotate(-18deg);"></div><div class="sankey-line" style="--x1:306px;--y:154px;--w:128px;--h:28px;--c:var(--c-success-text);"></div></div>
+        <div class="case-visual">
+          <svg class="diagram-svg" viewBox="0 0 520 300" role="img" aria-label="流量归因桑基图">
+            <path d="M96 62 C190 62 220 125 302 132" fill="none" stroke="var(--c-info)" stroke-width="24" opacity=".50" stroke-linecap="round"/>
+            <path d="M96 148 C190 148 220 148 302 148" fill="none" stroke="var(--c-brand)" stroke-width="38" opacity=".50" stroke-linecap="round"/>
+            <path d="M96 232 C190 232 220 176 302 164" fill="none" stroke="var(--c-service)" stroke-width="18" opacity=".55" stroke-linecap="round"/>
+            <path d="M302 142 C370 142 392 110 444 96" fill="none" stroke="var(--c-success-text)" stroke-width="34" opacity=".55" stroke-linecap="round"/>
+            <path d="M302 160 C370 160 392 190 444 204" fill="none" stroke="var(--c-warning-text)" stroke-width="18" opacity=".45" stroke-linecap="round"/>
+            <rect x="28" y="44" width="88" height="36" rx="8" class="svg-node-info"/><text x="72" y="67" text-anchor="middle" class="svg-label">搜索 32%</text>
+            <rect x="28" y="130" width="88" height="36" rx="8" class="svg-node-red"/><text x="72" y="153" text-anchor="middle" class="svg-label">推荐 51%</text>
+            <rect x="28" y="214" width="88" height="36" rx="8" class="svg-node-service"/><text x="72" y="237" text-anchor="middle" class="svg-label">频道 17%</text>
+            <rect x="280" y="124" width="88" height="48" rx="8" class="svg-node"/><text x="324" y="143" text-anchor="middle" class="svg-label">加购</text><text x="324" y="160" text-anchor="middle" class="svg-small">汇流节点</text>
+            <rect x="420" y="76" width="78" height="38" rx="8" class="svg-node-success"/><text x="459" y="100" text-anchor="middle" class="svg-label">成交</text>
+            <rect x="420" y="186" width="78" height="38" rx="8" class="svg-node-warning"/><text x="459" y="210" text-anchor="middle" class="svg-label">流失</text>
+          </svg>
+        </div>
       </article>
     </section>
     <div class="fit-note"><span>JD V16 token / 1920 x 1080</span><span>Case 01-04</span></div>

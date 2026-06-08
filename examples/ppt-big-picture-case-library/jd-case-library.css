@@ -127,6 +127,63 @@
   overflow: hidden;
 }
 
+.diagram-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.svg-title {
+  font-family: var(--font-brand);
+  font-size: 18px;
+  font-weight: 800;
+  fill: var(--c-title);
+}
+
+.svg-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 650;
+  fill: var(--c-text);
+}
+
+.svg-small {
+  font-family: var(--font-body);
+  font-size: 10px;
+  fill: var(--c-help);
+}
+
+.svg-node {
+  fill: var(--c-bg);
+  stroke: var(--c-line);
+  stroke-width: 1.2;
+}
+
+.svg-node-red {
+  fill: var(--c-brand-light);
+  stroke: var(--c-brand);
+}
+
+.svg-node-info {
+  fill: var(--c-info-bg);
+  stroke: var(--c-info);
+}
+
+.svg-node-success {
+  fill: var(--c-success-bg);
+  stroke: var(--c-success-text);
+}
+
+.svg-node-warning {
+  fill: var(--c-warning-bg);
+  stroke: var(--c-warning-text);
+}
+
+.svg-node-service {
+  fill: var(--c-service-bg);
+  stroke: var(--c-service);
+}
+
 .mini-node {
   position: absolute;
   display: grid;
