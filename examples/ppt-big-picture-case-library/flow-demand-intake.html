@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flow 02 - 需求流转与优先级流程图</title>
+  <style>
+    :root { --paper:#ffffff; --ink:#171a26; --muted:#828794; --line:#c2c4cc; --panel:#ffffff; --accent:#ff0f23; --blue:#0073ff; --green:#2aa32a; --amber:#b5691a; --rose:#ff0f23; }
+    * { box-sizing: border-box; }
+    html, body { width:100%; height:100%; }
+    body { margin:0; display:grid; place-items:center; overflow:hidden; padding:16px; background:#f2f3f7; color:var(--ink); font-family:"PingFang SC","Noto Sans CJK SC",Inter,Arial,sans-serif; }
+    .stage { width:var(--stage-w,1920px); height:var(--stage-h,1080px); }
+    .canvas { width:1920px; height:1080px; padding:56px 64px; background:var(--paper); overflow:hidden; transform:scale(var(--stage-scale,1)); transform-origin:top left; }
+    header { display:grid; grid-template-columns:1fr 470px; gap:36px; align-items:end; margin-bottom:34px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:17px; font-weight:850; }
+    h1 { margin:0; font-size:54px; line-height:1.14; letter-spacing:0; }
+    .rule { padding:21px 24px; background:#f5f6fa; border-left:8px solid var(--accent); font-size:23px; line-height:1.38; font-weight:700; }
+    .flow { display:grid; grid-template-columns:repeat(7, 1fr); gap:18px; align-items:start; }
+    .step { position:relative; min-height:430px; padding:22px; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .step:not(:last-child)::after { content:"→"; position:absolute; right:-24px; top:190px; color:var(--accent); font-size:34px; font-weight:900; }
+    .idx { display:inline-flex; width:42px; height:42px; align-items:center; justify-content:center; margin-bottom:16px; color:#ffffff; background:var(--blue); border-radius:50%; font-weight:900; font-size:18px; }
+    .step:nth-child(3) .idx, .step:nth-child(5) .idx { background:var(--amber); }
+    .step:nth-child(7) .idx { background:var(--green); }
+    h2 { margin:0 0 12px; font-size:24px; line-height:1.2; letter-spacing:0; }
+    .desc { margin:0 0 18px; color:var(--muted); font-size:15px; line-height:1.48; min-height:66px; }
+    .chips { display:grid; gap:10px; }
+    .chip { padding:10px 12px; background:#f5f6fa; border-left:5px solid var(--blue); border-radius:5px; font-size:14px; line-height:1.35; }
+    .decision { background:#fff9e0; border-color:#c2c4cc; }
+    .decision .chip { border-color:var(--amber); }
+    .done .chip { border-color:var(--green); }
+    .bottom { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-top:26px; }
+    .bottom article { padding:20px 22px; background:#f5f6fa; border-radius:8px; border:1px solid #c2c4cc; }
+    .bottom h3 { margin:0 0 10px; color:var(--accent); font-size:21px; }
+    .bottom p { margin:0; color:var(--muted); font-size:16px; line-height:1.5; }
+  </style>
+  <link rel="stylesheet" href="./jd-theme.css">
+</head>
+<body>
+  <main class="canvas">
+    <header>
+      <div>
+        <p class="eyebrow">JD PRODUCT / 场域需求流转与优先级 / Demo</p>
+        <h1>场域需求不是先进排期，而是先完成价值、成本、时机三重判断</h1>
+      </div>
+      <div class="rule">这套流程把“谁声音大谁优先”改成可解释的业务优先级决策。</div>
+    </header>
+    <section class="flow">
+      <article class="step"><span class="idx">1</span><h2>业务提交</h2><p class="desc">提交问题、目标人群、预期指标，而不是直接提交功能方案。</p><div class="chips"><div class="chip">必须说明业务损失或增长机会</div><div class="chip">必须附当前替代方案</div><div class="chip">缺信息则退回补齐</div></div></article>
+      <article class="step"><span class="idx">2</span><h2>产品澄清</h2><p class="desc">把模糊诉求翻译成可验证的问题定义和成功标准。</p><div class="chips"><div class="chip">确认目标和非目标</div><div class="chip">识别依赖系统和数据口径</div><div class="chip">形成一页需求说明</div></div></article>
+      <article class="step decision"><span class="idx">3</span><h2>价值评审</h2><p class="desc">判断是否值得进入方案阶段，避免低价值需求消耗研发。</p><div class="chips"><div class="chip">影响面：用户/收入/效率</div><div class="chip">紧急度：窗口期和风险</div><div class="chip">证据质量：数据或客户声音</div></div></article>
+      <article class="step"><span class="idx">4</span><h2>方案拆解</h2><p class="desc">产品、设计、研发共同拆出最小可交付路径。</p><div class="chips"><div class="chip">MVP 范围</div><div class="chip">不做项清单</div><div class="chip">上线后的监控指标</div></div></article>
+      <article class="step decision"><span class="idx">5</span><h2>排期决策</h2><p class="desc">按价值、成本、依赖、风险进入季度或月度排期。</p><div class="chips"><div class="chip">P0：合规/事故/收入阻断</div><div class="chip">P1：核心增长或效率杠杆</div><div class="chip">P2：体验改善或局部优化</div></div></article>
+      <article class="step"><span class="idx">6</span><h2>交付上线</h2><p class="desc">按里程碑推进，并在灰度阶段监控目标指标。</p><div class="chips"><div class="chip">设计评审</div><div class="chip">技术评审</div><div class="chip">灰度与回滚预案</div></div></article>
+      <article class="step done"><span class="idx">7</span><h2>复盘归档</h2><p class="desc">上线不是终点，必须沉淀结果、经验和后续判断。</p><div class="chips"><div class="chip">目标是否达成</div><div class="chip">是否继续投入</div><div class="chip">同步到需求知识库</div></div></article>
+    </section>
+    <section class="bottom">
+      <article><h3>关键原则</h3><p>业务方负责问题和价值，产品负责边界和方案，研发负责可行性和成本。</p></article>
+      <article><h3>会议节奏</h3><p>每周一次价值评审，每两周一次排期决策，避免临时插队成为常态。</p></article>
+      <article><h3>风险控制</h3><p>没有成功标准的需求不进开发；没有复盘的需求不继续二期。</p></article>
+    </section>
+  </main>
+  <script>
+    function fitCanvas(){const c=document.querySelector(".canvas");let s=document.querySelector(".stage");if(!s){s=document.createElement("div");s.className="stage";c.parentNode.insertBefore(s,c);s.appendChild(c)}const scale=Math.max(.1,Math.min((innerWidth-32)/1920,(innerHeight-32)/1080));document.documentElement.style.setProperty("--stage-scale",scale);document.documentElement.style.setProperty("--stage-w",`${1920*scale}px`);document.documentElement.style.setProperty("--stage-h",`${1080*scale}px`)}addEventListener("resize",fitCanvas);fitCanvas();
+  </script>
+</body>
+</html>

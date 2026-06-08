@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo 02 - 活动复盘归因图</title>
+  <style>
+    :root {
+      --paper: #ffffff;
+      --ink: #171a26;
+      --muted: #828794;
+      --line: #c2c4cc;
+      --panel: #ffffff;
+      --accent: #ff0f23;
+      --blue: #0073ff;
+      --green: #2aa32a;
+      --amber: #b5691a;
+      --rose: #ff0f23;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      background: #f2f3f7;
+      color: var(--ink);
+      font-family: "PingFang SC", "Noto Sans CJK SC", Inter, Arial, sans-serif;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 16px;
+    }
+    .stage {
+      width: var(--stage-w, 1920px);
+      height: var(--stage-h, 1080px);
+    }
+    .canvas {
+      width: 1920px;
+      height: 1080px;
+      padding: 54px 64px;
+      background: var(--paper);
+      overflow: hidden;
+      transform: scale(var(--stage-scale, 1));
+      transform-origin: top left;
+    }
+    header {
+      display: grid;
+      grid-template-columns: 1fr 620px;
+      gap: 44px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 17px;
+      font-weight: 850;
+    }
+    h1 {
+      margin: 0;
+      max-width: 1020px;
+      font-size: 54px;
+      line-height: 1.13;
+      letter-spacing: 0;
+    }
+    .verdict {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .verdict div {
+      padding: 18px 20px;
+      border-left: 1px solid var(--line);
+    }
+    .verdict div:first-child { border-left: 0; }
+    .verdict strong {
+      display: block;
+      color: var(--blue);
+      font-size: 31px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .verdict span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 465px 1fr 430px;
+      gap: 22px;
+      height: 760px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      overflow: hidden;
+    }
+    h2 {
+      margin: 0 0 18px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .journey {
+      display: grid;
+      gap: 14px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .step .date {
+      padding: 8px 0;
+      text-align: center;
+      color: var(--accent);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 850;
+    }
+    .step b {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+    .middle {
+      display: grid;
+      grid-template-rows: 265px 1fr;
+      gap: 22px;
+    }
+    .funnel {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      align-items: end;
+      height: 178px;
+      margin-top: 10px;
+    }
+    .funnel .bar {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      min-width: 0;
+    }
+    .funnel i {
+      display: block;
+      border-radius: 6px 6px 0 0;
+      background: var(--blue);
+    }
+    .funnel b {
+      margin-top: 8px;
+      font-size: 18px;
+    }
+    .funnel span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .insights {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .insight {
+      padding: 18px;
+      background: #f5f6fa;
+      border-left: 7px solid var(--accent);
+      border-radius: 6px;
+    }
+    .insight:nth-child(2) { border-color: var(--green); }
+    .insight:nth-child(3) { border-color: var(--amber); }
+    .insight:nth-child(4) { border-color: var(--rose); }
+    .insight b {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 19px;
+    }
+    .insight p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .actions {
+      display: grid;
+      gap: 14px;
+    }
+    .action {
+      padding: 17px 18px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #ffffff;
+    }
+    .action small {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 850;
+    }
+    .action b {
+      display: block;
+      margin: 5px 0;
+      font-size: 18px;
+    }
+    .action p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+  </style>
+  <link rel="stylesheet" href="./jd-theme.css">
+</head>
+<body>
+  <main class="canvas">
+    <header>
+      <div>
+        <p class="eyebrow">JD APP / 618 私域转化专项 / Demo</p>
+        <h1>京东 APP 活动带来了足够流量，但成交被“权益理解”和“首单门槛”拦住</h1>
+      </div>
+      <section class="verdict">
+        <div><strong>128%</strong><span>曝光完成率，投放侧达成目标</span></div>
+        <div><strong>41%</strong><span>权益页跳出率，是最大掉点</span></div>
+        <div><strong>+16%</strong><span>老客复购提升，说明人群有效</span></div>
+      </section>
+    </header>
+
+    <section class="layout">
+      <aside class="panel">
+        <h2>关键过程</h2>
+        <div class="journey">
+          <div class="step"><div class="date">D-7</div><div><b>预热期</b><p>老客召回表现好，但新客素材点击集中在低价款。</p></div></div>
+          <div class="step"><div class="date">D1</div><div><b>主推期</b><p>直播间流量充足，权益解释占用主播大量时间。</p></div></div>
+          <div class="step"><div class="date">D2</div><div><b>转化期</b><p>加购高峰后支付未同步增长，首单门槛成为阻力。</p></div></div>
+          <div class="step"><div class="date">D3</div><div><b>追单期</b><p>短信触达有效，但优惠叠加规则仍有大量咨询。</p></div></div>
+          <div class="step"><div class="date">D+3</div><div><b>沉淀期</b><p>复购人群沉淀清晰，可形成下一轮定向包。</p></div></div>
+        </div>
+      </aside>
+
+      <section class="middle">
+        <article class="panel">
+          <h2>转化漏斗</h2>
+          <div class="funnel">
+            <div class="bar"><i style="height: 152px"></i><b>42.8万</b><span>曝光</span></div>
+            <div class="bar"><i style="height: 118px; background: var(--green)"></i><b>6.3万</b><span>点击</span></div>
+            <div class="bar"><i style="height: 86px; background: var(--amber)"></i><b>2.9万</b><span>权益页</span></div>
+            <div class="bar"><i style="height: 55px; background: var(--rose)"></i><b>1.1万</b><span>加购</span></div>
+            <div class="bar"><i style="height: 38px; background: var(--accent)"></i><b>0.42万</b><span>支付</span></div>
+          </div>
+        </article>
+        <article class="panel">
+          <h2>复盘洞察</h2>
+          <div class="insights">
+            <div class="insight"><b>人群没错，表达太复杂</b><p>高意向人群愿意停留，但权益规则需要二次解释，影响下单速度。</p></div>
+            <div class="insight"><b>低价款吸引点击，高客单承接弱</b><p>素材和落地页承诺不一致，用户进入后预期落差明显。</p></div>
+            <div class="insight"><b>老客复购可复制</b><p>老客对权益理解成本低，适合做下一轮分层召回。</p></div>
+            <div class="insight"><b>追单有效但来得太晚</b><p>支付提醒能拉回部分用户，但应前置到加购后 30 分钟。</p></div>
+          </div>
+        </article>
+      </section>
+
+      <aside class="panel">
+        <h2>下一轮动作</h2>
+        <div class="actions">
+          <div class="action"><small>01 / 权益表达</small><b>把叠加规则压成三档权益</b><p>页面只保留“买什么、减多少、何时到账”。</p></div>
+          <div class="action"><small>02 / 首单承接</small><b>新增首单低门槛组合</b><p>用入门组合承接低价点击，不直接推高客单套装。</p></div>
+          <div class="action"><small>03 / 触达节奏</small><b>加购后 30 分钟自动追单</b><p>把短信和企业微信提醒前置，减少冷却损失。</p></div>
+          <div class="action"><small>04 / 人群复用</small><b>沉淀老客复购包</b><p>单独做复购权益，不和新客转化混用口径。</p></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+  <script>
+    function fitCanvas() {
+      const canvas = document.querySelector(".canvas");
+      if (!canvas) return;
+      let stage = document.querySelector(".stage");
+      if (!stage) {
+        stage = document.createElement("div");
+        stage.className = "stage";
+        canvas.parentNode.insertBefore(stage, canvas);
+        stage.appendChild(canvas);
+      }
+      const pad = 32;
+      const scale = Math.min((window.innerWidth - pad) / 1920, (window.innerHeight - pad) / 1080);
+      const safeScale = Math.max(0.1, scale);
+      document.documentElement.style.setProperty("--stage-scale", safeScale);
+      document.documentElement.style.setProperty("--stage-w", `${1920 * safeScale}px`);
+      document.documentElement.style.setProperty("--stage-h", `${1080 * safeScale}px`);
+    }
+    window.addEventListener("resize", fitCanvas);
+    fitCanvas();
+  </script>
+</body>
+</html>

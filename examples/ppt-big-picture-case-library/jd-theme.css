@@ -1,0 +1,291 @@
+@font-face {
+  font-family: "JD ZhengHei";
+  src: url("../../assets/fonts/JDZhengHeiV2-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JD ZhengHei";
+  src: url("../../assets/fonts/JDZhengHeiV2-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JD ZhengHei";
+  src: url("../../assets/fonts/JDZhengHeiV2-Heavy.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JD ZhengHei";
+  src: url("../../assets/fonts/JDZhengHeiV2-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --c-title: #171a26;
+  --c-text: #3d414d;
+  --c-help: #828794;
+  --c-disabled: #c2c4cc;
+  --c-bg-page: #f2f3f7;
+  --c-bg: #ffffff;
+  --c-sunken: #f5f6fa;
+  --c-brand: #ff0f23;
+  --c-brand-pressed: #e53029;
+  --c-brand-light: #fff0f4;
+  --c-brand-light-pressed: #ffd6e1;
+  --c-on-brand: #ffffff;
+  --c-service: #b5691a;
+  --c-service-bg: #fff4e8;
+  --c-success: #00d900;
+  --c-success-bg: #ebfbeb;
+  --c-success-text: #2aa32a;
+  --c-warning: #ffbf00;
+  --c-warning-bg: #fff9e0;
+  --c-warning-text: #b26b00;
+  --c-info: #0073ff;
+  --c-info-bg: #e5f5ff;
+  --c-line: rgba(0,0,0,0.08);
+  --paper: #ffffff;
+  --ink: #171a26;
+  --muted: #828794;
+  --line: rgba(0,0,0,0.08);
+  --panel: #ffffff;
+  --accent: #ff0f23;
+  --accent-soft: #fff0f4;
+  --blue: #0073ff;
+  --green: #2aa32a;
+  --gold: #b5691a;
+  --amber: #b26b00;
+  --rose: #ff0f23;
+  --bad: #ff0f23;
+  --font-brand: "JD ZhengHei", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --font-body: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+html,
+body {
+  background: var(--c-bg-page) !important;
+  color: var(--c-title) !important;
+  font-family: var(--font-body) !important;
+}
+
+.canvas {
+  position: relative !important;
+  background: var(--c-bg) !important;
+  box-shadow: 0 18px 48px rgba(23,26,38,0.10);
+}
+
+.canvas::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background: var(--c-brand);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.canvas::after {
+  content: "JD FIELD";
+  position: absolute;
+  top: 30px;
+  right: 48px;
+  height: 30px;
+  padding: 0 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: var(--c-brand);
+  color: var(--c-on-brand);
+  font-family: var(--font-brand);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+h1,
+h2,
+h3,
+.metric strong,
+.metric,
+.idx,
+.num,
+.score,
+.date,
+.brand-mark {
+  font-family: var(--font-brand) !important;
+}
+
+h1,
+h2,
+h3,
+th,
+td:first-child,
+.box h2,
+.panel h2 {
+  color: var(--c-title) !important;
+}
+
+p,
+li,
+.note,
+.desc,
+.claim,
+.step p,
+.level p,
+.op p,
+.action p,
+.insight p,
+.box li,
+.metric span,
+.timeline div,
+.summary,
+.rule {
+  color: var(--c-text) !important;
+}
+
+.eyebrow,
+.tag,
+.num,
+.idx,
+.date,
+.action small,
+.op small,
+.kicker {
+  color: var(--c-brand) !important;
+}
+
+.summary,
+.rule,
+.decision,
+.recommend,
+.footer div,
+.bottom article {
+  background: var(--c-sunken) !important;
+  border-left-color: var(--c-brand) !important;
+}
+
+.metric,
+.pillar,
+.risk,
+.panel,
+.box,
+.step,
+.node,
+.action,
+.op,
+.insight,
+.matrix,
+.legend div,
+.level,
+.card,
+table,
+.timeline,
+.swimlanes {
+  background: var(--c-bg) !important;
+  border-color: var(--c-line) !important;
+  box-shadow: none !important;
+}
+
+.head,
+th,
+td:first-child,
+.lane,
+.timeline div:first-child {
+  background: var(--c-sunken) !important;
+  color: var(--c-title) !important;
+}
+
+.timeline div:first-child,
+.decision,
+.score,
+.idx,
+.brand-mark {
+  background: var(--c-brand) !important;
+  color: var(--c-on-brand) !important;
+}
+
+.bar,
+.visual-line {
+  background: var(--c-sunken) !important;
+}
+
+.bar i,
+li::before,
+.box li::before,
+.canvas .arrow::after {
+  background: var(--c-brand) !important;
+}
+
+.arrow,
+.step:not(:last-child)::after {
+  color: var(--c-brand) !important;
+}
+
+.good,
+.node.green,
+.done .idx {
+  border-color: var(--c-success-text) !important;
+}
+
+.good {
+  background: var(--c-success-text) !important;
+}
+
+.mid,
+.node.amber,
+.decision .idx {
+  border-color: var(--c-warning-text) !important;
+}
+
+.mid {
+  background: var(--c-warning-text) !important;
+}
+
+.weak,
+.node.rose {
+  border-color: var(--c-error) !important;
+}
+
+.weak {
+  background: var(--c-error) !important;
+}
+
+.node.green,
+.chip.done {
+  background: var(--c-success-bg) !important;
+}
+
+.node.amber,
+.decision,
+.level:nth-child(2) {
+  background: var(--c-warning-bg) !important;
+}
+
+.node.rose,
+.level:nth-child(3) {
+  background: var(--c-brand-light) !important;
+}
+
+header {
+  border-color: var(--c-title) !important;
+}
+
+.grid a.card {
+  transition: transform .16s ease, border-color .16s ease;
+}
+
+.grid a.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--c-brand) !important;
+}

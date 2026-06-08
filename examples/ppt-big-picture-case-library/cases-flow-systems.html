@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JD Case Library 03 - 流程系统</title>
+  <link rel="stylesheet" href="./jd-theme.css">
+  <link rel="stylesheet" href="./jd-case-library.css">
+</head>
+<body>
+  <main class="canvas case-page">
+    <header class="case-header">
+      <div>
+        <p class="eyebrow">JD CASE LIBRARY / 03</p>
+        <h1>流程系统型图表要同时表达路径、责任和决策门</h1>
+      </div>
+      <div class="note">用于跨团队协作、异常升级、客服链路、系统机制说明。</div>
+    </header>
+    <section class="case-grid">
+      <article class="case-card">
+        <div class="case-copy"><span class="case-tag">用户旅程</span><h2>京东 APP 下单旅程</h2><p>把用户动作、触点和掉点放到一条链路里看。</p><div class="case-meta"><span>适合：体验优化 / 转化分析</span><span>核心：动作链路 + 情绪/指标</span></div></div>
+        <div class="case-visual"><div class="journey-line"></div><div class="mini-node mini-info" style="left:28px;top:94px;">搜索</div><div class="mini-node" style="left:138px;top:156px;">详情</div><div class="mini-node mini-warning" style="left:248px;top:94px;">加购</div><div class="mini-node mini-red" style="right:28px;top:156px;">支付</div><div class="mini-node mini-success" style="right:142px;bottom:36px;">履约</div></div>
+      </article>
+      <article class="case-card">
+        <div class="case-copy"><span class="case-tag">系统架构</span><h2>客服智能化能力架构</h2><p>表达入口、模型、知识库、人工兜底和数据回流的关系。</p><div class="case-meta"><span>适合：方案评审 / 技术对齐</span><span>核心：分层 + 数据流向</span></div></div>
+        <div class="case-visual"><div class="arch-box" style="left:24px;right:24px;top:24px;background:var(--c-brand-light);">客服入口：APP / 企微 / 电话</div><div class="arch-box" style="left:66px;right:66px;top:106px;background:var(--c-info-bg);">意图识别与路由</div><div class="arch-box" style="left:24px;top:192px;width:150px;background:var(--c-success-bg);">知识库</div><div class="arch-box" style="left:196px;top:192px;width:150px;background:var(--c-warning-bg);">模型服务</div><div class="arch-box" style="right:24px;top:192px;width:150px;background:var(--c-service-bg);">人工兜底</div></div>
+      </article>
+      <article class="case-card">
+        <div class="case-copy"><span class="case-tag">决策树</span><h2>异常分级决策树</h2><p>用少量判断条件把 L1/L2/L3 升级边界讲清楚。</p><div class="case-meta"><span>适合：风控 SOP / 值班机制</span><span>核心：判断条件 + 结果动作</span></div></div>
+        <div class="case-visual"><div class="mini-node mini-red" style="left:205px;top:24px;">异常触发</div><div class="tree-line" style="left:250px;top:76px;width:2px;height:48px;"></div><div class="mini-node mini-warning" style="left:186px;top:124px;">影响收入？</div><div class="tree-line" style="left:110px;top:176px;width:150px;"></div><div class="tree-line" style="left:260px;top:176px;width:150px;"></div><div class="mini-node" style="left:44px;top:210px;">L1观察</div><div class="mini-node mini-info" style="left:210px;top:210px;">L2处置</div><div class="mini-node mini-red" style="right:44px;top:210px;">L3升级</div></div>
+      </article>
+      <article class="case-card">
+        <div class="case-copy"><span class="case-tag">闭环流程</span><h2>设计规范发布闭环</h2><p>说明规范从定义、试点、发布、培训到监控的落地路径。</p><div class="case-meta"><span>适合：设计系统 / 规范发布</span><span>核心：流程闭环 + 责任归属</span></div></div>
+        <div class="case-visual"><div class="mini-node mini-red" style="left:34px;top:64px;">定义</div><div class="mini-node mini-info" style="left:174px;top:64px;">试点</div><div class="mini-node mini-success" style="right:34px;top:64px;">发布</div><div class="mini-node mini-warning" style="right:88px;bottom:64px;">培训</div><div class="mini-node mini-service" style="left:92px;bottom:64px;">监控</div><div class="road-line" style="top:50%;left:80px;right:80px;"></div><div class="mini-node" style="left:192px;top:136px;">规则回流</div></div>
+      </article>
+    </section>
+    <div class="fit-note"><span>JD V16 token / 1920 x 1080</span><span>Case 09-12</span></div>
+  </main>
+  <script src="./fit-canvas.js"></script>
+</body>
+</html>

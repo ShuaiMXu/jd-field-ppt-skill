@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo 03 - 供应商选型决策图</title>
+  <style>
+    :root {
+      --paper: #ffffff;
+      --ink: #171a26;
+      --muted: #828794;
+      --line: #c2c4cc;
+      --panel: #ffffff;
+      --accent: #ff0f23;
+      --blue: #0073ff;
+      --green: #2aa32a;
+      --amber: #b5691a;
+      --bad: #ff0f23;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      background: #f2f3f7;
+      color: var(--ink);
+      font-family: "PingFang SC", "Noto Sans CJK SC", Inter, Arial, sans-serif;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 16px;
+    }
+    .stage {
+      width: var(--stage-w, 1920px);
+      height: var(--stage-h, 1080px);
+    }
+    .canvas {
+      width: 1920px;
+      height: 1080px;
+      padding: 56px 64px;
+      background: var(--paper);
+      overflow: hidden;
+      transform: scale(var(--stage-scale, 1));
+      transform-origin: top left;
+    }
+    header {
+      display: grid;
+      grid-template-columns: 1fr 470px;
+      gap: 34px;
+      margin-bottom: 28px;
+      align-items: stretch;
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 17px;
+      font-weight: 850;
+    }
+    h1 {
+      margin: 0;
+      font-size: 54px;
+      line-height: 1.14;
+      letter-spacing: 0;
+    }
+    .decision {
+      padding: 22px 24px;
+      background: var(--ink);
+      color: #ffffff;
+      border-radius: 8px;
+    }
+    .decision b {
+      display: block;
+      color: #fff0f4;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .decision p {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 410px;
+      gap: 22px;
+      height: 820px;
+    }
+    .matrix {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      height: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th, td {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      padding: 18px 20px;
+      background: #f5f6fa;
+      font-size: 19px;
+      line-height: 1.25;
+    }
+    th:first-child { width: 210px; }
+    th small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    td {
+      padding: 16px 18px;
+      font-size: 16px;
+      line-height: 1.42;
+    }
+    td:first-child {
+      background: #f5f6fa;
+      color: var(--ink);
+      font-weight: 750;
+    }
+    .score {
+      display: inline-flex;
+      min-width: 54px;
+      height: 28px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      color: #ffffff;
+      background: var(--blue);
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 850;
+    }
+    .good { background: var(--green); }
+    .mid { background: var(--amber); }
+    .weak { background: var(--bad); }
+    .note {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.42;
+    }
+    .side {
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 18px;
+    }
+    .box {
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .box h2 {
+      margin: 0 0 14px;
+      font-size: 25px;
+      letter-spacing: 0;
+    }
+    .box ul {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .box li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.43;
+    }
+    .box li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .recommend {
+      background: #f5f6fa;
+      border-color: #c2c4cc;
+    }
+    .recommend h2 {
+      color: var(--accent);
+    }
+  </style>
+  <link rel="stylesheet" href="./jd-theme.css">
+</head>
+<body>
+  <main class="canvas">
+    <header>
+      <div>
+        <p class="eyebrow">JD SERVICE / 客服智能化平台 / Demo</p>
+        <h1>优先选择 B 方案：上线速度和集成风险最可控，AI 能力可后续补强</h1>
+      </div>
+      <aside class="decision">
+        <b>推荐结论</b>
+        <p>本轮不追求最强模型能力，先保证 8 周内上线、CRM 打通、客服团队可接管。</p>
+      </aside>
+    </header>
+
+    <section class="layout">
+      <article class="matrix">
+        <table>
+          <thead>
+            <tr>
+              <th>评估维度</th>
+              <th>A 方案<small>模型能力强，交付重</small></th>
+              <th>B 方案<small>标准集成快，运营友好</small></th>
+              <th>C 方案<small>价格低，能力边界窄</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>上线周期</td>
+              <td><span class="score mid">7/10</span><span class="note">预计 10-12 周，需较多定制开发。</span></td>
+              <td><span class="score good">9/10</span><span class="note">标准连接器覆盖 CRM 和工单，8 周可上线。</span></td>
+              <td><span class="score good">8/10</span><span class="note">基础能力快，但复杂流程需要绕行。</span></td>
+            </tr>
+            <tr>
+              <td>AI 问答能力</td>
+              <td><span class="score good">9/10</span><span class="note">多轮理解和知识召回最好，适合复杂咨询。</span></td>
+              <td><span class="score">7/10</span><span class="note">覆盖主要客服场景，疑难问题需人工兜底。</span></td>
+              <td><span class="score weak">5/10</span><span class="note">适合 FAQ，不适合复杂售后链路。</span></td>
+            </tr>
+            <tr>
+              <td>系统集成</td>
+              <td><span class="score mid">6/10</span><span class="note">API 完整，但需要内部开发配合。</span></td>
+              <td><span class="score good">9/10</span><span class="note">已有 CRM、企微、工单连接器。</span></td>
+              <td><span class="score mid">6/10</span><span class="note">仅支持基础消息同步，数据回写有限。</span></td>
+            </tr>
+            <tr>
+              <td>运营接管</td>
+              <td><span class="score mid">6/10</span><span class="note">配置复杂，需要供应商长期支持。</span></td>
+              <td><span class="score good">8/10</span><span class="note">客服主管可维护知识库和话术规则。</span></td>
+              <td><span class="score">7/10</span><span class="note">简单易用，但缺少精细策略配置。</span></td>
+            </tr>
+            <tr>
+              <td>成本结构</td>
+              <td><span class="score weak">5/10</span><span class="note">首年费用高，定制和调用量均需预算。</span></td>
+              <td><span class="score">7/10</span><span class="note">首年中等，扩容成本可预测。</span></td>
+              <td><span class="score good">9/10</span><span class="note">最低成本，但能力短板可能带来二次采购。</span></td>
+            </tr>
+            <tr>
+              <td>总体判断</td>
+              <td><span class="score mid">备选</span><span class="note">适合二期复杂咨询，不适合作为第一阶段主方案。</span></td>
+              <td><span class="score good">推荐</span><span class="note">最符合“快上线、低风险、可运营”的当前目标。</span></td>
+              <td><span class="score weak">谨慎</span><span class="note">可做低成本试点，但不建议承载主流程。</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <aside class="side">
+        <section class="box recommend">
+          <h2>决策标准</h2>
+          <ul>
+            <li>第一阶段目标是降本和分流，不是追求最强 AI。</li>
+            <li>必须 8 周内上线，并能接入现有 CRM 与工单系统。</li>
+            <li>客服团队能自维护知识库，减少长期供应商依赖。</li>
+          </ul>
+        </section>
+        <section class="box">
+          <h2>推进条件</h2>
+          <ul>
+            <li>第 1 周完成安全和数据边界确认。</li>
+            <li>第 2-4 周打通 CRM、企微、工单三条链路。</li>
+            <li>第 5-8 周灰度 20% 咨询量，并建立人工兜底规则。</li>
+          </ul>
+        </section>
+        <section class="box">
+          <h2>风险提示</h2>
+          <ul>
+            <li>B 方案复杂问题回答能力不是最强，需要保留人工升级。</li>
+            <li>历史知识库质量会直接影响首月效果。</li>
+            <li>若二期进入售前咨询，应重新评估 A 方案的模型能力。</li>
+          </ul>
+        </section>
+      </aside>
+    </section>
+  </main>
+  <script>
+    function fitCanvas() {
+      const canvas = document.querySelector(".canvas");
+      if (!canvas) return;
+      let stage = document.querySelector(".stage");
+      if (!stage) {
+        stage = document.createElement("div");
+        stage.className = "stage";
+        canvas.parentNode.insertBefore(stage, canvas);
+        stage.appendChild(canvas);
+      }
+      const pad = 32;
+      const scale = Math.min((window.innerWidth - pad) / 1920, (window.innerHeight - pad) / 1080);
+      const safeScale = Math.max(0.1, scale);
+      document.documentElement.style.setProperty("--stage-scale", safeScale);
+      document.documentElement.style.setProperty("--stage-w", `${1920 * safeScale}px`);
+      document.documentElement.style.setProperty("--stage-h", `${1080 * safeScale}px`);
+    }
+    window.addEventListener("resize", fitCanvas);
+    fitCanvas();
+  </script>
+</body>
+</html>
