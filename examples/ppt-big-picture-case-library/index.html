@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JD Field PPT 大图 Demo</title>
+  <style>
+    :root {
+      --ink: #171a26;
+      --muted: #828794;
+      --line: #c2c4cc;
+      --paper: #ffffff;
+      --panel: #ffffff;
+      --accent: #ff0f23;
+      --blue: #0073ff;
+      --green: #2aa32a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Noto Sans CJK SC", Inter, Arial, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 56px 32px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 42px;
+      letter-spacing: 0;
+    }
+    .lead {
+      margin: 0 0 36px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+    a.card {
+      display: block;
+      min-height: 260px;
+      padding: 24px;
+      color: inherit;
+      text-decoration: none;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .tag {
+      display: inline-flex;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .meta {
+      margin-top: 26px;
+      display: grid;
+      gap: 8px;
+      color: var(--ink);
+      font-size: 13px;
+    }
+    .meta span {
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 34px; }
+    }
+  </style>
+  <link rel="stylesheet" href="./jd-theme.css">
+</head>
+<body>
+  <main>
+    <h1>JD Field PPT 大图 Demo</h1>
+    <p class="lead">这组 demo 按京东场域设计语言更新：JD V16 token、京东红锚点、业务工具型信息密度、固定 16:9 画布、结论先行和行动闭环。</p>
+    <section class="grid" aria-label="demo list">
+      <a class="card" href="./strategy-growth.html">
+        <span class="tag">方案 / 战略</span>
+        <h2>京东场域增长方案图</h2>
+        <p>顶部结论条 + 中部策略支柱 + 底部四周路线图，适合经营会一页讲清。</p>
+        <div class="meta">
+          <span>画布：1920 x 1080</span>
+          <span>重点：结论、证据、行动节奏</span>
+        </div>
+      </a>
+      <a class="card" href="./campaign-retrospective.html">
+        <span class="tag">复盘 / 总结</span>
+        <h2>京东 APP 活动复盘图</h2>
+        <p>左侧过程链路，右侧指标与洞察，底部下一轮动作，适合活动阶段复盘。</p>
+        <div class="meta">
+          <span>画布：1920 x 1080</span>
+          <span>重点：过程、结果、经验沉淀</span>
+        </div>
+      </a>
+      <a class="card" href="./vendor-comparison.html">
+        <span class="tag">竞品 / 选型</span>
+        <h2>京东客服平台选型图</h2>
+        <p>对比矩阵 + 决策栏 + 风险条件，适合把复杂选型压成一页判断。</p>
+        <div class="meta">
+          <span>画布：1920 x 1080</span>
+          <span>重点：标准、差异、推荐结论</span>
+        </div>
+      </a>
+      <a class="card" href="./flow-lead-conversion.html">
+        <span class="tag">流程 / 转化</span>
+        <h2>商家线索转化流程图</h2>
+        <p>跨市场、销售、售前、运营的泳道流程，突出关键卡点和 SLA。</p>
+        <div class="meta">
+          <span>画布：1920 x 1080</span>
+          <span>重点：分工、门槛、转化节点</span>
+        </div>
+      </a>
+      <a class="card" href="./flow-demand-intake.html">
+        <span class="tag">流程 / 协作</span>
+        <h2>场域需求流转流程图</h2>
+        <p>从业务需求进入、评审、排期、上线到复盘，适合跨团队对齐。</p>
+        <div class="meta">
+          <span>画布：1920 x 1080</span>
+          <span>重点：决策门、责任人、节奏</span>
+        </div>
+      </a>
+      <a class="card" href="./flow-risk-escalation.html">
+        <span class="tag">流程 / 风险</span>
+        <h2>交易异常升级流程图</h2>
+        <p>监控触发、分级、处置、升级、复盘闭环，适合运营和风控场景。</p>
+        <div class="meta">
+          <span>画布：1920 x 1080</span>
+          <span>重点：分级、时限、闭环机制</span>
+        </div>
+      </a>
+      <a class="card" href="./cases-basic-diagrams.html">
+        <span class="tag">Case Library / 01</span>
+        <h2>基础图型 4 案例</h2>
+        <p>增长飞轮、鱼骨分析、价值金字塔、流量归因桑基。</p>
+        <div class="meta">
+          <span>画布：1920 x 1080</span>
+          <span>重点：复杂关系一眼看懂</span>
+        </div>
+      </a>
+      <a class="card" href="./cases-business-boards.html">
+        <span class="tag">Case Library / 02</span>
+        <h2>经营看板 4 案例</h2>
+        <p>产品路线图、经营驾驶舱、优先级矩阵、城市履约热力图。</p>
+        <div class="meta">
+          <span>画布：1920 x 1080</span>
+          <span>重点：指标、节奏、决策</span>
+        </div>
+      </a>
+      <a class="card" href="./cases-flow-systems.html">
+        <span class="tag">Case Library / 03</span>
+        <h2>流程系统 4 案例</h2>
+        <p>用户旅程、系统架构、异常决策树、设计规范发布闭环。</p>
+        <div class="meta">
+          <span>画布：1920 x 1080</span>
+          <span>重点：路径、责任、决策门</span>
+        </div>
+      </a>
+    </section>
+  </main>
+</body>
+</html>

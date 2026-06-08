@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flow 03 - 业务异常升级流程图</title>
+  <style>
+    :root { --paper:#ffffff; --ink:#171a26; --muted:#828794; --line:#c2c4cc; --panel:#ffffff; --accent:#ff0f23; --blue:#0073ff; --green:#2aa32a; --amber:#b5691a; --rose:#ff0f23; }
+    * { box-sizing:border-box; }
+    html, body { width:100%; height:100%; }
+    body { margin:0; display:grid; place-items:center; overflow:hidden; padding:16px; background:#f2f3f7; color:var(--ink); font-family:"PingFang SC","Noto Sans CJK SC",Inter,Arial,sans-serif; }
+    .stage { width:var(--stage-w,1920px); height:var(--stage-h,1080px); }
+    .canvas { width:1920px; height:1080px; padding:54px 64px; background:var(--paper); overflow:hidden; transform:scale(var(--stage-scale,1)); transform-origin:top left; }
+    header { display:grid; grid-template-columns:1fr 560px; gap:40px; align-items:end; padding-bottom:24px; margin-bottom:28px; border-bottom:2px solid var(--ink); }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:17px; font-weight:850; }
+    h1 { margin:0; font-size:54px; line-height:1.14; letter-spacing:0; }
+    .summary { padding:20px 24px; background:#f5f6fa; border-left:8px solid var(--accent); font-size:23px; line-height:1.38; font-weight:700; }
+    .layout { display:grid; grid-template-columns:380px 1fr 380px; gap:22px; height:800px; }
+    .panel { padding:22px; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    h2 { margin:0 0 16px; font-size:27px; letter-spacing:0; }
+    .levels { display:grid; gap:14px; }
+    .level { padding:16px 18px; border-radius:7px; background:#ffffff; border-left:8px solid var(--blue); }
+    .level:nth-child(2){ border-color:var(--amber); }
+    .level:nth-child(3){ border-color:var(--rose); }
+    .level b { display:block; margin-bottom:6px; font-size:18px; }
+    .level p { margin:0; color:var(--muted); font-size:14.5px; line-height:1.42; }
+    .center { display:grid; grid-template-rows:repeat(3,1fr); gap:18px; }
+    .row { display:grid; grid-template-columns:1fr 70px 1fr 70px 1fr; gap:10px; align-items:center; }
+    .node { height:100%; min-height:170px; padding:18px; background:var(--panel); border:2px solid var(--blue); border-radius:8px; }
+    .node.green { border-color:var(--green); }
+    .node.amber { border-color:var(--amber); background:#fff9e0; }
+    .node.rose { border-color:var(--rose); background:#fff0f4; }
+    .node b { display:block; margin-bottom:8px; font-size:20px; line-height:1.22; }
+    .node p { margin:0; color:var(--muted); font-size:15px; line-height:1.45; }
+    .arrow { text-align:center; color:var(--accent); font-size:38px; font-weight:900; }
+    .ops { display:grid; gap:14px; }
+    .op { padding:16px 18px; background:#ffffff; border:1px solid var(--line); border-radius:7px; }
+    .op small { color:var(--accent); font-size:13px; font-weight:850; }
+    .op b { display:block; margin:6px 0; font-size:18px; }
+    .op p { margin:0; color:var(--muted); font-size:14.5px; line-height:1.42; }
+  </style>
+  <link rel="stylesheet" href="./jd-theme.css">
+</head>
+<body>
+  <main class="canvas">
+    <header>
+      <div>
+        <p class="eyebrow">JD TRANSACTION / 交易异常升级 / Demo</p>
+        <h1>交易异常处置要先分级，再升级；否则所有问题都会挤到管理层</h1>
+      </div>
+      <div class="summary">核心机制：15 分钟定级，30 分钟止血，2 小时给出对外口径，24 小时完成复盘。</div>
+    </header>
+
+    <section class="layout">
+      <aside class="panel">
+        <h2>异常分级</h2>
+        <div class="levels">
+          <div class="level"><b>L1 观察</b><p>单点指标波动，未影响客户体验；由值班运营记录并观察。</p></div>
+          <div class="level"><b>L2 处置</b><p>影响局部业务或单渠道转化；需要业务负责人介入止血。</p></div>
+          <div class="level"><b>L3 升级</b><p>影响收入、履约、舆情或合规；进入跨部门战情机制。</p></div>
+        </div>
+      </aside>
+
+      <section class="center">
+        <div class="row">
+          <div class="node"><b>监控触发</b><p>指标异常、客诉、系统告警或一线反馈进入统一入口。</p></div>
+          <div class="arrow">→</div>
+          <div class="node amber"><b>15 分钟定级</b><p>按影响范围、金额、客户等级和舆情风险判断 L1-L3。</p></div>
+          <div class="arrow">→</div>
+          <div class="node green"><b>建立事件单</b><p>记录时间线、负责人、当前判断和下一次同步时间。</p></div>
+        </div>
+        <div class="row">
+          <div class="node rose"><b>L3 战情室</b><p>业务、产品、技术、客服、法务按需进入同一频道。</p></div>
+          <div class="arrow">→</div>
+          <div class="node"><b>30 分钟止血</b><p>暂停入口、回滚配置、降级服务或人工接管。</p></div>
+          <div class="arrow">→</div>
+          <div class="node"><b>2 小时口径</b><p>给一线和客户成功统一解释口径，避免多版本信息。</p></div>
+        </div>
+        <div class="row">
+          <div class="node green"><b>恢复验证</b><p>看核心指标回归、客户反馈下降、系统告警解除。</p></div>
+          <div class="arrow">→</div>
+          <div class="node"><b>24 小时复盘</b><p>沉淀根因、损失、补偿、预防动作和责任人。</p></div>
+          <div class="arrow">→</div>
+          <div class="node green"><b>机制更新</b><p>把规则写入监控、SOP、知识库和下次演练。</p></div>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <h2>责任与时限</h2>
+        <div class="ops">
+          <div class="op"><small>值班运营</small><b>入口与记录</b><p>维护事件单，确保时间线不断档。</p></div>
+          <div class="op"><small>业务负责人</small><b>止血决策</b><p>决定暂停、补偿、降级或继续观察。</p></div>
+          <div class="op"><small>技术/产品</small><b>根因和修复</b><p>给出系统侧判断、回滚方案和修复 ETA。</p></div>
+          <div class="op"><small>客服/CS</small><b>对外口径</b><p>统一客户解释、补偿边界和升级路径。</p></div>
+          <div class="op"><small>管理层</small><b>只处理 L3</b><p>避免所有 L1/L2 问题上升为管理层会议。</p></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+  <script>
+    function fitCanvas(){const c=document.querySelector(".canvas");let s=document.querySelector(".stage");if(!s){s=document.createElement("div");s.className="stage";c.parentNode.insertBefore(s,c);s.appendChild(c)}const scale=Math.max(.1,Math.min((innerWidth-32)/1920,(innerHeight-32)/1080));document.documentElement.style.setProperty("--stage-scale",scale);document.documentElement.style.setProperty("--stage-w",`${1920*scale}px`);document.documentElement.style.setProperty("--stage-h",`${1080*scale}px`)}addEventListener("resize",fitCanvas);fitCanvas();
+  </script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo 01 - 存量业务增长方案图</title>
+  <style>
+    :root {
+      --paper: #ffffff;
+      --ink: #171a26;
+      --muted: #828794;
+      --line: #c2c4cc;
+      --panel: #ffffff;
+      --accent: #ff0f23;
+      --accent-soft: #fff0f4;
+      --blue: #0073ff;
+      --green: #2aa32a;
+      --gold: #b5691a;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      background: #f2f3f7;
+      color: var(--ink);
+      font-family: "PingFang SC", "Noto Sans CJK SC", Inter, Arial, sans-serif;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 16px;
+    }
+    .stage {
+      width: var(--stage-w, 1920px);
+      height: var(--stage-h, 1080px);
+    }
+    .canvas {
+      width: 1920px;
+      height: 1080px;
+      padding: 58px 68px;
+      background: var(--paper);
+      overflow: hidden;
+      transform: scale(var(--stage-scale, 1));
+      transform-origin: top left;
+    }
+    .top {
+      display: grid;
+      grid-template-columns: 1fr 520px;
+      gap: 42px;
+      padding-bottom: 28px;
+      border-bottom: 2px solid var(--ink);
+    }
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--accent);
+      font-size: 18px;
+      font-weight: 800;
+    }
+    h1 {
+      margin: 0;
+      max-width: 1140px;
+      font-size: 56px;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .summary {
+      align-self: end;
+      padding: 22px 26px;
+      background: #f5f6fa;
+      border-left: 8px solid var(--accent);
+      font-size: 24px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin: 28px 0 26px;
+    }
+    .metric {
+      padding: 18px 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    .metric strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 34px;
+      line-height: 1;
+      color: var(--blue);
+    }
+    .metric span {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .main {
+      display: grid;
+      grid-template-columns: 1.05fr 1.05fr 1.05fr .85fr;
+      gap: 18px;
+      height: 526px;
+    }
+    .pillar, .risk {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      padding: 24px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .num {
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 850;
+    }
+    h2 {
+      margin: 8px 0 14px;
+      font-size: 28px;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .claim {
+      min-height: 78px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+    .bar {
+      height: 10px;
+      margin: 20px 0 22px;
+      background: #fff9e0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar i {
+      display: block;
+      height: 100%;
+      background: var(--accent);
+    }
+    ul {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 17px;
+      line-height: 1.45;
+    }
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .risk {
+      background: #fff9e0;
+    }
+    .risk h2 { font-size: 26px; }
+    .risk .row {
+      padding: 14px 0;
+      border-top: 1px solid #c2c4cc;
+    }
+    .risk b {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 17px;
+    }
+    .risk p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+    .timeline {
+      display: grid;
+      grid-template-columns: 190px repeat(4, 1fr);
+      gap: 0;
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .timeline div {
+      min-height: 96px;
+      padding: 15px 20px;
+      border-left: 1px solid var(--line);
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    .timeline div:first-child {
+      border-left: 0;
+      background: var(--ink);
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 750;
+    }
+    .timeline b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 18px;
+    }
+  </style>
+  <link rel="stylesheet" href="./jd-theme.css">
+</head>
+<body>
+  <main class="canvas">
+    <section class="top">
+      <div>
+        <p class="eyebrow">JD FIELD / 商家增长 / 2026 Q3</p>
+        <h1>商家增长放缓不是流量问题，优先把高意向行业的转化链路打穿</h1>
+      </div>
+      <div class="summary">建议未来 4 周聚焦“教育、医疗、连锁服务”三类高意向商家，用轻量方案包验证获客成本和成交周期。</div>
+    </section>
+
+    <section class="metrics">
+      <div class="metric"><strong>-18%</strong><span>自然新增线索环比下降</span></div>
+      <div class="metric"><strong>2.4x</strong><span>高意向行业试用转化更高</span></div>
+      <div class="metric"><strong>37天</strong><span>当前平均成交周期</span></div>
+      <div class="metric"><strong>4周</strong><span>完成行业化验证窗口</span></div>
+    </section>
+
+    <section class="main">
+      <article class="pillar">
+        <span class="num">01 / Industry Entry</span>
+        <h2>把“泛行业获客”改成三类行业切入</h2>
+        <p class="claim">线索质量分化后，平均投放会掩盖高转化行业，需要先做窄入口。</p>
+        <div class="bar"><i style="width: 78%"></i></div>
+        <ul>
+          <li>拆出教育、医疗、连锁服务三套入口页</li>
+          <li>每类行业只保留 1 个核心场景承诺</li>
+          <li>销售首问统一到行业痛点和规模阈值</li>
+        </ul>
+      </article>
+      <article class="pillar">
+        <span class="num">02 / Offer Package</span>
+        <h2>用轻量方案包替代定制化长沟通</h2>
+        <p class="claim">当前成交周期被“讲清方案”拖长，需要把首次沟通压成标准路径。</p>
+        <div class="bar"><i style="width: 65%; background: var(--green)"></i></div>
+        <ul>
+          <li>每个行业固定“3页方案 + 1页报价”</li>
+          <li>预设 ROI 计算口径，减少反复解释</li>
+          <li>售前只处理 3 类高频异议</li>
+        </ul>
+      </article>
+      <article class="pillar">
+        <span class="num">03 / Conversion Ops</span>
+        <h2>把线索运营从跟进动作升级为转化实验</h2>
+        <p class="claim">只看线索量无法解释转化，必须按阶段监控“卡点”。</p>
+        <div class="bar"><i style="width: 72%; background: var(--gold)"></i></div>
+        <ul>
+          <li>按行业建立 MQL 到 SQL 的漏斗看板</li>
+          <li>每周复盘掉点最高的两个环节</li>
+          <li>把话术、案例、报价作为实验变量</li>
+        </ul>
+      </article>
+      <aside class="risk">
+        <span class="num">Risk & Guardrail</span>
+        <h2>验证边界</h2>
+        <div class="row"><b>不做全行业铺开</b><p>四周内只验证三类高意向行业，避免资源摊薄。</p></div>
+        <div class="row"><b>不承诺长期ROI</b><p>先看获客成本、试用转化、成交周期三个短周期指标。</p></div>
+        <div class="row"><b>不重做产品线</b><p>只做包装、入口、话术和售前材料改造。</p></div>
+      </aside>
+    </section>
+
+    <section class="timeline">
+      <div>4周验证节奏</div>
+      <div><b>W1</b>确认行业画像，完成三套入口页和方案包初稿</div>
+      <div><b>W2</b>小流量投放，销售按行业话术跟进，记录异议</div>
+      <div><b>W3</b>复盘漏斗掉点，替换案例和报价表达</div>
+      <div><b>W4</b>输出行业获客成本、成交周期和是否扩大的建议</div>
+    </section>
+  </main>
+  <script>
+    function fitCanvas() {
+      const canvas = document.querySelector(".canvas");
+      if (!canvas) return;
+      let stage = document.querySelector(".stage");
+      if (!stage) {
+        stage = document.createElement("div");
+        stage.className = "stage";
+        canvas.parentNode.insertBefore(stage, canvas);
+        stage.appendChild(canvas);
+      }
+      const pad = 32;
+      const scale = Math.min((window.innerWidth - pad) / 1920, (window.innerHeight - pad) / 1080);
+      const safeScale = Math.max(0.1, scale);
+      document.documentElement.style.setProperty("--stage-scale", safeScale);
+      document.documentElement.style.setProperty("--stage-w", `${1920 * safeScale}px`);
+      document.documentElement.style.setProperty("--stage-h", `${1080 * safeScale}px`);
+    }
+    window.addEventListener("resize", fitCanvas);
+    fitCanvas();
+  </script>
+</body>
+</html>

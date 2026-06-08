@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flow 01 - 高意向线索转化流程图</title>
+  <style>
+    :root {
+      --paper: #ffffff;
+      --ink: #171a26;
+      --muted: #828794;
+      --line: #c2c4cc;
+      --panel: #ffffff;
+      --accent: #ff0f23;
+      --blue: #0073ff;
+      --green: #2aa32a;
+      --amber: #b5691a;
+      --rose: #ff0f23;
+    }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
+    body {
+      margin: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 16px;
+      background: #f2f3f7;
+      color: var(--ink);
+      font-family: "PingFang SC", "Noto Sans CJK SC", Inter, Arial, sans-serif;
+    }
+    .stage { width: var(--stage-w, 1920px); height: var(--stage-h, 1080px); }
+    .canvas {
+      width: 1920px;
+      height: 1080px;
+      padding: 54px 64px;
+      background: var(--paper);
+      overflow: hidden;
+      transform: scale(var(--stage-scale, 1));
+      transform-origin: top left;
+    }
+    header {
+      display: grid;
+      grid-template-columns: 1fr 520px;
+      gap: 38px;
+      align-items: end;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--ink);
+    }
+    .eyebrow { margin: 0 0 12px; color: var(--accent); font-size: 17px; font-weight: 850; }
+    h1 { margin: 0; font-size: 54px; line-height: 1.14; letter-spacing: 0; }
+    .summary {
+      padding: 20px 24px;
+      background: #f5f6fa;
+      border-left: 8px solid var(--accent);
+      font-size: 23px;
+      line-height: 1.38;
+      font-weight: 700;
+    }
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .legend div {
+      padding: 12px 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .legend b { color: var(--ink); }
+    .swimlanes {
+      display: grid;
+      grid-template-columns: 170px repeat(6, 1fr);
+      grid-template-rows: 56px repeat(4, 142px);
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .cell {
+      position: relative;
+      padding: 14px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .head {
+      background: #f5f6fa;
+      font-size: 16px;
+      font-weight: 850;
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+    .lane {
+      background: #f5f6fa;
+      color: var(--accent);
+      font-size: 21px;
+      font-weight: 850;
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+    .node {
+      height: 100%;
+      padding: 14px 15px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 2px solid var(--blue);
+    }
+    .node.green { border-color: var(--green); }
+    .node.amber { border-color: var(--amber); }
+    .node.rose { border-color: var(--rose); }
+    .node b { display: block; margin-bottom: 8px; font-size: 17px; line-height: 1.22; }
+    .node p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.38; }
+    .decision {
+      border-radius: 2px;
+      transform: rotate(45deg) scale(.76);
+      display: grid;
+      place-items: center;
+      background: #fff9e0;
+      border-color: var(--amber);
+    }
+    .decision span {
+      transform: rotate(-45deg);
+      display: block;
+      width: 140px;
+      text-align: center;
+      font-size: 16px;
+      line-height: 1.25;
+      font-weight: 850;
+    }
+    .arrow::after {
+      content: "→";
+      position: absolute;
+      right: -16px;
+      top: 50%;
+      z-index: 2;
+      color: var(--accent);
+      font-size: 31px;
+      font-weight: 900;
+      transform: translateY(-50%);
+    }
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .footer div {
+      padding: 16px 18px;
+      background: #f5f6fa;
+      border-left: 7px solid var(--accent);
+      border-radius: 6px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    .footer b { display: block; margin-bottom: 5px; font-size: 18px; }
+  </style>
+  <link rel="stylesheet" href="./jd-theme.css">
+</head>
+<body>
+  <main class="canvas">
+    <header>
+      <div>
+        <p class="eyebrow">JD MERCHANT / 高意向商家线索转化 / Demo</p>
+        <h1>把商家线索转化从“销售个人跟进”改成跨团队可监控流程</h1>
+      </div>
+      <div class="summary">关键不是多建流程，而是明确三件事：谁筛选、何时升级、哪些卡点进入运营实验。</div>
+    </header>
+
+    <section class="legend">
+      <div><b>蓝色</b> 标准动作</div>
+      <div><b>绿色</b> 可自动化动作</div>
+      <div><b>黄色</b> 决策门</div>
+      <div><b>红色</b> 风险/升级点</div>
+    </section>
+
+    <section class="swimlanes">
+      <div class="head">角色 / 阶段</div><div class="head">线索进入</div><div class="head">意向判断</div><div class="head">方案匹配</div><div class="head">商机推进</div><div class="head">卡点处理</div><div class="head">复盘沉淀</div>
+      <div class="lane">市场</div>
+      <div class="cell arrow"><div class="node green"><b>行业入口页收集线索</b><p>带入来源、行业、规模、场景字段，避免后续二次追问。</p></div></div>
+      <div class="cell"><div class="node"><b>补全画像标签</b><p>按行业、预算、触达渠道进行初始分层。</p></div></div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"><div class="node green"><b>更新获客看板</b><p>每周输出来源质量和转化差异。</p></div></div>
+      <div class="lane">销售</div>
+      <div class="cell"></div>
+      <div class="cell arrow"><div class="node amber decision"><span>是否达到 MQL 标准？</span></div></div>
+      <div class="cell arrow"><div class="node"><b>匹配行业方案包</b><p>只选择一个主场景，减少首轮沟通发散。</p></div></div>
+      <div class="cell arrow"><div class="node"><b>推进 SQL 与报价</b><p>48 小时内完成需求确认和下一步约定。</p></div></div>
+      <div class="cell"><div class="node rose"><b>记录丢失原因</b><p>价格、时机、权限、方案不匹配必须结构化记录。</p></div></div>
+      <div class="cell"></div>
+      <div class="lane">售前</div>
+      <div class="cell"></div><div class="cell"></div>
+      <div class="cell arrow"><div class="node"><b>提供场景证明</b><p>用案例、ROI 口径、实施边界支撑销售判断。</p></div></div>
+      <div class="cell"><div class="node amber decision"><span>是否需要定制评估？</span></div></div>
+      <div class="cell"><div class="node rose"><b>复杂需求升级</b><p>超过标准包边界时，进入专家评估而不是继续口头承诺。</p></div></div>
+      <div class="cell"></div>
+      <div class="lane">运营</div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell arrow"><div class="node green"><b>识别流程卡点</b><p>按行业和阶段定位掉点最高的两个环节。</p></div></div>
+      <div class="cell"><div class="node green"><b>形成下周实验</b><p>调整入口页、话术、方案包或报价表达。</p></div></div>
+    </section>
+
+    <section class="footer">
+      <div><b>准入标准</b>MQL 需满足行业、规模、场景、联系人权限四项中的至少三项。</div>
+      <div><b>SLA</b>高意向线索 2 小时内首触，48 小时内完成方案匹配。</div>
+      <div><b>复盘节奏</b>每周只复盘两个最大掉点，避免所有问题同时优化。</div>
+    </section>
+  </main>
+  <script>
+    function fitCanvas() {
+      const canvas = document.querySelector(".canvas");
+      let stage = document.querySelector(".stage");
+      if (!stage) {
+        stage = document.createElement("div");
+        stage.className = "stage";
+        canvas.parentNode.insertBefore(stage, canvas);
+        stage.appendChild(canvas);
+      }
+      const pad = 32;
+      const scale = Math.max(0.1, Math.min((window.innerWidth - pad) / 1920, (window.innerHeight - pad) / 1080));
+      document.documentElement.style.setProperty("--stage-scale", scale);
+      document.documentElement.style.setProperty("--stage-w", `${1920 * scale}px`);
+      document.documentElement.style.setProperty("--stage-h", `${1080 * scale}px`);
+    }
+    window.addEventListener("resize", fitCanvas);
+    fitCanvas();
+  </script>
+</body>
+</html>

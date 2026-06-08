@@ -18,6 +18,7 @@ Open these files directly in a browser:
 - `examples/traffic-framework/full-page.html`
 - `examples/hints-journey/index.html`
 - `examples/drawing-path-gallery/index.html`
+- `examples/ppt-big-picture-case-library/index.html`
 
 ## Validate
 
