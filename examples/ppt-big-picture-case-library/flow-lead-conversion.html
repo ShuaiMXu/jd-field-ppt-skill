@@ -135,6 +135,41 @@
       line-height: 1.25;
       font-weight: 850;
     }
+    .decision-cell { z-index: 2; }
+    .blabel {
+      position: absolute;
+      z-index: 5;
+      padding: 1px 9px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.3;
+      background: #ffffff;
+      border: 1.5px solid currentColor;
+    }
+    .blabel.yes { color: var(--green); }
+    .blabel.no  { color: var(--accent); }
+    .barrow {
+      position: absolute;
+      left: 50%;
+      z-index: 4;
+      color: var(--accent);
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1;
+      transform: translateX(-50%);
+    }
+    .reflow {
+      margin-top: 4px;
+      padding: 12px 14px;
+      border: 1.5px dashed var(--muted);
+      border-radius: 8px;
+      background: #fafbfc;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.36;
+    }
+    .reflow b { display: block; margin-bottom: 4px; color: var(--ink); font-size: 15px; }
     .arrow::after {
       content: "→";
       position: absolute;
@@ -190,15 +225,16 @@
       <div class="cell"><div class="node green"><b>更新获客看板</b><p>每周输出来源质量和转化差异。</p></div></div>
       <div class="lane">销售</div>
       <div class="cell"></div>
-      <div class="cell arrow"><div class="node amber decision"><span>是否达到 MQL 标准？</span></div></div>
+      <div class="cell arrow decision-cell"><div class="node amber decision"><span>是否达到 MQL 标准？</span></div><span class="blabel yes" style="top:32%;right:2px;">是</span><span class="blabel no" style="left:50%;bottom:6px;transform:translateX(-50%);">否</span><span class="barrow" style="bottom:-22px;">↓</span></div>
       <div class="cell arrow"><div class="node"><b>匹配行业方案包</b><p>只选择一个主场景，减少首轮沟通发散。</p></div></div>
       <div class="cell arrow"><div class="node"><b>推进 SQL 与报价</b><p>48 小时内完成需求确认和下一步约定。</p></div></div>
       <div class="cell"><div class="node rose"><b>记录丢失原因</b><p>价格、时机、权限、方案不匹配必须结构化记录。</p></div></div>
       <div class="cell"></div>
       <div class="lane">售前</div>
-      <div class="cell"></div><div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"><div class="reflow"><b>未达标 → 退回市场培育</b>补全画像、继续培育后再判断，不进入方案匹配。</div></div>
       <div class="cell arrow"><div class="node"><b>提供场景证明</b><p>用案例、ROI 口径、实施边界支撑销售判断。</p></div></div>
-      <div class="cell"><div class="node amber decision"><span>是否需要定制评估？</span></div></div>
+      <div class="cell arrow decision-cell"><div class="node amber decision"><span>是否需要定制评估？</span></div><span class="blabel yes" style="top:32%;right:2px;">是</span><span class="blabel no" style="left:50%;top:6px;transform:translateX(-50%);">否</span><span class="barrow" style="top:-22px;">↑</span></div>
       <div class="cell"><div class="node rose"><b>复杂需求升级</b><p>超过标准包边界时，进入专家评估而不是继续口头承诺。</p></div></div>
       <div class="cell"></div>
       <div class="lane">运营</div>

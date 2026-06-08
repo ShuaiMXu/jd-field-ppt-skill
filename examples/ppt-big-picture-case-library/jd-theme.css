@@ -222,8 +222,7 @@ td:first-child,
 
 .bar i,
 li::before,
-.box li::before,
-.canvas .arrow::after {
+.box li::before {
   background: var(--c-brand) !important;
 }
 
