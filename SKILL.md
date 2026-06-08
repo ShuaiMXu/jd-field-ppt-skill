@@ -1,6 +1,6 @@
 ---
 name: jd-field-ppt-skill
-description: 生成京东场域专用的横向翻页 HTML PPT / 业务汇报 deck / 方案演示页。用于京东 APP、零售、内容生态、店铺、交易、增长、设计系统、业务复盘、产品方案、规范发布等场景；当用户说“京东场域 PPT”“JD 风格 PPT”“业务汇报页”“把文档做成演示 deck”“生成分享封面”时触发。输出优先为单文件 HTML deck，可配套生成图片素材与封面，并必须按 JD V16 token、场域叙事、信息密度和校验清单自检。
+description: 生成京东场域专用的横向翻页 HTML PPT / 业务汇报 deck / 方案演示页 / 一页 PPT 大图 / 业务图型案例库。用于京东 APP、零售、内容生态、店铺、交易、增长、设计系统、业务复盘、产品方案、规范发布、经营看板、流程系统、飞轮、鱼骨、桑基、路线图、Dashboard、决策树等场景；当用户说“京东场域 PPT”“JD 风格 PPT”“业务汇报页”“一页讲清”“PPT 大图”“流程图”“图型 case”“把文档做成演示 deck”“生成分享封面”时触发。输出优先为单文件 HTML deck，可配套生成图片素材与封面，并必须按 JD V16 token、场域叙事、信息密度和校验清单自检。
 metadata:
   short-description: 京东场域 HTML PPT 生成技能
 ---
@@ -29,7 +29,7 @@ metadata:
 1. **识别场域**：先判断是业务复盘、产品方案、设计规范发布、增长实验、生态治理、项目路演还是汇报封面。若材料不足，只问最关键的 1-2 个问题。
 2. **读参考**：按任务读取 `references/`：
    - 不确定该用什么 deck 结构：先读 `deck-structure-presets.md`
-   - 用户要求画图 / 架构图 / 流程图 / 飞轮 / 鱼骨 / Dashboard / SVG / 精排 / Mermaid / PlantUML / Markdown 图表转画板：读 `drawing-paths.md`
+   - 用户要求画图 / 架构图 / 流程图 / 飞轮 / 鱼骨 / 桑基 / 路线图 / Dashboard / 决策树 / SVG / 精排 / Mermaid / PlantUML / Markdown 图表转画板：读 `drawing-paths.md`，并先查看 `examples/ppt-big-picture-case-library/` 中的对应 case
    - 用户质疑“结构不够多 / 模板太单一 / 页面类型不够”：读 `html-ppt-patterns.md`
    - 业务 / 产品 / 设计汇报：读 `jd-field-deck-system.md` 和 `page-patterns.md`
    - 调整视觉主题 / 图表色 / 状态色：读 `jd-color-tokens.md`
@@ -37,9 +37,9 @@ metadata:
    - 收尾自检：读 `quality-checklist.md`
 3. **拷贝模板和资产**：从 `assets/template-jd-field.html` 复制为目标 `ppt/index.html`，并把 `assets/fonts/` 复制到目标 `ppt/fonts/`、`assets/media/` 复制到目标 `ppt/media/`，替换标题、章节、页面内容和 `data-layout`。
 4. **先选路径**：根据 `deck-structure-presets.md` 判断是用户旅程型、系统机制型、经营复盘型、方案提案型、规范发布型还是一页压缩型。
-5. **再选作图路径**：若页面包含结构图、流程图、飞轮、鱼骨、Dashboard、SVG 或精排架构图，根据 `drawing-paths.md` 选择 A-E 路径。
+5. **再选作图路径**：若页面包含结构图、流程图、飞轮、鱼骨、桑基、路线图、Dashboard、决策树、SVG 或精排架构图，根据 `drawing-paths.md` 选择 A-F 路径；不要画占位图，先匹配 case library 中的典型结构再重画。
 6. **再排节奏**：先写 slide plan，再填页面。多页默认 3-8 页；复杂汇报可扩展到 7-12 页；一页压缩必须控制信息密度。
-7. **选择版式**：正文页优先使用 `page-patterns.md` 和 `html-ppt-patterns.md` 中登记的版式，不临时发明复杂结构；连续两页不要使用完全相同 layout。
+7. **选择版式**：正文页优先使用 `page-patterns.md` 和 `html-ppt-patterns.md` 中登记的版式；一页 PPT 大图和图型探索优先参考 `examples/ppt-big-picture-case-library/index.html`。不临时发明复杂结构；连续两页不要使用完全相同 layout。
 8. **写京东场域语言**：标题是结论，不是栏目名；正文短句，保留业务对象、用户动作、指标、约束。
 9. **可选配图**：需要图片时，用真实业务对象、界面状态、流程图或信息图；图片必须进入模板图片槽位，避免装饰性背景图。
 10. **静态校验**：运行：
@@ -59,6 +59,7 @@ metadata:
 - **字体预设**：标题、关键数字、品牌强调使用 `JD ZhengHei`；普通正文、表格、注释使用苹方。
 - **真实对象优先**：商品、店铺、内容、交易、履约、会员、搜索、推荐、频道、设计组件等业务对象要在首屏或关键页出现。
 - **页面要能被复述**：每页只有一个主判断；页面标题读完后，听众应知道这一页要证明什么。
+- **图型必须像图型**：飞轮要有闭环推动关系，鱼骨要有主干和分骨，桑基要有流量宽度编码，路线图要有时间轴和里程碑，Dashboard 要有 KPI/趋势/异常区，决策树要有判断节点和分支。
 - **不做嵌套卡片**：页面区块可以分栏、分带、分表，不要卡片套卡片。
 
 ## 资源文件
@@ -84,7 +85,12 @@ jd-field-ppt-skill/
 │   ├── page-patterns.md
 │   ├── image-and-cover-guidelines.md
 │   └── quality-checklist.md
-└── scripts/validate-jd-deck.mjs
+├── scripts/validate-jd-deck.mjs
+└── examples/ppt-big-picture-case-library/
+    ├── index.html
+    ├── cases-basic-diagrams.html     # 飞轮 / 鱼骨 / 金字塔 / 桑基
+    ├── cases-business-boards.html    # 路线图 / Dashboard / 矩阵 / 热力图
+    └── cases-flow-systems.html       # 用户旅程 / 架构 / 决策树 / 闭环流程
 ```
 
 ## 交付格式
